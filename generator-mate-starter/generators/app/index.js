@@ -69,6 +69,14 @@ module.exports = class extends Generator {
         "start:tunnel": "browser-sync start --config bs-config.js --tunnel",
         "test": "npm run lint:html && npm run lint:css",
         "test:lighthouse": "lighthouse --output html --view"
+      },
+
+      devDependencies: {
+        "browser-sync": "^2.26.3",
+        "eslint": "^5.13.0",
+        "htmllint-cli": "0.0.7",
+        "lighthouse": "^4.1.0",
+        "stylelint": "^9.10.1"
       }
     });
   }

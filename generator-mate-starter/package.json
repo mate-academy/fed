@@ -66,6 +66,5 @@
   "scripts": {
     "lint": "eslint ."
   },
-  "repository": "git@github.com:mate-academy/fed.git",
-  "private": true
+  "repository": "git@github.com:mate-academy/fed.git"
 }
