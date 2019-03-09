@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Dmytro Rudnytskykh",
+      "authorEmail": "rudnitskih@gmail.com",
+      "authorUrl": ""
+    }
+  }
+}
