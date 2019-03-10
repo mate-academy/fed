@@ -1,19 +1,16 @@
-# generator-mate-starter [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Generate FED starter project
-
 ## Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-mate-starter using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
 ```bash
 npm install -g yo
-npm install -g generator-mate-starter
+npm install -g @mate-academy/generator-mate-starter
 ```
 
 Then generate your new project:
 
 ```bash
-yo mate-starter
+yo @mate-academy/mate-starter
 ```
 
 ## Getting To Know Yeoman
@@ -25,12 +22,4 @@ yo mate-starter
 
 ## License
 
- © [Dmytro Rudnytskykh]()
-
-
-[npm-image]: https://badge.fury.io/js/generator-mate-starter.svg
-[npm-url]: https://npmjs.org/package/generator-mate-starter
-[travis-image]: https://travis-ci.org/mate-academy/generator-mate-starter.svg?branch=master
-[travis-url]: https://travis-ci.org/mate-academy/generator-mate-starter
-[daviddm-image]: https://david-dm.org/mate-academy/generator-mate-starter.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/mate-academy/generator-mate-starter
+ © [Dmytro Rudnytskykh](https://rudnitskih.pp.ua)

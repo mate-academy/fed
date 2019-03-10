@@ -27,7 +27,7 @@ module.exports = {
     'ignoreInitial': true
   },
   'server': {
-    baseDir: 'public'
+    baseDir: 'src'
   },
   'proxy': false,
   'port': 9000,
