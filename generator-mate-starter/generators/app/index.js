@@ -2,6 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const path = require("path");
 
 module.exports = class extends Generator {
   prompting() {
@@ -31,43 +32,28 @@ module.exports = class extends Generator {
       this.destinationRoot(),
       {globOptions: {dot: true}}
     );
-  }
 
-  install() {
-    // this.installDependencies();
-  }
-
-  initializing() {
-    this.composeWith(require.resolve('generator-npm-init/app'), {
-      // skip prompts
-      'skip-name': true,
-      'skip-description': true,
-      'skip-version': true,
-      'skip-main': true,
-      'skip-test': true,
-      'skip-repo': true,
-      'skip-keywords': true,
-      'skip-author': true,
-      'skip-license': true,
-
-      // supply alternative defaults
-      name: '<%= destFolderName %>',
-      version: '1.0.0',
-      description: '',
-      main: 'index.js',
-      repo: '',
+    this.fs.writeJSON(this.destinationPath("package.json"), {
+      name: process.cwd().split(path.sep).pop(),
+      version: "1.0.0",
+      description: "",
+      main: "index.js",
+      repo: "",
       keywords: [],
-      author: '',
-      license: 'ISC',
+      author: "",
+      license: "ISC",
 
       // configure run script defaults
       scripts: {
+        "postinstall": "npm run copy:editorconfig && npm run copy:htmllint-config",
+        "copy:editorconfig": "cp node_modules/@mate-academy/fed-editor-config/.editorconfig $INIT_CWD",
+        "copy:htmllint-config": "cp node_modules/@mate-academy/fed-htmllint-config/.htmllintrc $INIT_CWD",
         "lint:html": "htmllint ./src/**/*.html",
         "lint:css": "stylelint ./src/**/*.css",
-        "_lint:js": "eslint ./public/**/*.js",
+        "lint:js": "eslint ./src/**/*.js",
         "start": "browser-sync start --config browser-sync.js",
-        "start:tunnel": "browser-sync start --config bs-config.js --tunnel",
-        "test": "npm run lint:html && npm run lint:css",
+        "start:tunnel": "browser-sync start --config browser-sync-config.js --tunnel",
+        "test": "npm run lint:html && npm run lint:css && npm run lint:js",
         "test:lighthouse": "lighthouse --output html --view"
       },
 
@@ -76,8 +62,16 @@ module.exports = class extends Generator {
         "eslint": "^5.13.0",
         "htmllint-cli": "0.0.7",
         "lighthouse": "^4.1.0",
-        "stylelint": "^9.10.1"
+        "stylelint": "^9.10.1",
+        "@mate-academy/fed-stylelint-config": "latest",
+        "@mate-academy/fed-htmllint-config": "latest",
+        "@mate-academy/fed-editor-config": "latest",
+        "@mate-academy/fed-eslint-config": "latest"
       }
     });
+  }
+
+  install() {
+    this.npmInstall();
   }
 };

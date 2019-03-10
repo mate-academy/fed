@@ -1,0 +1,71 @@
+"use strict";
+
+module.exports = {
+  "extends": [
+    "eslint:recommended",
+    "plugin:eslint-comments/recommended",
+    "plugin:import/recommended",
+    "plugin:promise/recommended"
+  ],
+  "plugins": [
+    "eslint-comments",
+    "import",
+    "optimize-regex",
+    "promise"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "array-callback-return": 2,
+    "arrow-body-style": [2, "as-needed"],
+    "arrow-parens": [2, "as-needed"],
+    "comma-dangle": 2,
+    "curly": [2, "multi-line", "consistent"],
+    "dot-location": [2, "property"],
+    "eqeqeq": [2, "always", { "null": "ignore" }],
+    "import/unambiguous": 0,
+    "import/no-named-as-default": 0,
+    "import/no-self-import": 1,
+    "import/no-useless-path-segments": 1,
+    "import/no-extraneous-dependencies": 2,
+    "max-len": [1, 140],
+    "newline-after-var": 2,
+    "no-alert": 0,
+    "no-confusing-arrow": [1, { "allowParens": true }],
+    "no-console": 0,
+    "no-const-assign": 2,
+    "no-duplicate-imports": 1,
+    "no-extra-bind": 2,
+    "no-lonely-if": 2,
+    "no-nested-ternary": 2,
+    "no-shadow-restricted-names": 2,
+    "no-tabs": 2,
+    "no-template-curly-in-string": 1,
+    "no-trailing-spaces": 2,
+    "no-unneeded-ternary": [2, { "defaultAssignment": false }],
+    "no-unreachable": 2,
+    "no-unused-expressions": [2, { "allowShortCircuit": true, "allowTernary": true }],
+    "no-unused-vars": [2, { "ignoreRestSiblings": true }],
+    "no-use-before-define": [2, "nofunc"],
+    "no-useless-concat": 1,
+    "no-useless-constructor": 1,
+    "no-useless-escape": 1,
+    "no-useless-return": 1,
+    "no-var": 2,
+    "one-var": [1, "consecutive"],
+    "one-var-declaration-per-line": 2,
+    "operator-linebreak": 2,
+    "prefer-arrow-callback": 2,
+    "prefer-const": [1, { "destructuring": "all" }],
+    "prefer-destructuring": 1,
+    "prefer-template": 1,
+    "promise/always-return": 0,
+    "quotes": [1, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+    "semi": [1, "always"],
+    "space-before-function-paren": [1, "never"],
+    "template-curly-spacing": 1
+  }
+};

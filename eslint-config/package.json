@@ -1,0 +1,18 @@
+{
+  "name": "@mate-academy/fed-eslint-config",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-config-recommended": "^4.0.0",
+    "eslint-plugin-eslint-comments": "^3.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-optimize-regex": "^1.1.6",
+    "eslint-plugin-promise": "^4.0.1"
+  }
+}

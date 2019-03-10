@@ -1,0 +1,4 @@
+{
+  "extends": "@mate-academy/fed-eslint-config",
+  "rules": {}
+}
