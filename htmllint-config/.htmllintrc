@@ -7,7 +7,6 @@
     "frameborder",
     "style"
   ],
-  "attr-name-style": "lowercase",
   "attr-no-dup": true,
   "attr-quote-style": "double",
   "attr-req-value": false,

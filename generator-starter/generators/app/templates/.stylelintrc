@@ -1,4 +1,4 @@
 {
-  "extends": "@mate-academy/fed-stylelint-config",
+  "extends": "@mate-academy/stylelint-config",
   "rules": {}
 }

@@ -6,11 +6,11 @@ module.exports = {
     "color-hex-length": "short",
     "color-no-invalid-hex": true,
 
-    "number-leading-zero": "never",
+    "number-leading-zero": "always",
     "number-max-precision": 2,
     "number-no-trailing-zeros": true,
 
-    "string-quotes": "single",
+    "string-quotes": "double",
 
     "length-zero-no-unit": true,
 
@@ -33,7 +33,7 @@ module.exports = {
     "declaration-colon-space-before": "never",
 
     "declaration-block-no-duplicate-properties": true,
-    "declaration-block-no-redundant-longhand-properties": true,
+    "declaration-block-no-redundant-longhand-properties": false,
     "declaration-block-no-shorthand-property-overrides": true,
     "declaration-block-semicolon-newline-after": "always",
     "declaration-block-trailing-semicolon": "always",
@@ -41,7 +41,7 @@ module.exports = {
     "block-closing-brace-newline-after": "always",
     "block-closing-brace-newline-before": "always",
     "block-opening-brace-newline-after": "always",
-    "block-opening-brace-newline-before": "never-multi-line",
+    "block-opening-brace-newline-before": "never-single-line",
     "block-no-empty": true,
 
     "selector-attribute-brackets-space-inside": "never",
@@ -52,7 +52,7 @@ module.exports = {
     "selector-combinator-space-before": "always",
     "selector-descendant-combinator-no-non-space": true,
     "selector-max-id": 0,
-    "selector-max-universal": 0,
+    "selector-max-universal": 1,
     "selector-pseudo-class-no-unknown": true,
     "selector-pseudo-class-parentheses-space-inside": "never",
     "selector-pseudo-element-case": "lower",
@@ -61,7 +61,7 @@ module.exports = {
 
     "selector-list-comma-newline-after": "always",
 
-    "rule-empty-line-before": ["always", {"except": "first-nested"}],
+    "rule-empty-line-before": ["always", {ignore: ["after-comment", "first-nested", "inside-block"]}],
 
     "media-feature-name-case": "lower",
     "media-feature-name-no-unknown": true,

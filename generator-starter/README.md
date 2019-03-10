@@ -16,15 +16,15 @@ yo @mate-academy/starter
 ## Features
   - [x]  Generate init HTML and CSS files
   - [ ]  Add Pixel Glass to HTML (https://yoksel.github.io/pixel-glass-js/)
-  - [x]  HTML linting (based on @mate-academy package)
-  - [ ]  HTML validation 
+  - [x]  HTML Lint (based on @mate-academy package)
+  - [x]  HTML validation 
   - [x]  CSS Lint (based on @mate-academy package)
   - [x]  JS Lint (based on @mate-academy package)
   - [ ]  Image-twins run
-  - [ ]  Run lighthouse tool
+  - [x]  Run lighthouse tool
   - [x]  Hide all configs in separate packages
   - [x]  Add basic README, .editorconfig, .gitignore, .nvmrc, .npmrc
   - [ ]  Deploy to GH pages
-  - [ ]  Add support running local server
+  - [x]  Running local server with browser-sync
 
 Feel free to [learn more about Yeoman](http://yeoman.io/).
