@@ -48,12 +48,14 @@ module.exports = class extends Generator {
         "postinstall": "npm run copy:editorconfig && npm run copy:htmllint-config",
         "copy:editorconfig": "cp node_modules/@mate-academy/fed-editor-config/.editorconfig $INIT_CWD",
         "copy:htmllint-config": "cp node_modules/@mate-academy/fed-htmllint-config/.htmllintrc $INIT_CWD",
+        "validate:html": "foreach -g ./src/**/*.html --no-c -x \"html-validator --file #{path} --format=gnu" +
+          " --verbose\"",
         "lint:html": "htmllint ./src/**/*.html",
         "lint:css": "stylelint ./src/**/*.css",
         "lint:js": "eslint ./src/**/*.js",
         "start": "browser-sync start --config browser-sync.js",
         "start:tunnel": "browser-sync start --config browser-sync-config.js --tunnel",
-        "test": "npm run lint:html && npm run lint:css && npm run lint:js",
+        "test": "npm run lint:html && npm run lint:css && npm run lint:js && validate:html",
         "test:lighthouse": "lighthouse --output html --view"
       },
 
@@ -63,6 +65,8 @@ module.exports = class extends Generator {
         "htmllint-cli": "0.0.7",
         "lighthouse": "^4.1.0",
         "stylelint": "^9.10.1",
+        "foreach-cli": "^1.8.1",
+        "html-validator-cli": "^5.0.0",
         "@mate-academy/fed-stylelint-config": "latest",
         "@mate-academy/fed-htmllint-config": "latest",
         "@mate-academy/fed-editor-config": "latest",

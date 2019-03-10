@@ -1,5 +1,5 @@
 {
-  "name": "@mate-academy/fed-htmllint-config",
+  "name": "@mate-academy/htmllint-config",
   "version": "0.0.0",
   "description": "",
   "main": "index.js",

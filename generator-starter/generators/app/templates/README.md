@@ -1,12 +1,12 @@
 # Project Name
 
-*[Demo](https://some-url.com)*
+*[Demo](https://link-to-github-pages.com)*
 
 ## Description
 
 *Tell about your project*
 
-## Technologies Used
+## Technologies are used
 
 - *HTML*
 - *CSS*

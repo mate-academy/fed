@@ -1,5 +1,5 @@
 {
-  "name": "@mate-academy/fed-stylelint-config",
+  "name": "@mate-academy/stylelint-config",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
