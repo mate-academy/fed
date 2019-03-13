@@ -106,6 +106,6 @@ module.exports = {
     'gif': 'img',
     'js': 'script'
   },
-  'tunnel': false,
+  'tunnel': true,
   'injectNotification': false
 };

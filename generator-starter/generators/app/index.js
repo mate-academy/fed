@@ -52,12 +52,12 @@ module.exports = class extends Generator {
         "lint:css": "stylelint ./src/**/*.css",
         "lint:js": "eslint ./src/**/*.js",
         "start": "browser-sync start --config browser-sync.config.js",
-        "start:tunnel": "browser-sync start --config browser-sync.config.js --tunnel",
         "test": "npm run lint:html && npm run lint:css && npm run validate:html",
         "test:lighthouse": "lighthouse --view  --verbose"
       },
 
       devDependencies: {
+        "husky": "^1.3.1",
         "browser-sync": "^2.26.3",
         "eslint": "^5.13.0",
         "htmllint-cli": "0.0.7",
@@ -69,6 +69,12 @@ module.exports = class extends Generator {
         "@mate-academy/htmllint-config": "latest",
         "@mate-academy/editor-config": "latest",
         "@mate-academy/eslint-config": "latest"
+      },
+
+      "husky": {
+        "hooks": {
+          "pre-push": "npm test"
+        }
       }
     });
   }
