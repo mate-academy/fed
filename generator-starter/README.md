@@ -26,5 +26,7 @@ yo @mate-academy/starter
   - [x]  Add basic README, .editorconfig, .gitignore, .nvmrc, .npmrc
   - [ ]  Deploy to GH pages
   - [x]  Running local server with browser-sync
+  - [x]  Run linters on prepush
+  - [ ]  Add BEM lint - https://www.npmjs.com/package/bemlint
 
 Feel free to [learn more about Yeoman](http://yeoman.io/).
