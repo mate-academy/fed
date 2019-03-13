@@ -42,6 +42,7 @@ module.exports = {
     "block-closing-brace-newline-before": "always",
     "block-opening-brace-newline-after": "always",
     "block-opening-brace-newline-before": "never-single-line",
+    "block-opening-brace-space-before": "always",
     "block-no-empty": true,
 
     "selector-attribute-brackets-space-inside": "never",
