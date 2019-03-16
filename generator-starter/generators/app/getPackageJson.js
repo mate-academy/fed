@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = () => {
   return {
     name: process.cwd().split(path.sep).pop(),

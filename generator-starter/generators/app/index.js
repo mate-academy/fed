@@ -2,8 +2,7 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const path = require("path");
-const getPackageJson = require("getPackageJson");
+const getPackageJson = require("./getPackageJson");
 
 module.exports = class extends Generator {
   prompting() {
