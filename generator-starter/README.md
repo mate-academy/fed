@@ -27,6 +27,7 @@ yo @mate-academy/starter
   - [ ]  Deploy to GH pages
   - [x]  Running local server with browser-sync
   - [x]  Run linters on prepush
-  - [ ]  Add BEM lint - https://www.npmjs.com/package/bemlint
+  - [ ]  Add BEM lint - https://www.npmjs.com/package/bemlint, https://github.com/epixx/start-kit/blame/master/.stylelintrc, https://github.com/simonsmith/stylelint-selector-bem-pattern 
+  - [ ]  ? Add missspelling check - https://github.com/hcodes/yaspeller/blob/master/README.ru.md 
 
 Feel free to [learn more about Yeoman](http://yeoman.io/).
