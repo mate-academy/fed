@@ -12,7 +12,7 @@ module.exports = () => {
     license: "ISC",
 
     scripts: {
-      "postinstall": "npm run copy:editor-config && npm run copy:htmllint-config",
+      "install": "npm run copy:editor-config && npm run copy:htmllint-config",
       "copy:editor-config": "cp node_modules/@mate-academy/editor-config/.editorconfig ./.editorconfig",
       "copy:htmllint-config": "cp node_modules/@mate-academy/htmllint-config/.htmllintrc ./.htmllintrc",
       "validate:html": "foreach -g ./src/**/*.html --no-c -x \"html-validator --file #{path} --format=gnu --verbose\"",

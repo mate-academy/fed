@@ -8,25 +8,13 @@ module.exports = class extends Generator {
   prompting() {
     // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the finest ${chalk.red('mate-starter')} generator!`)
+      yosay(`Welcome to the finest ${chalk.red("@mate-academy/starter")} generator!`)
     );
-
-    const prompts = [
-      {
-        type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
-
-    // return this.prompt(prompts).then(props => {
-    //   // To access props later use this.props.someAnswer;
-    //   this.props = props;
-    // });
   }
 
   writing() {
+    this.spawnCommandSync("git", ["init"]);
+
     this.fs.copy(
       this.templatePath(),
       this.destinationRoot(),
@@ -34,6 +22,9 @@ module.exports = class extends Generator {
     );
 
     this.fs.writeJSON(this.destinationPath("package.json"), getPackageJson());
+
+    // ref: https://github.com/yeoman/generator/issues/812
+    this.fs.move(this.destinationPath("_gitignore"), this.destinationPath(".gitignore"));
   }
 
   install() {
