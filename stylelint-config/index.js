@@ -33,7 +33,6 @@ module.exports = {
     "declaration-colon-space-before": "never",
 
     "declaration-block-no-duplicate-properties": true,
-    "declaration-block-no-redundant-longhand-properties": false,
     "declaration-block-no-shorthand-property-overrides": true,
     "declaration-block-semicolon-newline-after": "always",
     "declaration-block-trailing-semicolon": "always",
