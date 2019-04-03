@@ -1,6 +1,6 @@
 # @mate-academy/eslint-config
 
-#### A simplified eslint-config based on [standard](https://standardjs.com/rules.html) rules
+#### A simplified eslint-config based on standard config. [Read more](https://mate-academy.github.io/style-guides/javascript-standard-modified) about rules.
 
 
 ## Install
