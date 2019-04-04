@@ -6,7 +6,7 @@ module.exports = {
     "node": true,
   },
   "rules": {
-    "max-len": ["warn", {
+    "max-len": ["error", {
       "code": 80,
       "comments": 80
     }],
