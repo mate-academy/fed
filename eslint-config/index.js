@@ -6,6 +6,10 @@ module.exports = {
     "node": true,
   },
   "rules": {
+    "max-len": ["error", {
+      "code": 80,
+      "comments": 80
+    }],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
     "strict": "error",
