@@ -15,7 +15,12 @@ module.exports = {
     "strict": "error",
     "space-before-function-paren": ["error", "never"],
     "no-var": "error",
-    "prefer-const": "error"
+    "prefer-const": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "curly": ["error", "all"],
+    "no-shadow": ["error", {"builtinGlobals": true, "hoist": "all", "allow": []}],
+    "no-redeclare": ["error", { "builtinGlobals": true }],
+    "no-param-reassign": "error"
   },
   "parserOptions": {
     "sourceType": "script"
