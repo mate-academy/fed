@@ -14,6 +14,8 @@ module.exports = {
     "semi-style": ["error", "last"],
     "strict": "error",
     "space-before-function-paren": ["error", "never"],
+    "no-var": "error",
+    "prefer-const": "error"
   },
   "parserOptions": {
     "sourceType": "script"
