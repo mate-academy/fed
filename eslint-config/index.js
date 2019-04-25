@@ -20,7 +20,8 @@ module.exports = {
     "curly": ["error", "all"],
     "no-shadow": ["error", {"builtinGlobals": true, "hoist": "all", "allow": []}],
     "no-redeclare": ["error", { "builtinGlobals": true }],
-    "no-param-reassign": "error"
+    "no-param-reassign": "error",
+    "operator-linebreak": ["error", "before"]
   },
   "parserOptions": {
     "sourceType": "script"
