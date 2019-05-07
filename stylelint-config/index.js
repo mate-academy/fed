@@ -67,7 +67,6 @@ module.exports = {
     "media-feature-name-no-unknown": true,
 
     "at-rule-name-case": "lower",
-    "at-rule-no-unknown": true,
 
     "comment-no-empty": true,
 
