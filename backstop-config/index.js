@@ -2,7 +2,7 @@
 
 module.exports = {
   basicScenario: {
-    label: 'test', // name of the test
+    label: '', // name of the test
     url: 'http://localhost:8080/index.html',
     referenceUrl: '', // put here reference to github-pages with ready project
     readyEvent: '',
@@ -17,19 +17,12 @@ module.exports = {
     selectorExpansion: true,
     expect: 0,
     misMatchThreshold: 1, // 1% of 100%
+    requireSameDimensions: true,
   },
-  id: 'test',
-  onBeforeScript: 'puppet/onBefore.js',
-  onReadyScript: 'puppet/onReady.js',
   viewports: [
-    {
-      name: 'tablet_h',
-      width: 1024,
-      height: 768,
-    },
+    // add viewports for test
   ],
   scenarios: [
-    { ...basicScenario },
     // define here scenarios for testing
   ],
   paths: {

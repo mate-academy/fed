@@ -1,0 +1,23 @@
+# @mate-academy/backstop-config
+
+#### Link to documentation [BackstopJS](https://github.com/garris/BackstopJS)
+
+## Install
+
+```bash
+npm install @mate-academy/backstop-config
+```
+
+## Usage
+
+1. Create file backstopConfig.js
+2. Connect module to file:
+    ```javascript
+        const backstop = require('@mate-academy/backstop-config');
+    ```
+3. Update the test params in file backstopConfig.js. For information on how 
+to do this, look to the documentation.
+
+## Assignment
+
+We use it for testing students HTML task.
