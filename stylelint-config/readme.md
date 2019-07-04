@@ -1,12 +1,12 @@
 # @mate-academy/stylelint-config
 
-#### A simplified eslint-config based on standard config. [Read more](https://mate-academy.github.io/style-guides/javascript-standard-modified) about rules.
+#### A simplified stylelint-config based on standard config. [Read more](https://mate-academy.github.io/style-guides/htmlcss.html) about rules.
 
 
 ## Install
 
 ```bash
-npm install @mate-academy/stylelint-config
+npm install --save-dev @mate-academy/stylelint-config
 ```
 
 ## Usage
