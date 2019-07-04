@@ -6,7 +6,7 @@
 ## Install
 
 ```bash
-npm install @mate-academy/eslint_react-config
+npm install --save-dev @mate-academy/eslint_react-config
 ```
 
 ## Usage
