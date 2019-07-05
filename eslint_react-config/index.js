@@ -19,13 +19,18 @@ module.exports = {
   ],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    'no-console': 'error',
-    "no-param-reassign": 0,
+    "no-console": "error",
+    "no-param-reassign": [2, {"props": true}],
 
     "no-shadow": ["error", { "builtinGlobals": false }],
     "react/destructuring-assignment": 0,
-    "jsx-a11y/label-has-for": 0,
-    "jsx-a11y/label-has-associated-control": 0,
+    "jsx-a11y/label-has-associated-control": [2, {
+      "labelComponents": ["label"],
+      "labelAttributes": ["htmlFor"],
+      "controlComponents": ["input"],
+      "assert": "both",
+      "depth": 3,
+    }],
     "padding-line-between-statements": [
       "error",
       {"blankLine": "always", "prev": "*", "next": "return"},
@@ -33,7 +38,6 @@ module.exports = {
       { "blankLine": "any",    "prev": ["const", "let", "var"], "next": ["const", "let", "var"]},
       { "blankLine": "always", "prev": "directive", "next": "*" },
       { "blankLine": "always", "prev": "block-like", "next": "*" },
-
     ]
   }
 };
