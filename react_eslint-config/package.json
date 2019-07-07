@@ -1,5 +1,5 @@
 {
-  "name": "eslint_react-config",
+  "name": "react_eslint-config",
   "version": "0.0.1",
   "description": "React config for Mate academy students based on airbnb",
   "main": "index.js",
