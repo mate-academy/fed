@@ -5,7 +5,7 @@
 ## Install
 
 ```bash
-npm install @mate-academy/backstop-config
+npm install --save-dev @mate-academy/backstop-config
 ```
 
 ## Usage
@@ -20,4 +20,4 @@ to do this, look to the documentation.
 
 ## Assignment
 
-We use it for testing students HTML task.
+Config file for BackstopJS. We use it for testing students HTML task.
