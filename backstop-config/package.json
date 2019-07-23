@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/backstop-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "simple backstop config",
   "main": "index.js",
   "scripts": {
