@@ -30,10 +30,10 @@ viewports: [{
 
 ```javascript
 scenarios: [{
-      ...basicScenario,
-      label: 'Elementary test',
-      referenceUrl:
-        'https://mate-academy.github.io/layout_solutions/hello-world/',
+  ...basicScenario,
+  label: 'Elementary test',
+  referenceUrl:
+    'https://mate-academy.github.io/layout_solutions/hello-world/',
     }]
 ```
 For more information on how to updated config file, look to the documentation.
