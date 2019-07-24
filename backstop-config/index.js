@@ -17,7 +17,7 @@ module.exports = {
     selectorExpansion: true,
     expect: 0,
     misMatchThreshold: 1, // 1% of 100%
-    requireSameDimensions: true,
+    requireSameDimensions: false,
   },
   viewports: [
     // add viewports for test

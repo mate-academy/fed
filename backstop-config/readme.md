@@ -15,8 +15,28 @@ npm install --save-dev @mate-academy/backstop-config
     ```javascript
         const backstop = require('@mate-academy/backstop-config');
     ```
-3. Update the test params in file backstopConfig.js. For information on how 
-to do this, look to the documentation.
+3. Update the test params in file backstopConfig.js.
+
+## Example
+
+```javascript
+viewports: [{
+  name: 'custom-size',
+  width: 200,
+  height: 50,
+  }]
+
+```
+
+```javascript
+scenarios: [{
+  ...basicScenario,
+  label: 'Elementary test',
+  referenceUrl:
+    'https://mate-academy.github.io/layout_solutions/hello-world/',
+    }]
+```
+For more information on how to updated config file, look to the documentation.
 
 ## Assignment
 
