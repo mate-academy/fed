@@ -23,6 +23,7 @@ module.exports = {
     "no-param-reassign": "error",
     "operator-linebreak": ["error", "before"],
     "no-console": "error",
+    "standard/no-callback-literal": 0
   },
   "parserOptions": {
     "sourceType": "script"
