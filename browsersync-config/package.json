@@ -1,0 +1,15 @@
+{
+  "name": "@mate-academy/browsersync-config",
+  "version": "0.0.1",
+  "description": "Config file for browsersync",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mate academy",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:mate-academy/fed.git"
+  }
+}
