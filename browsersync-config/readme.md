@@ -21,6 +21,6 @@
    ```
 1. Add config file to browserSync:
     ```javascript
-      browserSync({config});
+      browserSync(config);
     ```
 For more information on how to install `Browsersync` and updated config file, look to the documentation.

@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/browsersync-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Config file for browsersync",
   "main": "index.js",
   "scripts": {
