@@ -20,15 +20,15 @@ module.exports = {
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "no-console": "error",
-    "no-param-reassign": [2, {"props": true}],
+    "no-param-reassign": [2, { "props": true }],
     "no-shadow": ["error", { "builtinGlobals": false }],
     "react/destructuring-assignment": 0,
-    "jsx-a11y/label-has-associated-control": [2, {
-      "labelComponents": ["label"],
-      "labelAttributes": ["htmlFor"],
-      "controlComponents": ["input"],
-      "assert": "both",
-      "depth": 3,
+    "jsx-a11y/label-has-for": [2, {
+      "components": ["Label"],
+      "required": {
+        "some": ["id", "nesting"]
+      },
+      "allowChildren": true
     }],
     "padding-line-between-statements": [
       "error",
