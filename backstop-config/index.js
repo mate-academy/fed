@@ -4,7 +4,7 @@ module.exports = {
   basicScenario: {
     label: '', // name of the test
     url: 'http://localhost:8080/index.html',
-    referenceUrl: '', // put here reference to github-pages with ready project
+    referenceUrl: 'https://mate-academy.github.io/layout_solutions',
     readyEvent: '',
     readySelector: '',
     delay: 1000,
