@@ -37,6 +37,7 @@ module.exports = {
       {"blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]},
       {"blankLine": "always", "prev": "directive", "next": "*"},
       {"blankLine": "always", "prev": "block-like", "next": "*"},
-    ]
+    ],
+    "import/prefer-default-export": 0
   }
 };
