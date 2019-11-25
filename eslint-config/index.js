@@ -25,6 +25,15 @@ module.exports = {
     "no-console": "error",
     "standard/no-callback-literal": 0,
     "import/prefer-default-export": 0,
+    "padding-line-between-statements": [
+      "error",
+      { blankLine: "always", prev: ["const", "let", "var"], next: "*"},
+      { blankLine: "always", prev: "*", next: ["return", "block-like", "multiline-expression"]},
+      { blankLine: "always", prev: "*", next: ["const", "let", "var"]},
+      { blankLine: "any", prev: ["const", "let", "var"], next: ["const", "let", "var"]},
+    ],
+    "brace-style": ["error", "1tbs"],
+    "object-curly-newline": ["error", { "multiline": true }],
   },
   "parserOptions": {
     "sourceType": "script"
