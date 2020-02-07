@@ -1,0 +1,25 @@
+{
+  "name": "@mate-academy/eslint-config-react-typescript",
+  "version": "0.0.1",
+  "description": "React config for Mate academy students based on airbnb with Typescript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mate academy",
+  "license": "ISC",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.19.0",
+    "@typescript-eslint/parser": "^2.19.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-typescript": "^6.3.1",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^1.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:mate-academy/fed.git"
+  }
+}
