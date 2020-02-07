@@ -48,6 +48,7 @@ module.exports = {
     ],
 
     // React
+    "react/prop-types": 0,
     "import/prefer-default-export": 0,
     "standard/no-callback-literal": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
