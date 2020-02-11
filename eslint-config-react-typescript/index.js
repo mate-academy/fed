@@ -37,6 +37,7 @@ module.exports = {
     "operator-linebreak": [2, "before"],
     "no-console": 2,
     "brace-style": [2, "1tbs"],
+    "arrow-body-style": 0,
     "no-param-reassign": [2, { "props": true }],
     "padding-line-between-statements": [
       2,
@@ -53,6 +54,7 @@ module.exports = {
     "standard/no-callback-literal": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
     "react/destructuring-assignment": 0,
+    "react/jsx-props-no-spreading": 0,
     "react/state-in-constructor": [2, "never"],
     "react-hooks/rules-of-hooks": 2,
     "jsx-a11y/label-has-for": [2, {
