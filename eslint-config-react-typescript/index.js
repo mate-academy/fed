@@ -38,6 +38,7 @@ module.exports = {
     "no-console": 2,
     "brace-style": [2, "1tbs"],
     "arrow-body-style": 0,
+    "arrow-parens": 0,
     "no-param-reassign": [2, { "props": true }],
     "padding-line-between-statements": [
       2,
