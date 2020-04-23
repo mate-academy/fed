@@ -41,5 +41,6 @@
   "tag-self-close": false,
   "text-ignore-regex": "&",
   "title-no-dup": true,
-  "line-end-style": "lf"
+  "line-end-style": "lf",
+  "attr-new-line": 2
 }
