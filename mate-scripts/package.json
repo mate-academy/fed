@@ -1,8 +1,8 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.0.1",
-  "description": "Commands to init, run, test, deploy Mate academy homework projects",
-  "main": "mate-scripts.js",
+  "version": "0.0.25",
+  "description": "Scripts to init, run, test, deploy Mate academy homework projects",
+  "main": "bin/mateScripts.js",
   "scripts": {
     "lint": "eslint **/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -18,13 +18,14 @@
     "mate-academy"
   ],
   "bin": {
-    "mate-scripts": "./mate-scripts.js"
+    "mate-scripts": "bin/mateScripts.js"
   },
   "author": "dev@mate.academy",
   "license": "MIT",
   "homepage": "https://github.com/mate-academy/fed/mate-scripts#README.md",
   "dependencies": {
-    "commander": "^5.1.0"
+    "commander": "^5.1.0",
+    "fs-extra": "^9.0.0"
   },
   "devDependencies": {
     "@mate-academy/eslint-config": "0.0.12",

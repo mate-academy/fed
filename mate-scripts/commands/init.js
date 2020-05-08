@@ -1,9 +1,9 @@
 'use strict';
 
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
-
-const packageJson = 'package.json';
+const { getRootDir } = require('../getRootDir');
+const { execCommand } = require('../execCommand');
 
 const packagesPaths = {
   linthtml: 'node_modules/@mate-academy/linthtml-config',
@@ -13,60 +13,31 @@ const configFileNames = {
   linthtml: '.linthtmlrc.json',
 };
 
-const rootDirError = 'Command should be run inside project folder with @mate-academy/scripts as devDependency';
-
-function init() {
+async function init() {
   const rootDir = getRootDir();
 
-  hasCorrectDependency(rootDir);
+  copyConfigs(rootDir);
+  await initBackstop(rootDir);
+}
+
+function copyConfigs(rootDir) {
+  copyCommonConfigs(rootDir);
+  copyLayoutConfigs(rootDir);
   copyLinthtmlConfig(rootDir);
 }
 
-function getRootDir() {
-  let rootDir = process.cwd();
-  let folderContent = fs.readdirSync(rootDir);
+function copyCommonConfigs(rootDir) {
+  const configsDir = path.join(__dirname, '../configs');
+  const commonConfigsDir = path.join(configsDir, 'common');
 
-  while (true) {
-    if (isRoot(folderContent) && hasCorrectDependency(rootDir)) {
-      break;
-    }
-
-    if (isSystemRoot(rootDir)) {
-      throw new Error(rootDirError);
-    }
-
-    rootDir = path.join(rootDir, '../');
-    folderContent = fs.readdirSync(rootDir);
-  }
-
-  return rootDir;
+  fs.copySync(commonConfigsDir, rootDir);
 }
 
-function isRoot(folderContent) {
-  return folderContent.includes(packageJson);
-}
+function copyLayoutConfigs(rootDir) {
+  const configsDir = path.join(__dirname, '../configs');
+  const layoutConfigsDir = path.join(configsDir, 'layout');
 
-function hasCorrectDependency(rootDir) {
-  let packageFile;
-
-  try {
-    packageFile = fs.readFileSync(
-      path.join(rootDir, packageJson),
-      { encoding: 'utf-8' },
-    );
-  } catch (e) {
-    packageFile = null;
-  }
-
-  return (
-    packageFile
-    && packageFile.devDependencies
-    && packageFile.devDependencies['@mate-academy/scripts']
-  );
-}
-
-function isSystemRoot(rootDir) {
-  return rootDir === '/';
+  fs.copySync(layoutConfigsDir, rootDir);
 }
 
 function copyLinthtmlConfig(rootDir) {
@@ -74,6 +45,15 @@ function copyLinthtmlConfig(rootDir) {
     path.join(rootDir, packagesPaths.linthtml, configFileNames.linthtml),
     path.join(rootDir, configFileNames.linthtml),
   );
+}
+
+async function initBackstop(rootDir) {
+  const backstopFolder = path.join(rootDir, 'backstop_data');
+  const referencesDir = path.join(backstopFolder, 'bitmaps_reference');
+
+  fs.removeSync(referencesDir);
+
+  execCommand(`backstop reference --config=${path.join(rootDir, './config/backstop/backstopConfig.js')}`);
 }
 
 module.exports = {
