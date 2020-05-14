@@ -5,7 +5,7 @@ module.exports = () => {
     name: process.cwd().split(path.sep).pop(),
     version: "1.0.0",
     description: "",
-    main: "index.js",
+    main: "index.ts",
     repo: "",
     keywords: [],
     author: "",

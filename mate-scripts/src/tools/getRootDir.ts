@@ -1,12 +1,10 @@
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const packageJson = 'package.json';
 const rootDirError = 'Command should be run inside project folder with @mate-academy/scripts as devDependency';
 
-function getRootDir() {
+export function getRootDir() {
   let rootDir = process.cwd();
   let folderContent = fs.readdirSync(rootDir);
 
@@ -26,11 +24,11 @@ function getRootDir() {
   return rootDir;
 }
 
-function isRoot(folderContent) {
+function isRoot(folderContent: string[]) {
   return folderContent.includes(packageJson);
 }
 
-function hasCorrectDependency(rootDir) {
+function hasCorrectDependency(rootDir: string) {
   if (process.env.NODE_ENV === 'test') {
     return true;
   }
@@ -55,10 +53,6 @@ function hasCorrectDependency(rootDir) {
   );
 }
 
-function isSystemRoot(rootDir) {
+function isSystemRoot(rootDir: string) {
   return rootDir === '/';
 }
-
-module.exports = {
-  getRootDir,
-};

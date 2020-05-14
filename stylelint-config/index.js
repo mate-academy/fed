@@ -1,6 +1,12 @@
 "use strict";
 
 module.exports = {
+  "extends": [
+    "stylelint-config-recommended-scss",
+  ],
+  plugins: [
+    "stylelint-scss"
+  ],
   "rules": {
     "color-hex-case": "lower",
     "color-hex-length": "short",

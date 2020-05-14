@@ -1,5 +1,5 @@
 module.exports = {
-  extends: '@mate-academy/eslint-config',
+  extends: '@mate-academy/eslint-config-react-typescript',
   rules: {
     'max-len': ['error', {
       ignoreStrings: true,

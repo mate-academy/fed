@@ -1,11 +1,18 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.0.25",
+  "version": "0.0.27",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
+    "start": "rollup -w -c",
     "lint": "eslint **/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./bin && rollup -c && ./shebangify.js && chmod +x ./bin/mateScripts.js",
+    "prepublishOnly": "npm run build",
+    "postpublish": "rm -rf ./bin",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish"
   },
   "repository": {
     "type": "git",
@@ -20,6 +27,13 @@
   "bin": {
     "mate-scripts": "bin/mateScripts.js"
   },
+  "files": [
+    "./bin/**/*.*",
+    "./configs/**/*.*",
+    "package.json",
+    "package-lock.json",
+    "README.md"
+  ],
   "author": "dev@mate.academy",
   "license": "MIT",
   "homepage": "https://github.com/mate-academy/fed/mate-scripts#README.md",
@@ -28,7 +42,15 @@
     "fs-extra": "^9.0.0"
   },
   "devDependencies": {
-    "@mate-academy/eslint-config": "0.0.12",
-    "eslint-plugin-node": "^11.1.0"
+    "@mate-academy/eslint-config-react-typescript": "0.0.4",
+    "@rollup/plugin-json": "^4.0.3",
+    "@types/commander": "^2.12.2",
+    "@types/fs-extra": "^8.1.0",
+    "@types/node": "^14.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "rollup": "^2.10.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "typescript": "^3.9.2"
   }
 }
