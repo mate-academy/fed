@@ -12,7 +12,10 @@ export default {
     },
   ],
   external: [
-    ...Object.keys(pkg.dependencies || {})
+    ...Object.keys(pkg.dependencies || {}),
+    'path',
+    'fs',
+    'child_process',
   ],
   plugins: [
     typescript({

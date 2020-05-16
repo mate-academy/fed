@@ -3,10 +3,12 @@ export interface LintOptions {
     html: boolean;
     styles: boolean;
     javascript: boolean;
+    files?: string[];
 }
 export declare class LintCommand extends Command {
+    srcDir: string;
     run(options: LintOptions): Promise<void>;
-    private lintHtml;
-    private lintStyles;
-    private lintJs;
+    private static lintHtml;
+    private static lintStyles;
+    private static lintJs;
 }

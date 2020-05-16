@@ -15,7 +15,7 @@ export class InitCommand extends Command {
   async run() {
     this.copyConfigs();
 
-    await this.initBackstop();
+    // await this.initBackstop();
     this.initGitHooks();
   }
 

@@ -29,7 +29,7 @@ program
   .action(commandRunner.make(StartCommand));
 
 program
-  .command('lint')
+  .command('lint [files...]')
   .option('-s, --styles', 'lint styles only', false)
   .option('-h, --html', 'lint html only', false)
   .option('-j, --javascript', 'lint javascript only', false)

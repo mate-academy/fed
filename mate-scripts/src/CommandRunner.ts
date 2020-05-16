@@ -17,12 +17,17 @@ export class CommandRunner {
   private commands = new Map<typeof Command, Command>();
 
   make(CommandClass: CommandConstructor) {
-    return (commanderCommand: Commander) => {
-      return this.runCommand(CommandClass, commanderCommand)
+    return (...args: any[]) => {
+      const commanderCommand = args.pop() as Commander;
+      return this.runCommand(CommandClass, commanderCommand, args)
     };
   }
 
-  private async runCommand(CommandClass: CommandConstructor, commanderCommand?: Commander) {
+  private async runCommand(
+    CommandClass: CommandConstructor,
+    commanderCommand?: Commander,
+    args: any[] = [],
+  ) {
     const command = this.getCommand(CommandClass);
 
     if (CommandClass.requiredCommands) {
@@ -34,7 +39,7 @@ export class CommandRunner {
     const controller = controllers.get(CommandClass);
 
     if (controller && commanderCommand) {
-      return command.run(controller(commanderCommand));
+      return command.run(controller(commanderCommand, ...args));
     }
 
     return command.run();

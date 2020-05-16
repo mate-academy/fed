@@ -1,31 +1,37 @@
 import path from 'path';
-import { execBashCodeSilent } from '../tools/execBashCode.js';
+import { execBashCodeSilent } from '../tools/execBashCode';
 import { Command } from './Command';
 
 export interface LintOptions {
   html: boolean;
   styles: boolean;
   javascript: boolean;
+  files?: string[];
 }
 
 export class LintCommand extends Command {
+  srcDir = `${path.join(this.rootDir, './src')}`;
+
   async run(options: LintOptions): Promise<void> {
-    const { html, styles, javascript } = options;
+    const { html, styles, javascript, files } = options;
+    const filesToLint = files
+      ? files.join(' ')
+      : this.srcDir;
 
-    html && this.lintHtml();
-    styles && this.lintStyles();
-    javascript && this.lintJs();
+    html && LintCommand.lintHtml(filesToLint);
+    styles && LintCommand.lintStyles(filesToLint);
+    javascript && LintCommand.lintJs(filesToLint);
   }
 
-  private lintHtml() {
-    execBashCodeSilent(`linthtml ${path.join(this.rootDir, 'src/**/*.html')}`);
+  private static lintHtml(filesToLint: string) {
+    execBashCodeSilent(`linthtml ${filesToLint}`);
   }
 
-  private lintStyles() {
-    execBashCodeSilent(`stylelint ${path.join(this.rootDir, 'src/**/*.*css')}`);
+  private static lintStyles(filesToLint: string) {
+    execBashCodeSilent(`stylelint ${filesToLint}`);
   }
 
-  private lintJs() {
-    execBashCodeSilent(`eslint ${path.join(this.rootDir, 'src/**/*.js')}`);
+  private static lintJs(filesToLint: string) {
+    execBashCodeSilent(`eslint ${filesToLint}`);
   }
 }
