@@ -1,30 +1,63 @@
-import { execSync } from 'child_process';
 import fs from 'fs-extra';
 import path from 'path';
+import { Backstop } from '../Backstop.js';
+import { DESTINATION_DIR } from '../constants.js';
+import { execBashCode, execBashCodeSafely } from '../tools/execBashCode.js';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
 
 export class DeployCommand extends Command {
-  static requiredCommands = [BuildCommand];
+  private readonly buildCommand = this.child<BuildCommand>(BuildCommand);
+
+  private readonly destinationDir = path.join(this.rootDir, DESTINATION_DIR);
+
+  private readonly backstop = new Backstop(this.rootDir);
 
   async run(): Promise<void> {
-    fs.copySync(
-      path.join(this.rootDir, './backstop_data/html_report'),
-      path.join(this.rootDir, './dist/report/html_report'),
-    );
+    await this.buildCommand.run();
 
-    execSync(`git add ${path.join(this.rootDir, './dist')} -f`, { stdio: 'inherit' });
-    execSync('git commit -m "make build" --no-verify', { stdio: 'inherit' });
+    console.log('Start deploy to gh-pages\n');
 
     try {
-      execSync('git push --delete origin gh-pages');
-    } catch (e) {
-      // do nothing
+      this.copyHtmlReport();
+      this.commitBuild();
+
+      DeployCommand.ensureCanPush();
+      DeployCommand.pushGhPagesSubtree();
+
+      console.log('Deployed to gh-pages successfully\n');
+    } catch (error) {
+      console.log('Error during deploy to gh-pages:');
+      console.error(error.message);
+    } finally {
+      this.clean();
     }
+  }
 
-    execSync('git subtree push --prefix dist origin gh-pages', { stdio: 'inherit' });
-    execSync('git reset --soft HEAD^', { stdio: 'inherit' });
+  private copyHtmlReport() {
+    fs.copySync(
+      path.join(this.backstop.htmlReportDir),
+      path.join(this.destinationDir, './report/html_report'),
+    );
+  }
 
-    fs.removeSync(path.join(this.rootDir, 'dist'));
+  private commitBuild() {
+    execBashCode(`git add ${this.destinationDir} -f`, false);
+    execBashCode('git commit -m "make build" --no-verify', false);
+  }
+
+  private static ensureCanPush() {
+    execBashCodeSafely('git push --delete origin gh-pages', false);
+  }
+
+  private static pushGhPagesSubtree() {
+    execBashCode(`git subtree push --prefix ${DESTINATION_DIR} origin gh-pages`, false);
+  }
+
+  private clean() {
+    execBashCode('git reset --soft HEAD^', false);
+    execBashCode(`git restore --staged ${this.destinationDir}`, false);
+
+    fs.removeSync(this.destinationDir);
   }
 }

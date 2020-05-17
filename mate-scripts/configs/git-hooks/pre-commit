@@ -10,7 +10,7 @@ STAGED_JS_FILES=$(git diff --cached --name-only --diff-filter=ACM ./src | grep "
 if [[ "$STAGED_JS_FILES" != "" ]]; then
   echo "Linting javascript files"
 
-  mate-scripts lint --javascript $(join_by " " ${STAGED_JS_FILES})
+  npx mate-scripts lint --javascript $(join_by " " ${STAGED_JS_FILES})
 
   if [[ "$?" == 0 ]]; then
     printf "\033[32mESLint Passed\033[0m\n\n"
@@ -26,7 +26,7 @@ STAGED_CSS_FILES=$(git diff --cached --name-only --diff-filter=ACM ./src | grep 
 if [[ "$STAGED_CSS_FILES" != "" ]]; then
   echo "Linting CSS files"
 
-  mate-scripts lint --styles $(join_by " " ${STAGED_CSS_FILES})
+  npx mate-scripts lint --styles $(join_by " " ${STAGED_CSS_FILES})
 
   if [[ "$?" == 0 ]]; then
     printf "\033[32mStyleLint Passed\033[0m\n\n"
@@ -42,7 +42,7 @@ STAGED_HTML_FILES=$(git diff --cached --name-only --diff-filter=ACM ./src | grep
 if [[ "$STAGED_HTML_FILES" != "" ]]; then
   echo "Linting HTML files"
 
-  mate-scripts lint --html $(join_by " " ${STAGED_HTML_FILES})
+  npx mate-scripts lint --html $(join_by " " ${STAGED_HTML_FILES})
 
   if [[ "$?" == 0 ]]; then
     printf "\033[32mHTMLLint Passed\033[0m\n\n"

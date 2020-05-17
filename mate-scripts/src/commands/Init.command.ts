@@ -1,22 +1,28 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { Backstop } from '../Backstop.js';
 import { execBashCode } from '../tools/execBashCode.js';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
-  private static packagesPaths = {
-    linthtml: 'node_modules/@mate-academy/linthtml-config',
-  };
+  private static readonly lintHtmlConfigDir = 'node_modules/@mate-academy/linthtml-config';
 
-  private static configFileNames = {
-    linthtml: '.linthtmlrc.json',
-  };
+  private static readonly lintHtmlConfigFileName = '.linthtmlrc.json';
+
+  private static readonly configsDir = path.join(__dirname, '../configs');
+
+  private static readonly gitHooksSourceDir = path.join(InitCommand.configsDir, 'git-hooks');
+
+  private readonly gitHooksDestinationDir = path.join(this.rootDir, './.git/hooks');
+
+  private readonly backstop = new Backstop(this.rootDir);
 
   async run() {
+    console.log('UPDATED INIT');
     this.copyConfigs();
-
-    // await this.initBackstop();
     this.initGitHooks();
+
+    this.backstop.loadReferences();
   }
 
   private copyConfigs() {
@@ -26,50 +32,48 @@ export class InitCommand extends Command {
   }
 
   private copyCommonConfigs() {
-    const configsDir = path.join(__dirname, '../configs');
-    const commonConfigsDir = path.join(configsDir, 'common');
+    const commonConfigsDir = path.join(InitCommand.configsDir, 'common');
 
     fs.copySync(commonConfigsDir, this.rootDir);
   }
 
   private copyLayoutConfigs() {
-    const configsDir = path.join(__dirname, '../configs');
-    const layoutConfigsDir = path.join(configsDir, 'layout');
+    const layoutConfigsDir = path.join(InitCommand.configsDir, 'layout');
 
     fs.copySync(layoutConfigsDir, this.rootDir);
   }
 
   private copyLinthtmlConfig() {
-    fs.copyFileSync(
-      path.join(this.rootDir, InitCommand.packagesPaths.linthtml, InitCommand.configFileNames.linthtml),
-      path.join(this.rootDir, InitCommand.configFileNames.linthtml),
+    const lintHtmlConfigSource = path.join(
+      this.rootDir,
+      InitCommand.lintHtmlConfigDir,
+      InitCommand.lintHtmlConfigFileName,
     );
-  }
 
-  private async initBackstop() {
-    const backstopFolder = path.join(this.rootDir, 'backstop_data');
-    const referencesDir = path.join(backstopFolder, 'bitmaps_reference');
+    const lintHtmlConfigDestination = path.join(
+      this.rootDir,
+      InitCommand.lintHtmlConfigFileName,
+    );
 
-    fs.removeSync(referencesDir);
-
-    execBashCode(`backstop reference --config=${path.join(this.rootDir, './backstopConfig.js')}`);
+    fs.copyFileSync(lintHtmlConfigSource, lintHtmlConfigDestination);
   }
 
   private initGitHooks() {
-    const configsDir = path.join(__dirname, '../configs');
-    const gitHooksDir = path.join(configsDir, 'git-hooks');
-    const targetHooksPath = path.join(this.rootDir, './.git/hooks');
-    const gitHooksList = fs.readdirSync(gitHooksDir);
+    const gitHooksList = fs.readdirSync(InitCommand.gitHooksSourceDir);
 
-    gitHooksList.forEach((hookName) => {
-      const targetHookFilename = path.join(targetHooksPath, hookName);
+    gitHooksList.forEach((hookName) => this.initGitHook(hookName));
+  }
 
-      fs.copySync(
-        path.join(gitHooksDir, hookName),
-        targetHookFilename,
-      );
+  private initGitHook(hookName: string) {
+    const sourceHookFile = path.join(InitCommand.gitHooksSourceDir, hookName);
+    const destinationHookFile = path.join(this.gitHooksDestinationDir, hookName);
 
-      execBashCode(`chmod +x ${targetHookFilename}`);
-    });
+    fs.copySync(sourceHookFile, destinationHookFile);
+
+    InitCommand.makeGitHookExecutable(destinationHookFile);
+  }
+
+  private static makeGitHookExecutable(hookFile: string) {
+    execBashCode(`chmod +x ${hookFile}`);
   }
 }

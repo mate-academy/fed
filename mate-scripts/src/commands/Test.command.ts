@@ -1,16 +1,10 @@
-import fs from 'fs-extra';
-import path from 'path';
-import { execBashCodeSilent } from '../tools/execBashCode.js';
+import { Backstop } from '../Backstop.js';
 import { Command } from './Command';
 
 export class TestCommand extends Command {
-  async run(): Promise<void> {
-    fs.removeSync(
-      path.join(this.rootDir, './backstop_data/bitmaps_test'),
-    );
+  private readonly backstop = new Backstop(this.rootDir);
 
-    execBashCodeSilent(
-      'backstop test --config=backstopConfig.js',
-    );
+  async run(): Promise<void> {
+    this.backstop.test();
   }
 }

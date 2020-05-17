@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.0.27",
+  "version": "0.0.38",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
@@ -28,8 +28,8 @@
     "mate-scripts": "bin/mateScripts.js"
   },
   "files": [
-    "./bin/**/*.*",
-    "./configs/**/*.*",
+    "bin",
+    "configs",
     "package.json",
     "package-lock.json",
     "README.md"

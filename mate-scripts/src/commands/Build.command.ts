@@ -1,12 +1,11 @@
-import { execSync } from 'child_process';
-import fs from 'fs-extra';
-import path from 'path';
+import { DESTINATION_DIR } from '../constants.js';
+import { Gulp } from '../Gulp.js';
 import { Command } from './Command';
 
 export class BuildCommand extends Command {
-  async run(): Promise<void> {
-    fs.removeSync(path.join(this.rootDir, 'dist'));
+  private readonly gulp = new Gulp(this.rootDir);
 
-    execSync('gulp build', { stdio: 'inherit' });
+  async run(): Promise<void> {
+    this.gulp.build(DESTINATION_DIR);
   }
 }

@@ -21,3 +21,11 @@ export function execBashCodeSilent(bashCode: string, shouldBindStdout = true) {
     process.exit(1);
   }
 }
+
+export function execBashCodeSafely(bashCode: string, shouldBindStdout = true) {
+  try {
+    execBashCode(bashCode, shouldBindStdout);
+  } catch (error) {
+    // do nothing
+  }
+}
