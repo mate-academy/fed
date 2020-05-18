@@ -5,7 +5,10 @@ import { Command } from './Command';
 export class BuildCommand extends Command {
   private readonly gulp = new Gulp(this.rootDir);
 
-  async run(): Promise<void> {
-    this.gulp.build(DESTINATION_DIR);
+  protected common() {
   }
+
+  layout = () => {
+    this.gulp.build(DESTINATION_DIR);
+  };
 }

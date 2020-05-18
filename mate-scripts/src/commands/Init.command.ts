@@ -17,19 +17,17 @@ export class InitCommand extends Command {
 
   private readonly backstop = new Backstop(this.rootDir);
 
-  async run() {
-    console.log('UPDATED INIT');
-    this.copyConfigs();
+  protected common() {
+    this.copyCommonConfigs();
     this.initGitHooks();
-
-    this.backstop.loadReferences();
   }
 
-  private copyConfigs() {
-    this.copyCommonConfigs();
+  protected layout = () => {
     this.copyLayoutConfigs();
     this.copyLinthtmlConfig();
-  }
+
+    this.backstop.loadReferences();
+  };
 
   private copyCommonConfigs() {
     const commonConfigsDir = path.join(InitCommand.configsDir, 'common');

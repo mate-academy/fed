@@ -13,7 +13,10 @@ export class DeployCommand extends Command {
 
   private readonly backstop = new Backstop(this.rootDir);
 
-  async run(): Promise<void> {
+  protected common() {
+  }
+
+  protected layout = async (): Promise<void> => {
     await this.buildCommand.run();
 
     console.log('Start deploy to gh-pages\n');
@@ -32,7 +35,7 @@ export class DeployCommand extends Command {
     } finally {
       this.clean();
     }
-  }
+  };
 
   private copyHtmlReport() {
     fs.copySync(

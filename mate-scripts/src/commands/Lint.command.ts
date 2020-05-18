@@ -9,13 +9,18 @@ export interface LintOptions {
 }
 
 export class LintCommand extends Command {
-  async run(options: LintOptions): Promise<void> {
-    const { html, styles, javascript, files } = options;
+  protected common(options: LintOptions) {
+    const { styles, javascript, files } = options;
 
-    html && LintCommand.lintHtml(files);
     styles && LintCommand.lintStyles(files);
     javascript && LintCommand.lintJs(files);
   }
+
+  protected layout = (options: LintOptions) => {
+    const { html, files } = options;
+
+    html && LintCommand.lintHtml(files);
+  };
 
   private static lintHtml(files: LintOptions['files']) {
     const filesToLint = files

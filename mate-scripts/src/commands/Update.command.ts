@@ -3,8 +3,16 @@ import { Command } from './Command';
 import { name } from '../../package.json';
 
 export class UpdateCommand extends Command {
-  async run(options?: any): Promise<void> {
+  common() {
     execBashCode(`npm install -D ${name}@latest`);
     execBashCode('npm run init');
   }
+
+  protected layout = () => {};
+
+  protected javascript = () => {};
+
+  protected react = () => {};
+
+  protected reactTypescript = () => {};
 }

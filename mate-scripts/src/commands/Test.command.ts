@@ -4,7 +4,10 @@ import { Command } from './Command';
 export class TestCommand extends Command {
   private readonly backstop = new Backstop(this.rootDir);
 
-  async run(): Promise<void> {
-    this.backstop.test();
+  protected common(): void {
   }
+
+  protected layout = ()=> {
+    this.backstop.test();
+  };
 }
