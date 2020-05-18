@@ -4,7 +4,10 @@ import { Command } from './Command';
 
 export class UpdateCommand extends Command {
   common() {
-    execBashCode(`npm i ${name}$(npm view ${name} version)`);
+    const version = execBashCode(`npm view ${name} version`);
+
+    execBashCode(`npm i ${name}@${version}`);
+
     execBashCode('npx mate-scripts migrate');
     execBashCode('npx mate-scripts init');
   }

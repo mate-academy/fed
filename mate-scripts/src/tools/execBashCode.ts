@@ -11,12 +11,13 @@ export function execBashCode(bashCode: string, shouldBindStdout = true) {
     };
   }
 
-  execSync(bashCode, options);
+  return execSync(bashCode, options)
+    .toString();
 }
 
 export function execBashCodeSilent(bashCode: string, shouldBindStdout = true) {
   try {
-    execBashCode(bashCode, shouldBindStdout);
+    return execBashCode(bashCode, shouldBindStdout);
   } catch (error) {
     process.exit(1);
   }
@@ -24,7 +25,7 @@ export function execBashCodeSilent(bashCode: string, shouldBindStdout = true) {
 
 export function execBashCodeSafely(bashCode: string, shouldBindStdout = true) {
   try {
-    execBashCode(bashCode, shouldBindStdout);
+    return execBashCode(bashCode, shouldBindStdout);
   } catch (error) {
     // do nothing
   }
