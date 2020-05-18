@@ -24,10 +24,12 @@ export class BackstopService {
   }
 
   test() {
-    this.ensureReferences();
-    this.cleanTestResults();
+    if (fs.existsSync(this.configPath)) {
+      this.ensureReferences();
+      this.cleanTestResults();
 
-    BackstopService.run('test', { config: this.configPath });
+      BackstopService.run('test', { config: this.configPath });
+    }
   }
 
   private ensureReferences() {
