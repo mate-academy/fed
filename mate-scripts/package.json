@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.0.49",
+  "version": "0.0.50",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {

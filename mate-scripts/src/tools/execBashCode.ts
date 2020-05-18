@@ -11,8 +11,11 @@ export function execBashCode(bashCode: string, shouldBindStdout = true) {
     };
   }
 
-  return execSync(bashCode, options)
-    .toString();
+  const result = execSync(bashCode, options);
+
+  return result
+    ? result.toString()
+    : result;
 }
 
 export function execBashCodeSilent(bashCode: string, shouldBindStdout = true) {
