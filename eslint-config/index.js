@@ -33,10 +33,10 @@ module.exports = {
       { blankLine: "any", prev: ["const", "let", "var"], next: ["const", "let", "var"]},
     ],
     "brace-style": ["error", "1tbs"],
-    "object-curly-newline": ['error', {
+    "object-curly-newline": [2, {
       "ObjectExpression": {
         "consistent": true,
-        "minProperties": 4,
+        "minProperties": 2,
       },
     }],
   },
