@@ -9,6 +9,7 @@ import {
   StartCommand,
   TestCommand,
   UpdateCommand,
+  MigrateCommand,
 } from './commands';
 import { lintController } from './controllers';
 
@@ -56,5 +57,11 @@ program
   .command('update')
   .description('update @mate-academy/scripts')
   .action(commandFactory.make(UpdateCommand));
+
+
+program
+  .command('migrate')
+  .description('migrate to updated @mate-academy/scripts version')
+  .action(commandFactory.make(MigrateCommand));
 
 program.parse(process.argv);
