@@ -4,8 +4,7 @@ import { name } from '../../package.json';
 
 export class UpdateCommand extends Command {
   common() {
-    execBashCode(`npm install -D ${name}@latest`);
-    execBashCode(`npm update ${name}@latest`);
+    execBashCode(`npm i ${name}$(npm view ${name} version)`);
     execBashCode('npm run init');
   }
 
