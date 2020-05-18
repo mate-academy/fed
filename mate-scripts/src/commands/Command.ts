@@ -7,19 +7,19 @@ export abstract class Command {
 
   protected projectType: ProjectTypes = ProjectTypes.None;
 
-  private throwNoImplementationError = (): never => {
-    throw new Error(`No implementation for command ${this.constructor.name} for ${this.projectType} project`);
+  private logNoImplementationWarning = () => {
+    console.warn(`No implementation for command ${this.constructor.name} for ${this.projectType} project`);
   };
 
-  protected [ProjectTypes.None]: (options?: any) => void = this.throwNoImplementationError;
+  protected [ProjectTypes.None]: (options?: any) => void = this.logNoImplementationWarning;
 
-  protected [ProjectTypes.Layout]: (options?: any) => void = this.throwNoImplementationError;
+  protected [ProjectTypes.Layout]: (options?: any) => void = this.logNoImplementationWarning;
 
-  protected [ProjectTypes.Javascript]: (options?: any) => void = this.throwNoImplementationError;
+  protected [ProjectTypes.Javascript]: (options?: any) => void = this.logNoImplementationWarning;
 
-  protected [ProjectTypes.React]: (options?: any) => void = this.throwNoImplementationError;
+  protected [ProjectTypes.React]: (options?: any) => void = this.logNoImplementationWarning;
 
-  protected [ProjectTypes.ReactTypescript]: (options?: any) => void = this.throwNoImplementationError;
+  protected [ProjectTypes.ReactTypescript]: (options?: any) => void = this.logNoImplementationWarning;
 
   constructor(rootDir: string) {
     this.rootDir = rootDir;
@@ -47,14 +47,15 @@ export abstract class Command {
     );
 
     if (!mateAcademy || !mateAcademy.projectType) {
-      Command.throwProjectTypeError();
+      Command.logProjectTypeWarning();
+      return;
     }
 
     this.projectType = mateAcademy.projectType;
   }
 
-  private static throwProjectTypeError(): never {
-    throw new Error(
+  private static logProjectTypeWarning() {
+    console.warn(
 `package.json should contain
 {
   ...

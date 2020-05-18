@@ -10,8 +10,8 @@ export class CommandFactory {
     this.rootDir = getRootDir();
   }
 
-  make(CommandClass: CommandConstructor, controller?: Controller<any>) {
-    const command = new CommandClass(this.rootDir);
+  make(CommandClass: CommandConstructor, controller?: Controller<any>, isGlobal = false) {
+    const command = new CommandClass(isGlobal ? process.cwd() : this.rootDir);
 
     if (!controller) {
       return () => command.run();

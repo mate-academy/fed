@@ -8,17 +8,23 @@ export function getRootDir() {
   let rootDir = process.cwd();
   let folderContent = fs.readdirSync(rootDir);
 
-  while (true) {
-    if (isRoot(folderContent) && hasCorrectDependency(rootDir)) {
-      break;
-    }
+  try {
+    while (true) {
+      if (isRoot(folderContent) && hasCorrectDependency(rootDir)) {
+        break;
+      }
 
-    if (isSystemRoot(rootDir)) {
-      throw new Error(rootDirError);
-    }
+      if (isSystemRoot(rootDir)) {
+        throw new Error(rootDirError);
+      }
 
-    rootDir = path.join(rootDir, '../');
-    folderContent = fs.readdirSync(rootDir);
+      rootDir = path.join(rootDir, '../');
+      folderContent = fs.readdirSync(rootDir);
+    }
+  } catch (error) {
+    console.error(error.message);
+
+    rootDir = process.cwd();
   }
 
   return rootDir;

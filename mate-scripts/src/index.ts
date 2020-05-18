@@ -11,7 +11,7 @@ import {
   UpdateCommand,
   MigrateCommand,
 } from './commands';
-import { lintController } from './controllers';
+import { lintController, migrateController } from './controllers';
 
 const program = new Commander();
 const commandFactory = new CommandFactory();
@@ -60,8 +60,8 @@ program
 
 
 program
-  .command('migrate')
-  .description('migrate to updated @mate-academy/scripts version')
-  .action(commandFactory.make(MigrateCommand));
+  .command('migrate <type>')
+  .description('(global) migrate project to @mate-academy/scripts')
+  .action(commandFactory.make(MigrateCommand, migrateController, true));
 
 program.parse(process.argv);

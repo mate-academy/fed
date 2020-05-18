@@ -1,7 +1,13 @@
 import fs from 'fs-extra';
+import nodeFs from 'fs';
 import path from "path";
-import { execBashCodeSafely } from '../tools';
+import { ProjectTypes } from '../constants.js';
+import { execBashCode } from '../tools';
 import { Command } from './Command';
+
+export interface MigrateOptions {
+  projectType: ProjectTypes;
+}
 
 export class MigrateCommand extends Command {
   private static scripts = {
@@ -16,45 +22,72 @@ export class MigrateCommand extends Command {
     test: 'npm run lint && npm run test:only',
   };
 
-  protected common() {
+  private static mateConfig: Record<ProjectTypes, any> = {
+    [ProjectTypes.None]: null,
+    [ProjectTypes.Layout]: {
+      mateAcademy: {
+        projectType: ProjectTypes.Layout
+      }
+    },
+    [ProjectTypes.Javascript]: {
+      mateAcademy: {
+        projectType: ProjectTypes.Javascript
+      }
+    },
+    [ProjectTypes.React]: {
+      mateAcademy: {
+        projectType: ProjectTypes.React
+      }
+    },
+    [ProjectTypes.ReactTypescript]: {
+      mateAcademy: {
+        projectType: ProjectTypes.ReactTypescript
+      }
+    },
+  };
+
+  protected common(options: MigrateOptions) {
+    this[options.projectType]();
   }
 
-  protected layout = (rootDir: string) => {
-    MigrateCommand.safeRun(() => (
-      fs.copySync(
-        path.join(rootDir, 'config/backstop/backstopConfig.js'),
-        path.join(rootDir, 'backstopConfig.js'),
-      )
-    ));
-    MigrateCommand.safeRun(() => (
-      fs.removeSync(path.join(rootDir, 'config'))
-    ));
-    MigrateCommand.safeRun(() => (
-      fs.removeSync(path.join(rootDir, 'server.js'))
-    ));
-    MigrateCommand.safeRun(() => (
-      fs.removeSync(path.join(rootDir, '.travis.yml'))
-    ));
+  protected layout = () => {
+    execBashCode('npm i -D @mate-academy/scripts');
 
-    MigrateCommand.safeRun(() => {
-      if (fs.existsSync(path.join(rootDir, 'readme.md'))) {
-        fs.moveSync(
-          path.join(rootDir, 'readme.md'),
-          path.join(rootDir, 'README.md'),
-        );
-      }
-    });
-
-    execBashCodeSafely('npm rm @mate-academy/browsersync-config htmllint htmllint-cli husky lint-staged rimraf @mate-academy/htmllint-config');
-    execBashCodeSafely('npm i -D @linthtml/linthtml @linthtml/gulp-linthtml gulp gulp-autoprefixer gulp-clean gulp-eslint gulp-replace-path gulp-sass gulp-sourcemaps gulp-stylelint stylelint-scss @mate-academy/linthtml-config');
-
-    const pkg = fs.readFileSync(path.join(rootDir, 'package.json'), { encoding: 'utf-8' });
+    const pkg = fs.readFileSync(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
     const parsedPkg = JSON.parse(pkg);
 
     parsedPkg.scripts = MigrateCommand.scripts;
 
     delete parsedPkg['lint-staged'];
     delete parsedPkg.husky;
+
+    nodeFs.writeFileSync(
+      path.join(this.rootDir, 'package.json'),
+      JSON.stringify({
+        ...parsedPkg,
+        ...MigrateCommand.mateConfig.layout,
+      }, null, 2),
+    );
+
+    MigrateCommand.safeRun(() => (
+      fs.copySync(
+        path.join(this.rootDir, 'config/backstop/backstopConfig.js'),
+        path.join(this.rootDir, 'backstopConfig.js'),
+      )
+    ));
+    MigrateCommand.safeRun(() => (
+      fs.removeSync(path.join(this.rootDir, 'config'))
+    ));
+    MigrateCommand.safeRun(() => (
+      fs.removeSync(path.join(this.rootDir, 'server.js'))
+    ));
+    MigrateCommand.safeRun(() => (
+      fs.removeSync(path.join(this.rootDir, '.travis.yml'))
+    ));
+
+    execBashCode('npm rm @mate-academy/browsersync-config htmllint htmllint-cli husky lint-staged rimraf @mate-academy/htmllint-config');
+    execBashCode('npm i -D @linthtml/linthtml @linthtml/gulp-linthtml gulp gulp-autoprefixer gulp-clean gulp-eslint gulp-replace-path gulp-sass gulp-sourcemaps gulp-stylelint stylelint-scss @mate-academy/linthtml-config');
+    execBashCode('npm i');
   };
 
   protected javascript = () => {};
