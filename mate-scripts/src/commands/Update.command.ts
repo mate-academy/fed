@@ -6,7 +6,7 @@ export class UpdateCommand extends Command {
   common() {
     execBashCode(`npm i ${name}$(npm view ${name} version)`);
     execBashCode('npx mate-scripts migrate');
-    execBashCode('npm run init');
+    execBashCode('npx mate-scripts init');
   }
 
   protected layout = () => {};
