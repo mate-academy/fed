@@ -1,3 +1,5 @@
+import v0_0_0 from './0.0.0.js';
+
 export const migrations = [
-  require('./0.0.0'),
+  v0_0_0,
 ];
