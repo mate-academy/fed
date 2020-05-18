@@ -49,9 +49,11 @@ export class BackstopService {
   }
 
   loadReferences() {
-    this.cleanReference();
+    if (fs.existsSync(this.configPath)) {
+      this.cleanReference();
 
-    BackstopService.run('reference', { config: this.configPath });
+      BackstopService.run('reference', { config: this.configPath });
+    }
   }
 
   private cleanReference() {
