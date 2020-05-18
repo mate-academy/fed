@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.0.39",
+  "version": "0.0.41",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
@@ -32,8 +32,7 @@
     "configs",
     "package.json",
     "package-lock.json",
-    "README.md",
-    "configs/layout/.gitignore"
+    "README.md"
   ],
   "author": "dev@mate.academy",
   "license": "MIT",

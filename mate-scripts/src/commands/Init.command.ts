@@ -19,6 +19,7 @@ export class InitCommand extends Command {
 
   protected common() {
     this.copyCommonConfigs();
+    this.copyGitIgnore();
     this.initGitHooks();
   }
 
@@ -33,6 +34,15 @@ export class InitCommand extends Command {
     const commonConfigsDir = path.join(InitCommand.configsDir, 'common');
 
     fs.copySync(commonConfigsDir, this.rootDir);
+  }
+
+  private copyGitIgnore() {
+    const gitIgnoreFileName = '.gitignore';
+
+    fs.copySync(
+      path.join(InitCommand.configsDir, `${gitIgnoreFileName}.template`),
+      path.join(this.rootDir, gitIgnoreFileName),
+    );
   }
 
   private copyLayoutConfigs() {
