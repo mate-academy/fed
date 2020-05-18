@@ -1,4 +1,4 @@
-import { execBashCodeSilent } from '../tools/execBashCode';
+import { execBashCodeSilent } from '../tools';
 import { Command } from './Command';
 
 export interface LintOptions {

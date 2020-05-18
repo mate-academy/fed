@@ -1,9 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { execBashCodeSilent } from './tools/execBashCode.js';
+import { execBashCodeSilent } from '../tools';
 
-export class Backstop {
-  private static __instance: Backstop;
+export class BackstopService {
+  private static __instance: BackstopService;
 
   private readonly configPath = path.join(this.rootDir, './backstopConfig.js');
 
@@ -16,18 +16,18 @@ export class Backstop {
   readonly htmlReportDir = path.join(this.dataDir, 'html_report');
 
   constructor(private readonly rootDir: string) {
-    if (!Backstop.__instance) {
-      Backstop.__instance = this;
+    if (!BackstopService.__instance) {
+      BackstopService.__instance = this;
     }
 
-    return Backstop.__instance;
+    return BackstopService.__instance;
   }
 
   test() {
     this.ensureReferences();
     this.cleanTestResults();
 
-    Backstop.run('test', { config: this.configPath });
+    BackstopService.run('test', { config: this.configPath });
   }
 
   private ensureReferences() {
@@ -49,7 +49,7 @@ export class Backstop {
   loadReferences() {
     this.cleanReference();
 
-    Backstop.run('reference', { config: this.configPath });
+    BackstopService.run('reference', { config: this.configPath });
   }
 
   private cleanReference() {

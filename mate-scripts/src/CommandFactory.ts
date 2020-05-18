@@ -1,7 +1,7 @@
 import { Command as Commander } from 'commander';
 import { CommandConstructor } from './commands';
 import { Controller } from './controllers';
-import { getRootDir } from './tools/getRootDir';
+import { getRootDir } from './tools';
 
 export class CommandFactory {
   private readonly rootDir: string;

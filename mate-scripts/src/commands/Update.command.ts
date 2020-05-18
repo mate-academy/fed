@@ -1,4 +1,4 @@
-import { execBashCode } from '../tools/execBashCode';
+import { execBashCode } from '../tools';
 import { Command } from './Command';
 import { name } from '../../package.json';
 

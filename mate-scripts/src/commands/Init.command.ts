@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { Backstop } from '../Backstop.js';
-import { execBashCode } from '../tools/execBashCode.js';
+import { BackstopService } from '../services';
+import { execBashCode } from '../tools';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
@@ -15,7 +15,7 @@ export class InitCommand extends Command {
 
   private readonly gitHooksDestinationDir = path.join(this.rootDir, './.git/hooks');
 
-  private readonly backstop = new Backstop(this.rootDir);
+  private readonly backstop = new BackstopService(this.rootDir);
 
   protected common() {
     this.copyCommonConfigs();

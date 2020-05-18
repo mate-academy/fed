@@ -1,9 +1,9 @@
 import { DESTINATION_DIR } from '../constants.js';
-import { Gulp } from '../Gulp.js';
+import { GulpService } from '../services';
 import { Command } from './Command';
 
 export class StartCommand extends Command {
-  private readonly gulp = new Gulp(this.rootDir);
+  private readonly gulp = new GulpService(this.rootDir);
 
   protected common() {
   }

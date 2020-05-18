@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { Backstop } from '../Backstop.js';
+import { BackstopService } from '../services';
 import { DESTINATION_DIR } from '../constants.js';
-import { execBashCode, execBashCodeSafely } from '../tools/execBashCode.js';
+import { execBashCode, execBashCodeSafely } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
 
@@ -11,7 +11,7 @@ export class DeployCommand extends Command {
 
   private readonly destinationDir = path.join(this.rootDir, DESTINATION_DIR);
 
-  private readonly backstop = new Backstop(this.rootDir);
+  private readonly backstop = new BackstopService(this.rootDir);
 
   protected common() {
   }
