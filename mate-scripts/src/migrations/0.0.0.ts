@@ -36,6 +36,6 @@ export default (rootDir: string) => {
     }
   });
 
-  execBashCodeSafely('npm rm @mate-academy/browsersync-config htmllint htmllint-cli husky lint-staged rimraf');
-  execBashCodeSafely('npm i -D @linthtml/linthtml @linthtml/gulp-linthtml gulp gulp-autoprefixer gulp-clean gulp-eslint gulp-replace-path gulp-sass gulp-sourcemaps gulp-stylelint stylelint-scss');
+  execBashCodeSafely('npm rm @mate-academy/browsersync-config htmllint htmllint-cli husky lint-staged rimraf @mate-academy/htmllint-config');
+  execBashCodeSafely('npm i -D @linthtml/linthtml @linthtml/gulp-linthtml gulp gulp-autoprefixer gulp-clean gulp-eslint gulp-replace-path gulp-sass gulp-sourcemaps gulp-stylelint stylelint-scss @mate-academy/linthtml-config');
 }
