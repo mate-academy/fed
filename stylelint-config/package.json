@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/stylelint-config",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "stylelint-config-recommended-scss": "^4.2.0",
     "stylelint-scss": "^3.17.2"
   }
 }
