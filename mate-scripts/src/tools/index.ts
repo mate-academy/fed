@@ -1,2 +1,2 @@
-export * from './execBashCode.js';
-export * from './getRootDir.js';
+export * from './execBashCode';
+export * from './getRootDir';

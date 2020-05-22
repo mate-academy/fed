@@ -8,6 +8,7 @@ export function execBashCode(bashCode: string, shouldBindStdout = true) {
   if (shouldBindStdout) {
     options = {
       stdio: 'inherit',
+      cwd: process.cwd(),
     };
   }
 

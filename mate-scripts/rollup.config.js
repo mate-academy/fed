@@ -28,6 +28,6 @@ export default {
       indent: '  ',
       compact: true,
       namedExports: true,
-    })
-  ]
+    }),
+  ],
 };
