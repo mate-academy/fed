@@ -1,7 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { BackstopService } from '../services';
-import { execBashCode } from '../tools';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
@@ -77,11 +76,5 @@ export class InitCommand extends Command {
     const destinationHookFile = path.join(this.gitHooksDestinationDir, hookName);
 
     fs.copySync(sourceHookFile, destinationHookFile);
-
-    InitCommand.makeGitHookExecutable(destinationHookFile);
-  }
-
-  private static makeGitHookExecutable(hookFile: string) {
-    execBashCode(`chmod +x ${hookFile}`);
   }
 }
