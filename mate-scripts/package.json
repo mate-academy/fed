@@ -13,7 +13,7 @@
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
     "major": "npm version major && npm publish",
-    "updateRepos": "ts-node-dev --project ./tsconfig.local.json ./updateRepos.ts"
+    "updateRepos": "ts-node-dev --project ./tsconfig.local.json src/localScripts/updateRepos.ts"
   },
   "repository": {
     "type": "git",

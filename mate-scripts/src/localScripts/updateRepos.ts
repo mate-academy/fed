@@ -3,10 +3,10 @@ import path from 'path';
 import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 import { Command } from 'commander';
-import { repositories } from './repositories';
-import pkg from './package.json';
-import { ProjectTypes } from './src/constants.js';
-import { execBashCodeAsync, ExecBashCodeAsyncParams } from './src/tools';
+import { repositories } from './repositories.js';
+import pkg from '../../package.json';
+import { ProjectTypes } from '../constants.js';
+import { execBashCodeAsync, ExecBashCodeAsyncParams } from '../tools';
 
 dotenv.config();
 
@@ -24,15 +24,25 @@ const mergeMethod = 'squash';
 const program = new Command();
 
 program
-  .option('-i, --instructions <items>', 'Bash command to run inside repo folder', commaSeparatedList, ['mate-scripts update'])
+  .option('-c, --commands <items>', 'Bash command to run inside repo folder', commaSeparatedList, ['mate-scripts update'])
   .option('-m, --message <string>', 'Commit message and PR title', defaultMessage)
-  .option('-s, --silent', 'Hide internal commands logs', false)
-  .option('--merge', 'Merge pull requests automatically', false)
   .option('-t, --types, <items>', 'Project types to update', commaSeparatedList, ['layout'])
-  .option('-r, --repos, <items>', 'Specific repos to update', commaSeparatedList, [])
-  .option('-e, --exclude, <items>', 'Repos to exclude from update', commaSeparatedList, []);
+  .option('-i, --include, <items>', 'Specific projects to update', commaSeparatedList, [])
+  .option('-e, --exclude, <items>', 'Specific projects to exclude from update', commaSeparatedList, [])
+  .option('--merge', 'Merge pull requests automatically', false)
+  .option('-s, --silent', 'Hide internal commands logs', false);
 
 program.parse(process.argv);
+
+const {
+  commands,
+  message,
+  types: projectTypes,
+  include: includedProjects,
+  exclude: excludedProjects,
+  merge:  shouldMerge,
+  silent: isSilent,
+} = program.opts();
 
 async function updateRepos() {
   const reposTempDir = path.join('/', 'tmp');
@@ -40,7 +50,7 @@ async function updateRepos() {
     auth: githubToken
   });
   const execOptions: ExecBashCodeAsyncParams = {
-    shouldBindStdout: !program.silent,
+    shouldBindStdout: !isSilent,
   };
 
   const execInDir = (cwd: string) => (command: string) => execBashCodeAsync(command, {
@@ -48,10 +58,10 @@ async function updateRepos() {
   });
   const execInTmp = execInDir(reposTempDir);
   const reposToUpdate = (Object.keys(repositories) as ProjectTypes[])
-    .filter((projectType: ProjectTypes) => program.types.includes(projectType))
+    .filter((projectType: ProjectTypes) => projectTypes.includes(projectType))
     .flatMap((projectType) => repositories[projectType])
-    .filter((repoName) => program.repos.length ? program.repos.includes(repoName) : true)
-    .filter((repoName) => !program.exclude.includes(repoName));
+    .filter((repoName) => includedProjects.length ? includedProjects.includes(repoName) : true)
+    .filter((repoName) => !excludedProjects.includes(repoName));
 
   const prUrlsPromises = reposToUpdate.map(async (repo) => {
     const repoSSHUrl = `git@github.com:${orgName}/${repo}.git`;
@@ -64,23 +74,23 @@ async function updateRepos() {
 
       await execInRepo(`git checkout -b ${prBranch}`);
 
-      for (let instruction of program.instructions) {
-        await execInRepo(instruction);
+      for (let command of commands) {
+        await execInRepo(command);
       }
 
       await execInRepo('git add -A');
-      await execInRepo(`git commit -m "${program.message}"`);
+      await execInRepo(`git commit -m "${message}"`);
       await execInRepo(`git push origin ${prBranch}:${prBranch}`);
 
       const { data: { html_url: url, number: pullNumber } } = await octokit.pulls.create({
         owner: orgName,
         repo,
-        title: program.message,
+        title: message,
         head: prBranch,
         base: baseBranch,
       });
 
-      if (program.merge) {
+      if (shouldMerge) {
         await octokit.pulls.merge({
           owner: orgName,
           repo,
@@ -111,5 +121,3 @@ async function updateRepos() {
 
   console.log({ prUrls });
 }
-
-updateRepos();
