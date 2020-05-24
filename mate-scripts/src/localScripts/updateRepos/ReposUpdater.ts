@@ -37,10 +37,14 @@ export class ReposUpdater {
    updateRepos = async () => {
     const reposToUpdate = this.getReposToUpdate();
     const prUrlsPromises = reposToUpdate.map(this.tryToUpdateRepo);
-
     const prUrls = await Promise.all(prUrlsPromises);
 
     console.log(prUrls);
+
+    await fs.writeFile(
+      path.join('../', 'lastCreatedPRs.json'),
+      JSON.stringify(prUrls, null, 2),
+    );
   };
 
   private getReposToUpdate() {
@@ -59,9 +63,9 @@ export class ReposUpdater {
 
   private tryToUpdateRepo = async (repo: string) => {
     try {
-      return this.updateRepo(repo);
+      return await this.updateRepo(repo);
     } catch (error) {
-      return ReposUpdater.catchUpdateRepoError(repo, error);
+      return await ReposUpdater.catchUpdateRepoError(repo, error);
     } finally {
       await ReposUpdater.cleanUpAfterUpdateRepo(repo);
     }
@@ -94,13 +98,6 @@ private async updateRepo(repo: string) {
     await execInRepo(`git commit -m "${message}"`);
     await execInRepo(`git push -f origin ${prBranch}:${prBranch}`);
 
-    console.log({
-      owner: orgName,
-      repo,
-      title: message,
-      head: prBranch,
-      base: baseBranch,
-    });
     const { data: { html_url: url, number: pullNumber } } = await this.octokit.pulls.create({
       owner: orgName,
       repo,
@@ -137,7 +134,7 @@ private async updateRepo(repo: string) {
     try {
       await fs.remove(repoDir);
     } catch (error) {
-      // NODTE: do nothing, failing here means updateRepo fails before create folder(before clone repo)
+      // NOTE: do nothing, failing here means updateRepo fails before create folder(before clone repo)
     }
   }
 }

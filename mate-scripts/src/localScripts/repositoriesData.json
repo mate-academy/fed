@@ -1,6 +1,16 @@
 {
   "none": [
-    "html-scss-athletes"
+    "html-scss-athletes",
+    "js_calendar-table-DOM",
+    "js_tree-from-object-DOM",
+    "js_sort-table-DOM",
+    "js_sliding-tree-DOM",
+    "js_all-is-timed-DOM",
+    "js_task-gallery-DOM",
+    "js_task-carousel-DOM",
+    "js_all-is-counted-DOM",
+    "js_mouse-gun-DOM",
+    "js_registration-form-DOM"
   ],
   "layout": [
     "gulp-template",
@@ -22,18 +32,7 @@
     "layout_listing-details-airbnb",
     "layout_miami",
     "layout_dia",
-    "layout_miami2",
     "layout_stars",
-    "js_calendar-table-DOM",
-    "js_tree-from-object-DOM",
-    "js_sort-table-DOM",
-    "js_sliding-tree-DOM",
-    "js_all-is-timed-DOM",
-    "js_task-gallery-DOM",
-    "js_task-carousel-DOM",
-    "js_all-is-counted-DOM",
-    "js_mouse-gun-DOM",
-    "js_registration-form-DOM",
     "tools-using-exam"
   ],
   "javascript": [
