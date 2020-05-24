@@ -13,7 +13,8 @@
 
 
 ## TODO
-[] Projects list and bulk update
-[] Javascript support
-[] React support
-[] React typescript support
+- [x] Projects list and bulk update
+- [ ] Javascript support
+- [ ] React support
+- [ ] React typescript support
+- [ ] Async commands

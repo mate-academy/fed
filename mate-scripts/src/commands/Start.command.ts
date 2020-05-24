@@ -1,8 +1,8 @@
-import { Parcel } from '../services/Parcel.js';
+import { ParcelService } from '../services';
 import { Command } from './Command';
 
 export class StartCommand extends Command {
-  private readonly parcel = new Parcel(this.rootDir);
+  private readonly parcel = new ParcelService(this.rootDir);
 
   protected common() {
   }

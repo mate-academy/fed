@@ -2,7 +2,7 @@ import path from 'path';
 import { DESTINATION_DIR } from '../constants.js';
 import { execBashCode, makeCLIOptions } from '../tools';
 
-export class Parcel {
+export class ParcelService {
   private readonly baseOptions = {
     'out-dir': path.join(this.rootDir, DESTINATION_DIR),
   };
