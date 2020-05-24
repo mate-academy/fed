@@ -1,8 +1,8 @@
 import fs from 'fs-extra';
-import nodeFs from 'fs';
+import { promises as nodeFs } from 'fs';
 import path from "path";
-import { ProjectTypes } from '../constants.js';
-import { execBashCode } from '../tools';
+import { ProjectTypes } from '../constants';
+import { execBashCodeAsync } from '../tools';
 import { Command } from './Command';
 
 export interface MigrateOptions {
@@ -46,14 +46,14 @@ export class MigrateCommand extends Command {
     },
   };
 
-  protected common(options: MigrateOptions) {
-    this[options.projectType]();
+  protected async common(options: MigrateOptions) {
+    await this[options.projectType]();
   }
 
-  protected layout = () => {
-    execBashCode('npm i -D @mate-academy/scripts');
+  protected layout = async () => {
+    await execBashCodeAsync('npm i -D @mate-academy/scripts');
 
-    const pkg = fs.readFileSync(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
+    const pkg = await fs.readFile(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
     const parsedPkg = JSON.parse(pkg);
 
     parsedPkg.scripts = MigrateCommand.scripts;
@@ -61,7 +61,7 @@ export class MigrateCommand extends Command {
     delete parsedPkg['lint-staged'];
     delete parsedPkg.husky;
 
-    nodeFs.writeFileSync(
+    await nodeFs.writeFile(
       path.join(this.rootDir, 'package.json'),
       JSON.stringify({
         ...parsedPkg,
@@ -69,25 +69,33 @@ export class MigrateCommand extends Command {
       }, null, 2),
     );
 
-    MigrateCommand.safeRun(() => (
-      fs.copySync(
-        path.join(this.rootDir, 'config/backstop/backstopConfig.js'),
-        path.join(this.rootDir, 'backstopConfig.js'),
-      )
-    ));
-    MigrateCommand.safeRun(() => (
-      fs.removeSync(path.join(this.rootDir, 'config'))
-    ));
-    MigrateCommand.safeRun(() => (
-      fs.removeSync(path.join(this.rootDir, 'server.js'))
-    ));
-    MigrateCommand.safeRun(() => (
-      fs.removeSync(path.join(this.rootDir, '.travis.yml'))
-    ));
+    await Promise.all([
+      MigrateCommand.safeRun(
+        fs.copy(
+          path.join(this.rootDir, 'config/backstop/backstopConfig.js'),
+          path.join(this.rootDir, 'backstopConfig.js'),
+        ),
+      ),
+      MigrateCommand.safeRun(
+        fs.remove(path.join(this.rootDir, 'config')),
+      ),
+      MigrateCommand.safeRun(
+        fs.remove(path.join(this.rootDir, 'server.js')),
+      ),
+      MigrateCommand.safeRun(
+        fs.remove(path.join(this.rootDir, '.travis.yml')),
+      ),
+      MigrateCommand.safeRun(
+        fs.remove(path.join(this.rootDir, 'gulpfile.js')),
+      ),
+      MigrateCommand.safeRun(
+        fs.remove(path.join(this.rootDir, '.linthtmlrc')),
+      ),
+    ]);
 
-    execBashCode('npm rm @mate-academy/browsersync-config htmllint htmllint-cli husky lint-staged rimraf @mate-academy/htmllint-config');
-    execBashCode('npm i -D @linthtml/linthtml @linthtml/gulp-linthtml gulp gulp-autoprefixer gulp-clean gulp-eslint gulp-replace-path gulp-sass gulp-sourcemaps gulp-stylelint stylelint-scss @mate-academy/linthtml-config');
-    execBashCode('npm i');
+    await execBashCodeAsync('npm rm @linthtml/gulp-linthtml gulp-autoprefixer gulp-clean gulp-eslint gulp-replace-path gulp-sass gulp-sourcemaps gulp-stylelint gulp @mate-academy/browsersync-config htmllint htmllint-cli husky lint-staged rimraf @mate-academy/htmllint-config');
+    await execBashCodeAsync('npm i -D @linthtml/linthtml stylelint-scss @mate-academy/linthtml-config node-sass parcel');
+    await execBashCodeAsync('npm i');
   };
 
   protected javascript = () => {};
@@ -96,11 +104,13 @@ export class MigrateCommand extends Command {
 
   protected reactTypescript = () => {};
 
-  private static safeRun(cb: Function) {
+  private static async safeRun(promise: Promise<any>) {
     try {
-      cb();
+      await promise;
     } catch (error) {
       console.error('Migration error', error);
     }
+
+    return true;
   }
 }

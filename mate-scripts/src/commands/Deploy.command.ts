@@ -38,10 +38,14 @@ export class DeployCommand extends Command {
   };
 
   private copyHtmlReport() {
-    fs.copySync(
-      path.join(this.backstop.htmlReportDir),
-      path.join(this.destinationDir, './report/html_report'),
-    );
+    try {
+      fs.copySync(
+        path.join(this.backstop.htmlReportDir),
+        path.join(this.destinationDir, './report/html_report'),
+      );
+    } catch (e) {
+      console.error('Warning: No html_report');
+    }
   }
 
   private commitBuild() {
