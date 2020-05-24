@@ -19,18 +19,18 @@ export async function getRepos() {
   const react = [];
 
   for (const { name } of repos) {
-    if (name.startsWith('layout_')) {
+    if (name.startsWith('layout_') || name.includes('DOM')) {
       layout.push(name);
     } else if (name.startsWith('js_')) {
       javascript.push(name);
-    } else if (name.startsWith('react_')) {
+    } else if (name.startsWith('react_') || name.startsWith('redux_')) {
       react.push(name);
     } else {
       none.push(name);
     }
   }
 
-  await fs.writeFile('./repositories.json', JSON.stringify({
+  await fs.writeFile('./repositories-raw.json', JSON.stringify({
     none,
     layout,
     javascript,
