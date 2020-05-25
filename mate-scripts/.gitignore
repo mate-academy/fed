@@ -13,3 +13,6 @@ bin
 
 # Environment
 .env
+
+# Dynamic data
+src/localScripts/lastcreatedPRs.json

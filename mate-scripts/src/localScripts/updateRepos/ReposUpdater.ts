@@ -42,7 +42,7 @@ export class ReposUpdater {
     console.log(prUrls);
 
     await fs.writeFile(
-      path.join('../', 'lastCreatedPRs.json'),
+      path.join(__dirname, '../', 'lastCreatedPRs.json'),
       JSON.stringify(prUrls, null, 2),
     );
   };
