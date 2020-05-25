@@ -1,6 +1,5 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { BackstopService } from '../services';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
@@ -14,8 +13,6 @@ export class InitCommand extends Command {
 
   private readonly gitHooksDestinationDir = path.join(this.rootDir, './.git/hooks');
 
-  private readonly backstop = new BackstopService(this.rootDir);
-
   protected common() {
     this.copyCommonConfigs();
     this.copyGitIgnore();
@@ -25,8 +22,6 @@ export class InitCommand extends Command {
   protected layout = () => {
     this.copyLayoutConfigs();
     this.copyLinthtmlConfig();
-
-    this.backstop.loadReferences();
   };
 
   private copyCommonConfigs() {

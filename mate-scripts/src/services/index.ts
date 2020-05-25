@@ -1,2 +1,2 @@
-export * from './Backstop.service.js';
-export * from './Gulp.service.js';
+export * from './Backstop.service';
+export * from './Parcel.service';

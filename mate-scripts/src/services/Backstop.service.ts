@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { execBashCodeSilent } from '../tools';
+import { execBashCodeSilent, makeCLIOptions } from '../tools';
 
 export class BackstopService {
   private static __instance: BackstopService;
@@ -61,10 +61,7 @@ export class BackstopService {
   }
 
   private static run(subCommand: string, options: Record<string, any>) {
-    const optionsString = Object.entries(options)
-      .reduce((acc, [key, value]) => (
-        `${acc} --${key}=${value}`
-      ), '');
+    const optionsString = makeCLIOptions(options);
 
     execBashCodeSilent(`backstop ${subCommand} ${optionsString}`)
   }

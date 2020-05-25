@@ -10,3 +10,9 @@ node_modules
 
 # Generated files
 bin
+
+# Environment
+.env
+
+# Dynamic data
+src/localScripts/lastcreatedPRs.json
