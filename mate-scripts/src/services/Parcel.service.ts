@@ -5,7 +5,6 @@ import { execBashCode, makeCLIOptions } from '../tools';
 export class ParcelService {
   private readonly baseOptions = {
     'out-dir': path.join(this.rootDir, DESTINATION_DIR),
-    'public-url':  './',
   };
 
   private readonly source = path.join(this.rootDir, 'src/index.html');
@@ -24,7 +23,12 @@ export class ParcelService {
   }
 
   build() {
-    this.run('build', this.baseOptions, 'production');
+    const options = {
+      ...this.baseOptions,
+      'public-url':  './',
+    };
+
+    this.run('build', options, 'production');
   }
 
   private run(command: string, options: Record<string, any>, env = 'development') {
