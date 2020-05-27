@@ -37,3 +37,5 @@ export async function getRepos() {
     react,
   }, null, 2));
 }
+
+getRepos();
