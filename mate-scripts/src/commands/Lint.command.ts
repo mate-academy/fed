@@ -10,16 +10,20 @@ export interface LintOptions {
 
 export class LintCommand extends Command {
   protected common(options: LintOptions) {
-    const { styles, javascript, files } = options;
-
-    styles && LintCommand.lintStyles(files);
-    javascript && LintCommand.lintJs(files);
   }
 
   protected layout = (options: LintOptions) => {
-    const { html, files } = options;
+    const { html, files, styles, javascript } = options;
 
+    styles && LintCommand.lintStyles(files);
     html && LintCommand.lintHtml(files);
+    javascript && LintCommand.lintJs(files);
+  };
+
+  protected javascript = (options: LintOptions) => {
+    const { javascript, files } = options;
+
+    javascript && LintCommand.lintJs(files);
   };
 
   private static lintHtml(files: LintOptions['files']) {
@@ -27,7 +31,7 @@ export class LintCommand extends Command {
       ? files.join(' ')
       : './src/**/*.html';
 
-    execBashCodeSilent(`linthtml ${filesToLint}`);
+    execBashCodeSilent(`npx linthtml ${filesToLint}`);
   }
 
   private static lintStyles(files: LintOptions['files']) {
@@ -35,7 +39,7 @@ export class LintCommand extends Command {
       ? files.join(' ')
       : './src/**/*.css ./src/**/*.scss';
 
-    execBashCodeSilent(`stylelint ${filesToLint}`);
+    execBashCodeSilent(`npx stylelint ${filesToLint}`);
   }
 
   private static lintJs(files: LintOptions['files']) {
@@ -43,6 +47,6 @@ export class LintCommand extends Command {
       ? files.join(' ')
       : './src';
 
-    execBashCodeSilent(`eslint ${filesToLint}`);
+    execBashCodeSilent(`npx eslint ${filesToLint}`);
   }
 }

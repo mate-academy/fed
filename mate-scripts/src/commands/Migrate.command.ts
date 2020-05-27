@@ -11,15 +11,26 @@ export interface MigrateOptions {
 
 export class MigrateCommand extends Command {
   private static scripts = {
-    init: 'mate-scripts init',
-    start: 'mate-scripts start',
-    lint: 'mate-scripts lint',
-    'test:only': 'mate-scripts test',
-    build: 'mate-scripts build',
-    deploy: 'mate-scripts deploy',
-    update: 'mate-scripts update',
-    postinstall: 'npm run update',
-    test: 'npm run lint && npm run test:only',
+    layout: {
+      init: 'mate-scripts init',
+      start: 'mate-scripts start',
+      lint: 'mate-scripts lint',
+      'test:only': 'mate-scripts test',
+      build: 'mate-scripts build',
+      deploy: 'mate-scripts deploy',
+      update: 'mate-scripts update',
+      postinstall: 'npm run update',
+      test: 'npm run lint && npm run test:only',
+    },
+    javascript: {
+      init: 'mate-scripts init',
+      start: 'mate-scripts start',
+      lint: 'mate-scripts lint',
+      'test:only': 'mate-scripts test',
+      update: 'mate-scripts update',
+      postinstall: 'npm run update',
+      test: 'npm run lint && npm run test:only',
+    }
   };
 
   private static mateConfig: Record<ProjectTypes, any> = {
@@ -56,7 +67,7 @@ export class MigrateCommand extends Command {
     const pkg = await fs.readFile(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
     const parsedPkg = JSON.parse(pkg);
 
-    parsedPkg.scripts = MigrateCommand.scripts;
+    parsedPkg.scripts = MigrateCommand.scripts.layout;
 
     delete parsedPkg['lint-staged'];
     delete parsedPkg.husky;
@@ -98,7 +109,33 @@ export class MigrateCommand extends Command {
     await execBashCodeAsync('npm i');
   };
 
-  protected javascript = () => {};
+  protected javascript = async () => {
+    await execBashCodeAsync('npm i -D @mate-academy/scripts');
+
+    const pkg = await fs.readFile(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
+    const parsedPkg = JSON.parse(pkg);
+
+    parsedPkg.scripts = MigrateCommand.scripts.javascript;
+
+    delete parsedPkg['lint-staged'];
+    delete parsedPkg.husky;
+
+    await nodeFs.writeFile(
+      path.join(this.rootDir, 'package.json'),
+      JSON.stringify({
+        ...parsedPkg,
+        ...MigrateCommand.mateConfig.javascript,
+      }, null, 2),
+    );
+
+    await MigrateCommand.safeRun(
+      fs.remove(path.join(this.rootDir, '.travis.yml')),
+    );
+
+    await execBashCodeAsync('npm rm husky lint-staged');
+    await execBashCodeAsync('npm i');
+    await execBashCodeAsync('npx eslint ./ --fix');
+  };
 
   protected react = () => {};
 

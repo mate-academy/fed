@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { ProjectTypes } from '../constants.js';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
@@ -15,13 +16,19 @@ export class InitCommand extends Command {
 
   protected common() {
     this.copyCommonConfigs();
-    this.copyGitIgnore();
-    this.initGitHooks();
   }
 
   protected layout = () => {
-    this.copyLayoutConfigs();
+    this.copyGitIgnore(ProjectTypes.Layout);
+    this.copyProjectTypeSpecificConfigs(ProjectTypes.Layout);
     this.copyLinthtmlConfig();
+    this.initGitHooks(ProjectTypes.Layout);
+  };
+
+  protected javascript = () => {
+    this.copyGitIgnore(ProjectTypes.Javascript);
+    this.copyProjectTypeSpecificConfigs(ProjectTypes.Javascript);
+    this.initGitHooks(ProjectTypes.Javascript);
   };
 
   private copyCommonConfigs() {
@@ -30,19 +37,23 @@ export class InitCommand extends Command {
     fs.copySync(commonConfigsDir, this.rootDir);
   }
 
-  private copyGitIgnore() {
+  private copyGitIgnore(projectType: ProjectTypes) {
     const gitIgnoreFileName = '.gitignore';
 
     fs.copySync(
-      path.join(InitCommand.configsDir, `${gitIgnoreFileName}.template`),
+      path.join(
+        InitCommand.configsDir,
+        'gitignoreTemplates',
+        `${gitIgnoreFileName}.${projectType}`,
+      ),
       path.join(this.rootDir, gitIgnoreFileName),
     );
   }
 
-  private copyLayoutConfigs() {
-    const layoutConfigsDir = path.join(InitCommand.configsDir, 'layout');
+  private copyProjectTypeSpecificConfigs(projectType: ProjectTypes) {
+    const configsDir = path.join(InitCommand.configsDir, projectType);
 
-    fs.copySync(layoutConfigsDir, this.rootDir);
+    fs.copySync(configsDir, this.rootDir);
   }
 
   private copyLinthtmlConfig() {
@@ -60,14 +71,15 @@ export class InitCommand extends Command {
     fs.copyFileSync(lintHtmlConfigSource, lintHtmlConfigDestination);
   }
 
-  private initGitHooks() {
-    const gitHooksList = fs.readdirSync(InitCommand.gitHooksSourceDir);
+  private initGitHooks(projectType: ProjectTypes) {
+    const hooksDir = path.join(InitCommand.gitHooksSourceDir, projectType);
+    const gitHooksList = fs.readdirSync(hooksDir);
 
-    gitHooksList.forEach((hookName) => this.initGitHook(hookName));
+    gitHooksList.forEach((hookName) => this.initGitHook(hooksDir, hookName));
   }
 
-  private initGitHook(hookName: string) {
-    const sourceHookFile = path.join(InitCommand.gitHooksSourceDir, hookName);
+  private initGitHook(hooksDir: string, hookName: string) {
+    const sourceHookFile = path.join(hooksDir, hookName);
     const destinationHookFile = path.join(this.gitHooksDestinationDir, hookName);
 
     fs.copySync(sourceHookFile, destinationHookFile);

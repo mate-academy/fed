@@ -1,0 +1,24 @@
+#!/bin/sh
+
+PASS=true
+
+# ESLint
+STAGED_JS_FILES=$(git diff --cached --name-only --diff-filter=ACM ./src | grep ".\(j\|t\)sx\{0,1\}$")
+
+if [[ "$STAGED_JS_FILES" != "" ]]; then
+  echo "Testing javascript"
+
+  npx mate-scripts test
+
+  if [[ "$?" == 0 ]]; then
+    printf "\033[32mTests Passed\033[0m\n\n"
+  else
+    printf "\033[031mTests Failed\033[0m\n\n"
+    PASS=false
+  fi
+fi
+
+if ! ${PASS}; then
+  printf "Pre-commits check failed. Fix problems above before commit.\n\n"
+  exit 1
+fi
