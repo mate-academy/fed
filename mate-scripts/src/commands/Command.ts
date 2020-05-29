@@ -30,8 +30,12 @@ export abstract class Command {
   async run(options?: any): Promise<void> {
     this.setProjectType();
 
-    await this.common(options);
-    await this[this.projectType](options);
+    try {
+      await this.common(options);
+      await this[this.projectType](options);
+    } catch (error) {
+      process.exit(1);
+    }
   };
 
   private setProjectType() {

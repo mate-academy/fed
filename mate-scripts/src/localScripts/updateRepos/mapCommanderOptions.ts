@@ -10,6 +10,8 @@ export function mapCommanderOptions(commanderOptions: CommanderOptions): UpdateR
     exclude: excludedProjects,
     merge:  shouldMerge,
     silent: isSilent,
+    chunkSize,
+    mergeOnly,
   } = commanderOptions;
 
   return {
@@ -20,5 +22,7 @@ export function mapCommanderOptions(commanderOptions: CommanderOptions): UpdateR
     excludedProjects,
     shouldMerge,
     isSilent,
+    chunkSize,
+    mergeOnly,
   };
 }
