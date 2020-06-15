@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/mate-academy/fed/mate-scripts#README.md",
   "dependencies": {
     "commander": "^5.1.0",
+    "cross-env": "^7.0.2",
     "fs-extra": "^9.0.0"
   },
   "devDependencies": {

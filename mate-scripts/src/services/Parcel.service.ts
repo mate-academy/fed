@@ -33,7 +33,7 @@ export class ParcelService {
 
   private run(command: string, options: Record<string, any>, env = 'development') {
     const optionsString = makeCLIOptions(options);
-    const commandWithOptions = `NODE_ENV=${env} npx parcel ${command} ${this.source} ${optionsString}`;
+    const commandWithOptions = `cross-env NODE_ENV=${env} npx parcel ${command} ${this.source} ${optionsString}`;
 
     execBashCode(commandWithOptions);
   };
