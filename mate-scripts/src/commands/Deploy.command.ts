@@ -63,6 +63,7 @@ export class DeployCommand extends Command {
 
   private clean() {
     execBashCode('git reset --soft HEAD^', false);
+    execBashCode(`git checkout ${this.destinationDir}`, false);
     execBashCode(`git restore --staged ${this.destinationDir}`, false);
 
     fs.removeSync(this.destinationDir);
