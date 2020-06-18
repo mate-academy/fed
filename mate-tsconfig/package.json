@@ -1,0 +1,8 @@
+{
+  "name": "@mate-academy/ts-config",
+  "version": "1.0.1",
+  "description": "",
+  "main": "tsconfig.json",
+  "author": "Mate Academy",
+  "license": "ISC"
+}
