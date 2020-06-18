@@ -4,9 +4,6 @@
     "module": "ES6",
     "target": "es2017",
     "sourceMap": true,
-    "rootDirs": [
-      "./"
-    ],
     "outDir": "./dist",
     "noImplicitAny": true,
     "emitDecoratorMetadata": true,
@@ -24,11 +21,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "baseUrl": "./",
-    "allowJs": true,
-    "paths": {
-      "@/*": ["./*"]
-    }
+    "allowJs": true
   },
   "exclude": [
     "node_modules"
