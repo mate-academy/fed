@@ -1,5 +1,4 @@
 {
-  "extends": "",
   "compilerOptions": {
     "module": "ES6",
     "target": "es2017",
