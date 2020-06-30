@@ -1,6 +1,6 @@
 import { exec, execSync, ExecSyncOptions } from 'child_process';
 
-export function execBashCode(bashCode: string, shouldBindStdout = true) {
+export function execBashCode(bashCode: string, shouldBindStdout = true, cwd = process.cwd()) {
   let options: ExecSyncOptions = {
     stdio: 'ignore',
   };
@@ -8,7 +8,7 @@ export function execBashCode(bashCode: string, shouldBindStdout = true) {
   if (shouldBindStdout) {
     options = {
       stdio: 'inherit',
-      cwd: process.cwd(),
+      cwd,
     };
   }
 

@@ -2,38 +2,52 @@ import fs from 'fs-extra';
 import path from 'path';
 import { BackstopService } from '../services';
 import { DESTINATION_DIR } from '../constants.js';
-import { execBashCode, execBashCodeSafely } from '../tools';
+import { execBashCode } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
+
+export interface DeployOptions {
+  shouldShowInternalLogs: boolean;
+}
 
 export class DeployCommand extends Command {
   private readonly buildCommand = this.child<BuildCommand>(BuildCommand);
 
   private readonly destinationDir = path.join(this.rootDir, DESTINATION_DIR);
 
+  private readonly packageDir = path.join(
+    this.rootDir,
+    'node_modules',
+    '@mate-academy',
+    'scripts',
+  );
+
+  private deployScriptFile = path.join(
+    this.packageDir,
+    'bash-scripts',
+    'deploy-layout.sh',
+  );
+
   private readonly backstop = new BackstopService(this.rootDir);
 
-  protected common() {
+  protected common(options: DeployOptions) {
   }
 
-  protected layout = async (): Promise<void> => {
+  protected layout = async (options: DeployOptions): Promise<void> => {
+    const { shouldShowInternalLogs } = options;
+
     await this.buildCommand.run();
 
-    console.log('Start deploy to gh-pages\n');
+    console.log('Start deploy to gh-pages. Please wait, it may take up to minute.\n');
 
     try {
       this.copyHtmlReport();
-      this.commitBuild();
+      this.commitBuild(shouldShowInternalLogs);
+      this.runDeployBashScript(shouldShowInternalLogs);
 
-      DeployCommand.ensureCanPush();
-      DeployCommand.pushGhPagesSubtree();
-
-      console.log('Deployed to gh-pages successfully\n');
+      console.log('\x1b[32mSuccessfully deployed to gh-pages!\n\x1b[0m');
     } catch (error) {
-      console.log('Error during deploy to gh-pages:');
-      console.error(error.message);
-    } finally {
-      this.clean();
+      console.error('\x1b[31mDeploy error: ', error.message, '\x1b[0m');
     }
   };
 
@@ -44,28 +58,20 @@ export class DeployCommand extends Command {
         path.join(this.destinationDir, './report/html_report'),
       );
     } catch (e) {
-      console.error('Warning: No html_report');
+      console.error('\x1b[33mWarning: No html_report\x1b[0m');
     }
   }
 
-  private commitBuild() {
-    execBashCode(`git add ${this.destinationDir} -f`, false);
-    execBashCode('git commit -m "make build" --no-verify', false);
+  private commitBuild(showLogs: boolean) {
+    execBashCode(`git add ${this.destinationDir} -f`, showLogs);
+    execBashCode('git commit -m "make build" --no-verify', showLogs);
   }
 
-  private static ensureCanPush() {
-    execBashCodeSafely('git push --delete origin gh-pages', false);
-  }
-
-  private static pushGhPagesSubtree() {
-    execBashCode(`git subtree push --prefix ${DESTINATION_DIR} origin gh-pages`, false);
-  }
-
-  private clean() {
-    execBashCode('git reset --soft HEAD^', false);
-
-    fs.removeSync(this.destinationDir);
-
-    execBashCode(`git reset -- ${this.destinationDir}`, false);
+  private runDeployBashScript(showLogs: boolean) {
+    execBashCode(
+      `sh ${this.deployScriptFile} ${DESTINATION_DIR}`,
+      showLogs,
+      this.rootDir
+    );
   }
 }

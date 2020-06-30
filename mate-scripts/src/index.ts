@@ -11,7 +11,11 @@ import {
   UpdateCommand,
   MigrateCommand,
 } from './commands';
-import { lintController, migrateController } from './controllers';
+import {
+  deployController,
+  lintController,
+  migrateController,
+} from './controllers';
 
 const program = new Commander();
 const commandFactory = new CommandFactory();
@@ -50,8 +54,9 @@ program
 
 program
   .command('deploy')
+  .option('-l, --logs', 'show internal commands logs', false)
   .description('deploy application to gh-pages')
-  .action(commandFactory.make(DeployCommand));
+  .action(commandFactory.make(DeployCommand, deployController));
 
 program
   .command('update')
