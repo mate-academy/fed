@@ -54,8 +54,8 @@ export class DeployCommand extends Command {
   private copyHtmlReport() {
     try {
       fs.copySync(
-        path.join(this.backstop.htmlReportDir),
-        path.join(this.destinationDir, './report/html_report'),
+        path.join(this.backstop.reportDir),
+        path.join(this.destinationDir, './report'),
       );
     } catch (e) {
       console.error('\x1b[33mWarning: No html_report\x1b[0m');

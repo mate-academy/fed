@@ -13,7 +13,7 @@ export class BackstopService {
 
   private readonly testResultsDir = path.join(this.dataDir, 'bitmaps_test');
 
-  readonly htmlReportDir = path.join(this.dataDir, 'html_report');
+  readonly reportDir = this.dataDir;
 
   constructor(private readonly rootDir: string) {
     if (!BackstopService.__instance) {
