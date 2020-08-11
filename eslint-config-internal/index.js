@@ -21,7 +21,6 @@ module.exports = {
     "no-redeclare": ["error", { "builtinGlobals": true }],
     "operator-linebreak": ["error", "before"],
     "brace-style": ["error", "1tbs"],
-    "arrow-body-style": "off",
     "no-param-reassign": ["error", { "props": true }],
     "padding-line-between-statements": [
       "error",
