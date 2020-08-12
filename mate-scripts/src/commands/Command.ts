@@ -17,6 +17,8 @@ export abstract class Command {
 
   protected [ProjectTypes.Javascript]: (options?: any) => void = this.logNoImplementationWarning;
 
+  protected [ProjectTypes.Typescript]: (options?: any) => void = this.logNoImplementationWarning;
+
   protected [ProjectTypes.React]: (options?: any) => void = this.logNoImplementationWarning;
 
   protected [ProjectTypes.ReactTypescript]: (options?: any) => void = this.logNoImplementationWarning;
@@ -64,7 +66,7 @@ export abstract class Command {
 {
   ...
   "mateAcademy": {
-    "projectType": "layout" | "javascript" | "react" | "reactTypescript"
+    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "typescript"
   }
 }
 `
