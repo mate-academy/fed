@@ -15,4 +15,8 @@ export class TestCommand extends Command {
   protected javascript = () => {
     this.jest.once();
   };
+
+  protected typescript = () => {
+    this.jest.once();
+  };
 }
