@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-internal",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "Eslint config for Mate academy developers based on airbnb with Typescript",
   "main": "index.js",
   "scripts": {
@@ -19,5 +19,8 @@
     "eslint-config-airbnb-typescript": "^9.0.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.22.0"
+  }, 
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^4.0.0"
   }
 }
