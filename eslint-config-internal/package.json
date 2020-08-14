@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-internal",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Eslint config for Mate academy developers based on airbnb with Typescript",
   "main": "index.js",
   "scripts": {
@@ -12,11 +12,7 @@
     "type": "git",
     "url": "git://github.com:mate-academy/fed.git"
   },
-  "_moduleAliases": {
-    "@": "./src"
-  },
   "dependencies": {
-    "module-alias": "^2.2.2",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
     "eslint-config-airbnb": "^18.2.0",
