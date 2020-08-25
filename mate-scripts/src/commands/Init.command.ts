@@ -1,6 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { ProjectTypes } from '../constants.js';
+import { execBashCode, execBashCodeAsync } from '../tools';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
@@ -23,6 +24,8 @@ export class InitCommand extends Command {
     this.copyProjectTypeSpecificConfigs(ProjectTypes.Layout);
     this.copyLinthtmlConfig();
     this.initGitHooks(ProjectTypes.Layout);
+
+    execBashCode('npm i -D cross-env');
   };
 
   protected javascript = () => {
