@@ -63,6 +63,6 @@ export class BackstopService {
   private static run(subCommand: string, options: Record<string, any>) {
     const optionsString = makeCLIOptions(options);
 
-    execBashCodeSilent(`backstop ${subCommand} ${optionsString}`)
+    execBashCodeSilent(`npx backstop ${subCommand} ${optionsString}`)
   }
 }
