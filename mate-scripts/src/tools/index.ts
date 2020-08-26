@@ -1,3 +1,5 @@
 export * from './execBashCode';
-export * from './getRootDir';
+export * from './fileSystem';
 export * from './makeCLIOptions';
+export * from './array';
+export * from './Semver';

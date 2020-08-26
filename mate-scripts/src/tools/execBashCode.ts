@@ -45,13 +45,13 @@ const defaultExecBashCodeAsyncParams = {
   cwd: process.cwd(),
 };
 
-export function execBashCodeAsync(bashCode: string, params: ExecBashCodeAsyncParams = defaultExecBashCodeAsyncParams): Promise<void | string> {
+export function execBashCodeAsync(bashCode: string, params: ExecBashCodeAsyncParams = defaultExecBashCodeAsyncParams): Promise<string> {
   const {
     shouldBindStdout = true,
     cwd,
   } = params;
 
-  return new Promise<void | string>(((resolve, reject) => {
+  return new Promise<string>(((resolve, reject) => {
     const execOptions = { cwd };
     const childProcess = exec(bashCode, execOptions);
     let stdout = '';
