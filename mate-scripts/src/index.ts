@@ -16,6 +16,7 @@ import {
   lintController,
   migrateController,
 } from './controllers';
+import { startController } from './controllers/start.controller.js';
 
 const program = new Commander();
 const commandFactory = new CommandFactory();
@@ -31,8 +32,9 @@ program
 
 program
   .command('start')
+  .option('-l, --logs', 'show internal commands logs', false)
   .description('run development server')
-  .action(commandFactory.make(StartCommand));
+  .action(commandFactory.make(StartCommand, startController));
 
 program
   .command('lint [files...]')

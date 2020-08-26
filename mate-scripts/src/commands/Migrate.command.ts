@@ -55,6 +55,11 @@ export class MigrateCommand extends Command {
         projectType: ProjectTypes.ReactTypescript
       }
     },
+    [ProjectTypes.Typescript]: {
+      mateAcademy: {
+        projectType: ProjectTypes.Typescript
+      }
+    },
   };
 
   protected async common(options: MigrateOptions) {

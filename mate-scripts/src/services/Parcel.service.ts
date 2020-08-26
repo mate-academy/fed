@@ -12,14 +12,14 @@ export class ParcelService {
   constructor(private readonly rootDir: string) {
   }
 
-  serve() {
+  serve({ showLogs = false }: { showLogs: boolean } = { showLogs: false }) {
     const options = {
       ...this.baseOptions,
       open: true,
       port: 8080,
     };
 
-    this.run('serve', options);
+    this.run('serve', options, 'development', showLogs);
   }
 
   build() {
@@ -31,10 +31,14 @@ export class ParcelService {
     this.run('build', options, 'production');
   }
 
-  private run(command: string, options: Record<string, any>, env = 'development') {
+  private run(command: string, options: Record<string, any>, env = 'development', showLogs = false) {
     const optionsString = makeCLIOptions(options);
     const commandWithOptions = `cross-env NODE_ENV=${env} npx parcel ${command} ${this.source} ${optionsString}`;
 
-    execBashCode(commandWithOptions);
+    if (showLogs) {
+      console.log(commandWithOptions);
+    }
+
+    execBashCode(commandWithOptions, showLogs);
   };
 }
