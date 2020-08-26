@@ -1,15 +1,15 @@
 import { name } from '../../package.json';
-import { NpmService } from '../services';
+import { NPMPackageService } from '../services';
 import { execBashCode } from '../tools';
 import { Command } from './Command';
 
 export class UpdateCommand extends Command {
-  private npmService: NpmService;
+  private mateScriptsPackageService: NPMPackageService;
 
   constructor(rootDir: string) {
     super(rootDir);
 
-    this.npmService = new NpmService(name);
+    this.mateScriptsPackageService = new NPMPackageService(name);
   }
   async common() {
     await this.updateMateScriptsVersions();
@@ -18,20 +18,9 @@ export class UpdateCommand extends Command {
   }
 
   private async updateMateScriptsVersions() {
-    const versions = await this.npmService.getVersions();
-    const {
-      versionString: availableVersionString,
-    } = versions.available;
-
-    if (versions.available.isHigher(versions.global)) {
-      console.log(`Update global @mate-academy/scripts from ${versions.global?.versionString || '"none"'} to ${versions.available.versionString}`);
-      execBashCode(`npm i -g ${name}@${availableVersionString}`, false);
-    }
-
-    if (versions.available.isHigher(versions.local)) {
-      console.log(`Update local @mate-academy/scripts from ${versions.local?.versionString || '"none"'} to ${versions.available.versionString}`);
-      execBashCode(`npm i ${name}@${availableVersionString}`, false);
-    }
+    await this.mateScriptsPackageService.update({
+      envs: { global: true, local: true },
+    });
   }
 
   protected layout = () => {};

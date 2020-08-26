@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { ProjectTypes } from '../constants.js';
-import { execBashCode, execBashCodeAsync } from '../tools';
+import { ProjectTypes } from '../constants';
+import { NPMPackageService } from '../services';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
@@ -15,17 +15,25 @@ export class InitCommand extends Command {
 
   private readonly gitHooksDestinationDir = path.join(this.rootDir, './.git/hooks');
 
+  private readonly crossEnvPackageService: NPMPackageService;
+
+  constructor(rootDir: string) {
+    super(rootDir);
+
+    this.crossEnvPackageService = new NPMPackageService('cross-env');
+  }
+
   protected common() {
     this.copyCommonConfigs();
   }
 
-  protected layout = () => {
+  protected layout = async () => {
     this.copyGitIgnore(ProjectTypes.Layout);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.Layout);
     this.copyLinthtmlConfig();
     this.initGitHooks(ProjectTypes.Layout);
 
-    execBashCode('npm i -D cross-env');
+    await this.ensureCrossEnvInstalled();
   };
 
   protected javascript = () => {
@@ -86,5 +94,9 @@ export class InitCommand extends Command {
     const destinationHookFile = path.join(this.gitHooksDestinationDir, hookName);
 
     fs.copySync(sourceHookFile, destinationHookFile);
+  }
+
+  private async ensureCrossEnvInstalled() {
+    await this.crossEnvPackageService.ensure({ silent: true });
   }
 }
