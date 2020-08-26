@@ -2,6 +2,11 @@ import path from 'path';
 import { DESTINATION_DIR } from '../constants.js';
 import { execBashCode, makeCLIOptions } from '../tools';
 
+export interface ServeOptions {
+  showLogs: boolean;
+  open: boolean;
+}
+
 export class ParcelService {
   private readonly baseOptions = {
     'out-dir': path.join(this.rootDir, DESTINATION_DIR),
@@ -12,10 +17,10 @@ export class ParcelService {
   constructor(private readonly rootDir: string) {
   }
 
-  serve({ showLogs = false }: { showLogs: boolean } = { showLogs: false }) {
+  serve({ showLogs, open }: ServeOptions) {
     const options = {
       ...this.baseOptions,
-      open: true,
+      open,
       port: 8080,
     };
 

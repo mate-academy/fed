@@ -33,6 +33,7 @@ program
 program
   .command('start')
   .option('-l, --logs', 'show internal commands logs', false)
+  .option('-o, --open', 'open web browser after start', true)
   .description('run development server')
   .action(commandFactory.make(StartCommand, startController));
 

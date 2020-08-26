@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { BackstopService } from '../services';
 import { DESTINATION_DIR } from '../constants.js';
-import { execBashCode } from '../tools';
+import { execBashCode, execBashCodeAsync } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
 
@@ -34,6 +34,8 @@ export class DeployCommand extends Command {
   }
 
   protected layout = async (options: DeployOptions): Promise<void> => {
+    await DeployCommand.ensureSHExists();
+
     const { shouldShowInternalLogs } = options;
 
     await this.buildCommand.run();
@@ -50,6 +52,16 @@ export class DeployCommand extends Command {
       console.error('\x1b[31mDeploy error: ', error.message, '\x1b[0m');
     }
   };
+
+  private static async ensureSHExists() {
+    try {
+      await execBashCodeAsync('sh --version', { shouldBindStdout: false });
+    } catch (error) {
+      console.error('\x1b[31mDeploy skipped\nPlease run deploy in "Git bash" terminal', '\x1b[0m');
+
+      process.exit(0);
+    }
+  }
 
   private copyHtmlReport() {
     try {

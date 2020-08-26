@@ -3,6 +3,7 @@ import { Command } from './Command';
 
 export interface StartOptions {
   shouldShowInternalLogs: boolean;
+  open: boolean;
 }
 
 export class StartCommand extends Command {
@@ -13,7 +14,10 @@ export class StartCommand extends Command {
   }
 
   protected layout = (options: StartOptions) => {
-    this.parcel.serve({ showLogs: options.shouldShowInternalLogs });
+    this.parcel.serve({
+      showLogs: options.shouldShowInternalLogs,
+      open: options.open,
+    });
   };
 
   protected javascript = () => {
