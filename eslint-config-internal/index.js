@@ -68,5 +68,6 @@ module.exports = {
     "@typescript-eslint/indent": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-useless-constructor": "error",
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
   },
 };
