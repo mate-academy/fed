@@ -28,13 +28,15 @@ export class DeployCommand extends Command {
     'deploy-layout.sh',
   );
 
+  private shellRunner: string | undefined;
+
   private readonly backstop = new BackstopService(this.rootDir);
 
   protected common(options: DeployOptions) {
   }
 
   protected layout = async (options: DeployOptions): Promise<void> => {
-    await DeployCommand.ensureSHExists();
+    await this.setShellRunner();
 
     const { shouldShowInternalLogs } = options;
 
@@ -53,13 +55,27 @@ export class DeployCommand extends Command {
     }
   };
 
-  private static async ensureSHExists() {
+  private async setShellRunner() {
     try {
       await execBashCodeAsync('sh --version', { shouldBindStdout: false });
-    } catch (error) {
-      console.error('\x1b[31mDeploy skipped\nPlease run deploy in "Git bash" terminal', '\x1b[0m');
 
-      process.exit(0);
+      this.shellRunner = 'sh';
+    } catch (shError) {
+      try {
+        await execBashCodeAsync('bash --version', { shouldBindStdout: false });
+
+        this.shellRunner = 'bash';
+      } catch (bashError) {
+        try {
+          await execBashCodeAsync('zsh --version', { shouldBindStdout: false });
+
+          this.shellRunner = 'zsh';
+        } catch (zshError) {
+          console.error('\x1b[31mDeploy skipped\nPlease run deploy in "Git bash" terminal', '\x1b[0m');
+
+          process.exit(0);
+        }
+      }
     }
   }
 
@@ -81,7 +97,7 @@ export class DeployCommand extends Command {
 
   private runDeployBashScript(showLogs: boolean) {
     execBashCode(
-      `sh ${this.deployScriptFile} ${DESTINATION_DIR}`,
+      `${this.shellRunner} ${this.deployScriptFile} ${DESTINATION_DIR}`,
       showLogs,
       this.rootDir
     );
