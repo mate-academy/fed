@@ -109,7 +109,7 @@ export class NPMPackageService {
   }
 
   async getVersions(): Promise<PackageVersions> {
-    if (this._versions) {
+    if (!this._versions) {
       await this.setVersions();
     }
 
