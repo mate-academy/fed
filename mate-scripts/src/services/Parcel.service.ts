@@ -38,7 +38,8 @@ export class ParcelService {
 
   private run(command: string, options: Record<string, any>, env = 'development', showLogs = false) {
     const optionsString = makeCLIOptions(options);
-    const commandWithOptions = `cross-env NODE_ENV=${env} npx parcel ${command} ${this.source} ${optionsString}`;
+    const source = ParcelService.escapePathSpaces(this.source);
+    const commandWithOptions = `cross-env NODE_ENV=${env} npx parcel ${command} ${source} ${optionsString}`;
 
     if (showLogs) {
       console.log(commandWithOptions);
@@ -46,4 +47,8 @@ export class ParcelService {
 
     execBashCode(commandWithOptions, showLogs);
   };
+
+  private static escapePathSpaces(path: string) {
+    return path.replace(' ', '\\ ');
+  }
 }
