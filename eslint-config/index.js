@@ -12,7 +12,6 @@ module.exports = {
     }],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
-    "strict": "error",
     "space-before-function-paren": ["error", "never"],
     "no-var": "error",
     "prefer-const": "error",
@@ -41,6 +40,6 @@ module.exports = {
     }],
   },
   "parserOptions": {
-    "sourceType": "script"
+    "sourceType": "module"
   },
 };
