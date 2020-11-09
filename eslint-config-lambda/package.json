@@ -1,0 +1,12 @@
+{
+  "name": "@mate-academy/eslint-config-lambda",
+  "version": "0.0.11",
+  "description": "ESlint config for checking code editor task on frontend and lambda",
+  "main": "index.js",
+  "author": "Mate academy",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:mate-academy/fed.git"
+  }
+}
