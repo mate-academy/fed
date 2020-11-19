@@ -1,5 +1,5 @@
 import path from 'path';
-import { DESTINATION_DIR } from '../constants.js';
+import { DESTINATION_DIR, servePort } from '../constants';
 import { execBashCode, makeCLIOptions } from '../tools';
 
 export interface ServeOptions {
@@ -21,7 +21,7 @@ export class ParcelService {
     const options = {
       ...this.baseOptions,
       open,
-      port: 8080,
+      port: servePort,
     };
 
     this.run('serve', options, 'development', showLogs);

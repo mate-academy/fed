@@ -36,6 +36,15 @@ export class InitCommand extends Command {
     await this.ensureCrossEnvInstalled();
   };
 
+  protected layoutDOM = async () => {
+    this.copyGitIgnore(ProjectTypes.LayoutDOM);
+    this.copyProjectTypeSpecificConfigs(ProjectTypes.LayoutDOM);
+    this.copyLinthtmlConfig();
+    this.initGitHooks(ProjectTypes.LayoutDOM);
+
+    await this.ensureCrossEnvInstalled();
+  };
+
   protected javascript = () => {
     this.copyGitIgnore(ProjectTypes.Javascript);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.Javascript);

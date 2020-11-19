@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { BackstopService } from '../services';
-import { DESTINATION_DIR } from '../constants.js';
+import { DESTINATION_DIR } from '../constants';
 import { execBashCode, execBashCodeAsync } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
@@ -53,6 +53,11 @@ export class DeployCommand extends Command {
     } catch (error) {
       console.error('\x1b[31mDeploy error: ', error.message, '\x1b[0m');
     }
+  };
+
+
+  protected layoutDOM = async (options: DeployOptions) => {
+    await this.layout(options);
   };
 
   private async setShellRunner() {

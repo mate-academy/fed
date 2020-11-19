@@ -25,6 +25,8 @@ export class UpdateCommand extends Command {
 
   protected layout = () => {};
 
+  protected layoutDOM = () => {};
+
   protected javascript = () => {};
 
   protected react = () => {};

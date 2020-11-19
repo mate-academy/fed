@@ -20,6 +20,10 @@ export class StartCommand extends Command {
     });
   };
 
+  protected layoutDOM = (options: StartOptions) => {
+    this.layout(options);
+  };
+
   protected javascript = () => {
     this.jest.watch();
   };

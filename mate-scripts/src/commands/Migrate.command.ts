@@ -40,6 +40,11 @@ export class MigrateCommand extends Command {
         projectType: ProjectTypes.Layout
       }
     },
+    [ProjectTypes.LayoutDOM]: {
+      mateAcademy: {
+        projectType: ProjectTypes.LayoutDOM
+      }
+    },
     [ProjectTypes.Javascript]: {
       mateAcademy: {
         projectType: ProjectTypes.Javascript
@@ -69,18 +74,17 @@ export class MigrateCommand extends Command {
   protected layout = async () => {
     await execBashCodeAsync('npm i -D @mate-academy/scripts');
 
-    const pkg = await fs.readFile(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
-    const parsedPkg = JSON.parse(pkg);
+    const pkg = await this.getPackage();
 
-    parsedPkg.scripts = MigrateCommand.scripts.layout;
+    pkg.scripts = MigrateCommand.scripts.layout;
 
-    delete parsedPkg['lint-staged'];
-    delete parsedPkg.husky;
+    delete pkg['lint-staged'];
+    delete pkg.husky;
 
     await nodeFs.writeFile(
       path.join(this.rootDir, 'package.json'),
       JSON.stringify({
-        ...parsedPkg,
+        ...pkg,
         ...MigrateCommand.mateConfig.layout,
       }, null, 2),
     );
@@ -114,21 +118,41 @@ export class MigrateCommand extends Command {
     await execBashCodeAsync('npm i');
   };
 
-  protected javascript = async () => {
-    await execBashCodeAsync('npm i -D @mate-academy/scripts');
-
-    const pkg = await fs.readFile(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
-    const parsedPkg = JSON.parse(pkg);
-
-    parsedPkg.scripts = MigrateCommand.scripts.javascript;
-
-    delete parsedPkg['lint-staged'];
-    delete parsedPkg.husky;
+  protected layoutDOM = async () => {
+    const pkg = await this.getPackage();
 
     await nodeFs.writeFile(
       path.join(this.rootDir, 'package.json'),
       JSON.stringify({
-        ...parsedPkg,
+        ...pkg,
+        ...MigrateCommand.mateConfig.layoutDOM,
+      }, null, 2),
+    );
+
+    await execBashCodeAsync('npm rm backstopjs @mate-academy/backstop-config gulp-htmllint');
+    await execBashCodeAsync(`rm -rf ${path.join(this.rootDir, 'backstopConfig.js')}`);
+    await execBashCodeAsync('npm i -D cypress eslint-plugin-cypress mochawesome mochawesome-merge mochawesome-report-generator');
+
+    await execBashCodeAsync(`mkdir ${path.join(this.rootDir, 'cypress')}`);
+    await execBashCodeAsync(`mkdir ${path.join(this.rootDir, 'cypress', 'integration')}`);
+    await execBashCodeAsync(`cp ${path.join(__dirname, '../', 'configs', 'custom', ProjectTypes.LayoutDOM, 'page.spec.js')} ${path.join(this.rootDir, 'cypress', 'integration', 'page.spec.js')}`);
+    await execBashCodeAsync('npm i');
+  };
+
+  protected javascript = async () => {
+    await execBashCodeAsync('npm i -D @mate-academy/scripts');
+
+    const pkg = await this.getPackage();
+
+    pkg.scripts = MigrateCommand.scripts.javascript;
+
+    delete pkg['lint-staged'];
+    delete pkg.husky;
+
+    await nodeFs.writeFile(
+      path.join(this.rootDir, 'package.json'),
+      JSON.stringify({
+        ...pkg,
         ...MigrateCommand.mateConfig.javascript,
       }, null, 2),
     );
@@ -141,6 +165,12 @@ export class MigrateCommand extends Command {
     await execBashCodeAsync('npm i');
     await execBashCodeAsync('npx eslint ./ --fix');
   };
+
+  async getPackage(): Promise<any> {
+    const pkg = await fs.readFile(path.join(this.rootDir, 'package.json'), { encoding: 'utf-8' });
+
+    return JSON.parse(pkg);
+  }
 
   protected react = () => {};
 

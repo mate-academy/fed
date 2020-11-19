@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.6.5",
+  "version": "0.7.9",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
@@ -42,7 +42,8 @@
   "dependencies": {
     "commander": "^5.1.0",
     "cross-env": "^7.0.2",
-    "fs-extra": "^9.0.0"
+    "fs-extra": "^9.0.0",
+    "open": "^7.3.0"
   },
   "devDependencies": {
     "@mate-academy/eslint-config-react-typescript": "0.0.4",

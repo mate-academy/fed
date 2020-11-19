@@ -20,6 +20,10 @@ export class LintCommand extends Command {
     javascript && LintCommand.lintJs(files);
   };
 
+  protected layoutDOM = (options: LintOptions) => {
+    this.layout(options);
+  };
+
   protected javascript = (options: LintOptions) => {
     const { javascript, files } = options;
 
