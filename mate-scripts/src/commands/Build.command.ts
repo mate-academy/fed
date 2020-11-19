@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { DESTINATION_DIR } from '../constants.js';
+import { DESTINATION_DIR } from '../constants';
 import { ParcelService } from '../services';
 import { Command } from './Command';
 
@@ -10,9 +10,13 @@ export class BuildCommand extends Command {
   protected common() {
   }
 
-  layout = () => {
+  protected layout = () => {
     fs.removeSync(path.join(this.rootDir, DESTINATION_DIR));
 
     this.parcel.build();
   };
+
+  protected layoutDOM = () => {
+    this.layout();
+  }
 }

@@ -3,7 +3,7 @@
 PASS=true
 
 # Tests
-echo "Testing javascript"
+echo "e2e testing"
 
 npx mate-scripts test
 

@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { ProjectTypes } from '../constants.js';
+import { ProjectTypes } from '../constants';
 
 export abstract class Command {
   protected readonly rootDir: string;
@@ -14,6 +14,8 @@ export abstract class Command {
   protected [ProjectTypes.None]: (options?: any) => void = this.logNoImplementationWarning;
 
   protected [ProjectTypes.Layout]: (options?: any) => void = this.logNoImplementationWarning;
+
+  protected [ProjectTypes.LayoutDOM]: (options?: any) => void = this.logNoImplementationWarning;
 
   protected [ProjectTypes.Javascript]: (options?: any) => void = this.logNoImplementationWarning;
 
@@ -66,7 +68,7 @@ export abstract class Command {
 {
   ...
   "mateAcademy": {
-    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "typescript"
+    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "typescript" | "layoutDOM"
   }
 }
 `

@@ -1,6 +1,6 @@
 import { Command as Commander } from 'commander';
 import packageFile from '../package.json';
-import { CommandFactory } from './CommandFactory.js';
+import { CommandFactory } from './CommandFactory';
 import {
   BuildCommand,
   DeployCommand,
@@ -14,9 +14,9 @@ import {
 import {
   deployController,
   lintController,
-  migrateController,
+  migrateController, testController,
 } from './controllers';
-import { startController } from './controllers/start.controller.js';
+import { startController } from './controllers/start.controller';
 
 const program = new Commander();
 const commandFactory = new CommandFactory();
@@ -47,8 +47,10 @@ program
 
 program
   .command('test')
+  .option('-n, --not-open', 'should open test report in browser', false)
+  .option('-l, --logs', 'should log details to console during run', false)
   .description('run tests')
-  .action(commandFactory.make(TestCommand));
+  .action(commandFactory.make(TestCommand, testController));
 
 program
   .command('build')
