@@ -83,10 +83,13 @@ ${chunk.join('\n')}`);
       excludedProjects,
     } = this.options;
 
+    if (includedProjects.length) {
+      return includedProjects;
+    }
+
     return (Object.keys(repositories) as ProjectTypes[])
       .filter((projectType: ProjectTypes) => projectTypes.includes(projectType))
       .flatMap((projectType) => repositories[projectType])
-      .filter((repoName) => includedProjects.length ? includedProjects.includes(repoName) : true)
       .filter((repoName) => !excludedProjects.includes(repoName));
   }
 
@@ -187,7 +190,7 @@ ${chunk.join('\n')}`);
     await execInRepo(`git checkout -b ${prBranch}`);
 
     for (let command of commands) {
-      console.log(`Execute command ${command} in repo ${repo}`);
+      console.log(`Execute command '${command}' in repo '${repo}'`);
 
       await execInRepo(command);
     }
