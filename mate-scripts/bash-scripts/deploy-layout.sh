@@ -17,7 +17,7 @@ git commit -m "make build" --no-verify
   printf "\e[92mIt's ok, gh-pages doesn't exists on GitHub\n\e[0m"
 }
 
-echo "git subtree push --prefix ${DEST} origin gh-pages"
+echo "git subtree push --no-verify --prefix ${DEST} origin gh-pages"
 git subtree push --prefix ${DEST} origin gh-pages
 
 {

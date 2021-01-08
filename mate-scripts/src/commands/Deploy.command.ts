@@ -57,7 +57,21 @@ export class DeployCommand extends Command {
 
 
   protected layoutDOM = async (options: DeployOptions) => {
-    await this.layout(options);
+    await this.setShellRunner();
+
+    const { shouldShowInternalLogs } = options;
+
+    await this.buildCommand.run();
+
+    console.log('Start deploy to gh-pages. Please wait, it may take up to minute.\n');
+
+    try {
+      this.runDeployBashScript(shouldShowInternalLogs);
+
+      console.log('\x1b[32mSuccessfully deployed to gh-pages!\n\x1b[0m');
+    } catch (error) {
+      console.error('\x1b[31mDeploy error: ', error.message, '\x1b[0m');
+    }
   };
 
   private async setShellRunner() {
