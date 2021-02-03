@@ -1,0 +1,35 @@
+{
+  "name": "@mate-academy/huntd-graphql-serverless",
+  "version": "0.0.9",
+  "description": "GraphQL client for huntd.tech",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc --build",
+    "prepublishOnly": "npm run build",
+    "postpublish": "rm -rf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mate-academy/fed.git"
+  },
+  "author": "mate academy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mate-academy/fed/issues"
+  },
+  "types": "./dist/index.d.ts",
+  "homepage": "https://github.com/mate-academy/fed#readme",
+  "dependencies": {
+    "@apollo/client": "^3.3.7",
+    "graphql": "^15.5.0",
+    "graphql-request": "^3.4.0",
+    "graphql-tag": "^2.11.0"
+  },
+  "devDependencies": {
+    "@mate-academy/eslint-config-internal": "^0.0.10",
+    "@mate-academy/eslint-plugin-api": "^1.0.0",
+    "@mate-academy/ts-config": "^1.0.4",
+    "typescript": "^4.1.3"
+  }
+}
