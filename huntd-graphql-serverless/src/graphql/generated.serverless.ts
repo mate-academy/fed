@@ -29,6 +29,7 @@ export type Query = {
   adminUser?: Maybe<User>;
   authUser?: Maybe<User>;
   candidateProfileBySlug?: Maybe<CandidateProfile>;
+  candidateProfilesBySubscription: Array<CandidateProfile>;
   employmentLocations?: Maybe<Array<EmploymentLocation>>;
   employmentTypes?: Maybe<Array<EmploymentType>>;
   englishLevels?: Maybe<Array<EnglishLevel>>;
@@ -49,6 +50,12 @@ export type Query = {
 
 export type QueryCandidateProfileBySlugArgs = {
   slug: Scalars['String'];
+};
+
+
+export type QueryCandidateProfilesBySubscriptionArgs = {
+  subscriptionLastInteract: Scalars['GraphQLDateTime'];
+  where: PublicProfilesParameters;
 };
 
 
@@ -712,14 +719,15 @@ export type CandidateProfileTechnologiesFragment = (
   )>> }
 );
 
-export type PublicCandidateProfilesQueryVariables = Exact<{
-  where?: Maybe<PublicProfilesParameters>;
+export type CandidateProfilesBySubscriptionQueryVariables = Exact<{
+  subscriptionLastInteract: Scalars['GraphQLDateTime'];
+  where: PublicProfilesParameters;
 }>;
 
 
-export type PublicCandidateProfilesQuery = (
+export type CandidateProfilesBySubscriptionQuery = (
   { __typename?: 'Query' }
-  & { publicCandidateProfiles: Array<(
+  & { candidateProfilesBySubscription: Array<(
     { __typename?: 'CandidateProfile' }
     & CandidateProfileFullFragment
   )> }
@@ -975,9 +983,9 @@ export const UsersSearchSubscriptionFullFragmentDoc = gql`
     ${UsersSearchSubscriptionBaseFragmentDoc}
 ${UsersSearchSubscriptionParamsFragmentDoc}
 ${UsersSearchSubscriptionUserFragmentDoc}`;
-export const PublicCandidateProfilesDocument = gql`
-    query publicCandidateProfiles($where: PublicProfilesParameters) {
-  publicCandidateProfiles(where: $where) {
+export const CandidateProfilesBySubscriptionDocument = gql`
+    query candidateProfilesBySubscription($subscriptionLastInteract: GraphQLDateTime!, $where: PublicProfilesParameters!) {
+  candidateProfilesBySubscription(subscriptionLastInteract: $subscriptionLastInteract, where: $where) {
     ...CandidateProfileFull
   }
 }
@@ -1001,8 +1009,8 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    publicCandidateProfiles(variables?: PublicCandidateProfilesQueryVariables): Promise<{ data?: PublicCandidateProfilesQuery | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
-        return withWrapper(() => client.rawRequest<PublicCandidateProfilesQuery>(print(PublicCandidateProfilesDocument), variables));
+    candidateProfilesBySubscription(variables: CandidateProfilesBySubscriptionQueryVariables): Promise<{ data?: CandidateProfilesBySubscriptionQuery | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
+        return withWrapper(() => client.rawRequest<CandidateProfilesBySubscriptionQuery>(print(CandidateProfilesBySubscriptionDocument), variables));
     },
     updateSubscriptionLastNotified(variables?: UpdateSubscriptionLastNotifiedMutationVariables): Promise<{ data?: UpdateSubscriptionLastNotifiedMutation | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
         return withWrapper(() => client.rawRequest<UpdateSubscriptionLastNotifiedMutation>(print(UpdateSubscriptionLastNotifiedDocument), variables));
