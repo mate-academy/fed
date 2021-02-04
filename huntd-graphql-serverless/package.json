@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/huntd-graphql-serverless",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "GraphQL client for huntd.tech",
   "main": "dist/index.js",
   "scripts": {

@@ -319,8 +319,7 @@ export type MutationUpdateRecruiterProfileArgs = {
 
 
 export type MutationUpdateSubscriptionLastNotifiedArgs = {
-  id: Scalars['Int'];
-  userId: Scalars['Int'];
+  subscriptionsIds?: Maybe<Array<Scalars['Int']>>;
 };
 
 
@@ -612,6 +611,7 @@ export type UsersSearchSubscription = {
   lastNotified?: Maybe<Scalars['GraphQLDateTime']>;
   searchParams: CandidatesSearchParams;
   stringifiedSearchParams: SubscriptionStringifiedParams;
+  user?: Maybe<User>;
 };
 
 export type SubscriptionStringifiedParams = {
@@ -639,6 +639,97 @@ export type CandidatesSearchParams = {
 };
 
 
+export type CandidateProfileFullFragment = (
+  { __typename?: 'CandidateProfile' }
+  & CandidateProfileBaseFragment
+  & CandidateProfileTechnologiesFragment
+  & CandidateProfileEnglishLevelFragment
+  & CandidateProfileJobExperienceFragment
+  & CandidateProfileEmploymentTypesFragment
+  & CandidateProfileSpecializationFragment
+  & CandidateProfileCitiesFragment
+  & CandidateProfileEmploymentLocationsFragment
+);
+
+export type CandidateProfileBaseFragment = (
+  { __typename?: 'CandidateProfile' }
+  & Pick<CandidateProfile, 'id' | 'status' | 'rejectReason' | 'position' | 'salary' | 'candidateDescription' | 'experienceDescription' | 'workExpectations' | 'slug' | 'lastActionTime'>
+);
+
+export type CandidateProfileCitiesFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { cities?: Maybe<Array<(
+    { __typename?: 'CandidateProfileCity' }
+    & CandidateProfileCityBaseFragment
+  )>> }
+);
+
+export type CandidateProfileEmploymentLocationsFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { employmentLocations?: Maybe<Array<(
+    { __typename?: 'EmploymentLocation' }
+    & EmploymentLocationBaseFragment
+  )>> }
+);
+
+export type CandidateProfileEmploymentTypesFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { employmentTypes?: Maybe<Array<(
+    { __typename?: 'EmploymentType' }
+    & EmploymentTypeBaseFragment
+  )>> }
+);
+
+export type CandidateProfileEnglishLevelFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { englishLevel?: Maybe<(
+    { __typename?: 'EnglishLevel' }
+    & EnglishLevelBaseFragment
+  )> }
+);
+
+export type CandidateProfileJobExperienceFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { jobExperience?: Maybe<(
+    { __typename?: 'JobExperience' }
+    & JobExperienceBaseFragment
+  )> }
+);
+
+export type CandidateProfileSpecializationFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { specialization?: Maybe<(
+    { __typename?: 'Specialization' }
+    & SpecializationBaseFragment
+  )> }
+);
+
+export type CandidateProfileTechnologiesFragment = (
+  { __typename?: 'CandidateProfile' }
+  & { technologies?: Maybe<Array<(
+    { __typename?: 'Technology' }
+    & TechnologyBaseFragment
+  )>> }
+);
+
+export type PublicCandidateProfilesQueryVariables = Exact<{
+  where?: Maybe<PublicProfilesParameters>;
+}>;
+
+
+export type PublicCandidateProfilesQuery = (
+  { __typename?: 'Query' }
+  & { publicCandidateProfiles: Array<(
+    { __typename?: 'CandidateProfile' }
+    & CandidateProfileFullFragment
+  )> }
+);
+
+export type CandidateProfileCityBaseFragment = (
+  { __typename?: 'CandidateProfileCity' }
+  & Pick<CandidateProfileCity, 'id' | 'cityId' | 'cityName'>
+);
+
 export type EmploymentLocationBaseFragment = (
   { __typename?: 'EmploymentLocation' }
   & Pick<EmploymentLocation, 'id' | 'slug'>
@@ -659,6 +750,11 @@ export type JobExperienceBaseFragment = (
   & Pick<JobExperience, 'id' | 'slug'>
 );
 
+export type SpecializationBaseFragment = (
+  { __typename?: 'Specialization' }
+  & Pick<Specialization, 'id' | 'name'>
+);
+
 export type TechnologyBaseFragment = (
   { __typename?: 'Technology' }
   & Pick<Technology, 'id' | 'name'>
@@ -668,7 +764,7 @@ export type UsersSearchSubscriptionFullFragment = (
   { __typename?: 'UsersSearchSubscription' }
   & UsersSearchSubscriptionBaseFragment
   & UsersSearchSubscriptionParamsFragment
-  & UsersSearchSubscriptionStringifiedParamsFragment
+  & UsersSearchSubscriptionUserFragment
 );
 
 export type UsersSearchSubscriptionBaseFragment = (
@@ -684,33 +780,16 @@ export type UsersSearchSubscriptionParamsFragment = (
   ) }
 );
 
-export type UsersSearchSubscriptionStringifiedParamsFragment = (
+export type UsersSearchSubscriptionUserFragment = (
   { __typename?: 'UsersSearchSubscription' }
-  & { stringifiedSearchParams: (
-    { __typename?: 'SubscriptionStringifiedParams' }
-    & Pick<SubscriptionStringifiedParams, 'id'>
-    & { employmentLocations?: Maybe<Array<(
-      { __typename?: 'EmploymentLocation' }
-      & EmploymentLocationBaseFragment
-    )>>, employmentTypes?: Maybe<Array<(
-      { __typename?: 'EmploymentType' }
-      & EmploymentTypeBaseFragment
-    )>>, technologies?: Maybe<Array<(
-      { __typename?: 'Technology' }
-      & TechnologyBaseFragment
-    )>>, jobExperiences?: Maybe<Array<(
-      { __typename?: 'JobExperience' }
-      & JobExperienceBaseFragment
-    )>>, englishLevels?: Maybe<Array<(
-      { __typename?: 'EnglishLevel' }
-      & EnglishLevelBaseFragment
-    )>> }
-  ) }
+  & { user?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'email'>
+  )> }
 );
 
 export type UpdateSubscriptionLastNotifiedMutationVariables = Exact<{
-  id: Scalars['Int'];
-  userId: Scalars['Int'];
+  subscriptionsIds?: Maybe<Array<Scalars['Int']>>;
 }>;
 
 
@@ -730,6 +809,131 @@ export type UsersSearchSubscriptionsQuery = (
   )>> }
 );
 
+export const CandidateProfileBaseFragmentDoc = gql`
+    fragment CandidateProfileBase on CandidateProfile {
+  id
+  status
+  rejectReason
+  position
+  salary
+  candidateDescription
+  experienceDescription
+  workExpectations
+  slug
+  lastActionTime
+}
+    `;
+export const TechnologyBaseFragmentDoc = gql`
+    fragment TechnologyBase on Technology {
+  id
+  name
+}
+    `;
+export const CandidateProfileTechnologiesFragmentDoc = gql`
+    fragment CandidateProfileTechnologies on CandidateProfile {
+  technologies {
+    ...TechnologyBase
+  }
+}
+    ${TechnologyBaseFragmentDoc}`;
+export const EnglishLevelBaseFragmentDoc = gql`
+    fragment EnglishLevelBase on EnglishLevel {
+  id
+  slug
+}
+    `;
+export const CandidateProfileEnglishLevelFragmentDoc = gql`
+    fragment CandidateProfileEnglishLevel on CandidateProfile {
+  englishLevel {
+    ...EnglishLevelBase
+  }
+}
+    ${EnglishLevelBaseFragmentDoc}`;
+export const JobExperienceBaseFragmentDoc = gql`
+    fragment JobExperienceBase on JobExperience {
+  id
+  slug
+}
+    `;
+export const CandidateProfileJobExperienceFragmentDoc = gql`
+    fragment CandidateProfileJobExperience on CandidateProfile {
+  jobExperience {
+    ...JobExperienceBase
+  }
+}
+    ${JobExperienceBaseFragmentDoc}`;
+export const EmploymentTypeBaseFragmentDoc = gql`
+    fragment EmploymentTypeBase on EmploymentType {
+  id
+  slug
+}
+    `;
+export const CandidateProfileEmploymentTypesFragmentDoc = gql`
+    fragment CandidateProfileEmploymentTypes on CandidateProfile {
+  employmentTypes {
+    ...EmploymentTypeBase
+  }
+}
+    ${EmploymentTypeBaseFragmentDoc}`;
+export const SpecializationBaseFragmentDoc = gql`
+    fragment SpecializationBase on Specialization {
+  id
+  name
+}
+    `;
+export const CandidateProfileSpecializationFragmentDoc = gql`
+    fragment CandidateProfileSpecialization on CandidateProfile {
+  specialization {
+    ...SpecializationBase
+  }
+}
+    ${SpecializationBaseFragmentDoc}`;
+export const CandidateProfileCityBaseFragmentDoc = gql`
+    fragment CandidateProfileCityBase on CandidateProfileCity {
+  id
+  cityId
+  cityName
+}
+    `;
+export const CandidateProfileCitiesFragmentDoc = gql`
+    fragment CandidateProfileCities on CandidateProfile {
+  cities {
+    ...CandidateProfileCityBase
+  }
+}
+    ${CandidateProfileCityBaseFragmentDoc}`;
+export const EmploymentLocationBaseFragmentDoc = gql`
+    fragment EmploymentLocationBase on EmploymentLocation {
+  id
+  slug
+}
+    `;
+export const CandidateProfileEmploymentLocationsFragmentDoc = gql`
+    fragment CandidateProfileEmploymentLocations on CandidateProfile {
+  employmentLocations {
+    ...EmploymentLocationBase
+  }
+}
+    ${EmploymentLocationBaseFragmentDoc}`;
+export const CandidateProfileFullFragmentDoc = gql`
+    fragment CandidateProfileFull on CandidateProfile {
+  ...CandidateProfileBase
+  ...CandidateProfileTechnologies
+  ...CandidateProfileEnglishLevel
+  ...CandidateProfileJobExperience
+  ...CandidateProfileEmploymentTypes
+  ...CandidateProfileSpecialization
+  ...CandidateProfileCities
+  ...CandidateProfileEmploymentLocations
+}
+    ${CandidateProfileBaseFragmentDoc}
+${CandidateProfileTechnologiesFragmentDoc}
+${CandidateProfileEnglishLevelFragmentDoc}
+${CandidateProfileJobExperienceFragmentDoc}
+${CandidateProfileEmploymentTypesFragmentDoc}
+${CandidateProfileSpecializationFragmentDoc}
+${CandidateProfileCitiesFragmentDoc}
+${CandidateProfileEmploymentLocationsFragmentDoc}`;
 export const UsersSearchSubscriptionBaseFragmentDoc = gql`
     fragment UsersSearchSubscriptionBase on UsersSearchSubscription {
   id
@@ -755,74 +959,32 @@ export const UsersSearchSubscriptionParamsFragmentDoc = gql`
   }
 }
     `;
-export const EmploymentLocationBaseFragmentDoc = gql`
-    fragment EmploymentLocationBase on EmploymentLocation {
-  id
-  slug
-}
-    `;
-export const EmploymentTypeBaseFragmentDoc = gql`
-    fragment EmploymentTypeBase on EmploymentType {
-  id
-  slug
-}
-    `;
-export const TechnologyBaseFragmentDoc = gql`
-    fragment TechnologyBase on Technology {
-  id
-  name
-}
-    `;
-export const JobExperienceBaseFragmentDoc = gql`
-    fragment JobExperienceBase on JobExperience {
-  id
-  slug
-}
-    `;
-export const EnglishLevelBaseFragmentDoc = gql`
-    fragment EnglishLevelBase on EnglishLevel {
-  id
-  slug
-}
-    `;
-export const UsersSearchSubscriptionStringifiedParamsFragmentDoc = gql`
-    fragment UsersSearchSubscriptionStringifiedParams on UsersSearchSubscription {
-  stringifiedSearchParams {
-    id
-    employmentLocations {
-      ...EmploymentLocationBase
-    }
-    employmentTypes {
-      ...EmploymentTypeBase
-    }
-    technologies {
-      ...TechnologyBase
-    }
-    jobExperiences {
-      ...JobExperienceBase
-    }
-    englishLevels {
-      ...EnglishLevelBase
-    }
+export const UsersSearchSubscriptionUserFragmentDoc = gql`
+    fragment UsersSearchSubscriptionUser on UsersSearchSubscription {
+  user {
+    email
   }
 }
-    ${EmploymentLocationBaseFragmentDoc}
-${EmploymentTypeBaseFragmentDoc}
-${TechnologyBaseFragmentDoc}
-${JobExperienceBaseFragmentDoc}
-${EnglishLevelBaseFragmentDoc}`;
+    `;
 export const UsersSearchSubscriptionFullFragmentDoc = gql`
     fragment UsersSearchSubscriptionFull on UsersSearchSubscription {
   ...UsersSearchSubscriptionBase
   ...UsersSearchSubscriptionParams
-  ...UsersSearchSubscriptionStringifiedParams
+  ...UsersSearchSubscriptionUser
 }
     ${UsersSearchSubscriptionBaseFragmentDoc}
 ${UsersSearchSubscriptionParamsFragmentDoc}
-${UsersSearchSubscriptionStringifiedParamsFragmentDoc}`;
+${UsersSearchSubscriptionUserFragmentDoc}`;
+export const PublicCandidateProfilesDocument = gql`
+    query publicCandidateProfiles($where: PublicProfilesParameters) {
+  publicCandidateProfiles(where: $where) {
+    ...CandidateProfileFull
+  }
+}
+    ${CandidateProfileFullFragmentDoc}`;
 export const UpdateSubscriptionLastNotifiedDocument = gql`
-    mutation updateSubscriptionLastNotified($id: Int!, $userId: Int!) {
-  updateSubscriptionLastNotified(id: $id, userId: $userId)
+    mutation updateSubscriptionLastNotified($subscriptionsIds: [Int!]) {
+  updateSubscriptionLastNotified(subscriptionsIds: $subscriptionsIds)
 }
     `;
 export const UsersSearchSubscriptionsDocument = gql`
@@ -839,7 +1001,10 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    updateSubscriptionLastNotified(variables: UpdateSubscriptionLastNotifiedMutationVariables): Promise<{ data?: UpdateSubscriptionLastNotifiedMutation | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
+    publicCandidateProfiles(variables?: PublicCandidateProfilesQueryVariables): Promise<{ data?: PublicCandidateProfilesQuery | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
+        return withWrapper(() => client.rawRequest<PublicCandidateProfilesQuery>(print(PublicCandidateProfilesDocument), variables));
+    },
+    updateSubscriptionLastNotified(variables?: UpdateSubscriptionLastNotifiedMutationVariables): Promise<{ data?: UpdateSubscriptionLastNotifiedMutation | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
         return withWrapper(() => client.rawRequest<UpdateSubscriptionLastNotifiedMutation>(print(UpdateSubscriptionLastNotifiedDocument), variables));
     },
     usersSearchSubscriptions(variables?: UsersSearchSubscriptionsQueryVariables): Promise<{ data?: UsersSearchSubscriptionsQuery | undefined; extensions?: any; headers: Headers; status: number; errors?: GraphQLError[] | undefined; }> {
