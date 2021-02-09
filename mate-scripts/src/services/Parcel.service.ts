@@ -27,13 +27,13 @@ export class ParcelService {
     this.run('serve', options, 'development', showLogs);
   }
 
-  build() {
+  build(showLogs = false) {
     const options = {
       ...this.baseOptions,
       'public-url':  './',
     };
 
-    this.run('build', options, 'production');
+    this.run('build', options, 'production', showLogs);
   }
 
   private run(command: string, options: Record<string, any>, env = 'development', showLogs = false) {

@@ -40,7 +40,9 @@ export class DeployCommand extends Command {
 
     const { shouldShowInternalLogs } = options;
 
-    await this.buildCommand.run();
+    await this.buildCommand.run({
+      shouldShowInternalLogs,
+    });
 
     console.log('Start deploy to gh-pages. Please wait, it may take up to minute.\n');
 
@@ -61,7 +63,9 @@ export class DeployCommand extends Command {
 
     const { shouldShowInternalLogs } = options;
 
-    await this.buildCommand.run();
+    await this.buildCommand.run({
+      shouldShowInternalLogs,
+    });
 
     console.log('Start deploy to gh-pages. Please wait, it may take up to minute.\n');
 

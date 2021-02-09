@@ -55,6 +55,7 @@ program
 program
   .command('build')
   .description('create production ready build')
+  .option('-l, --logs', 'show internal commands logs', false)
   .action(commandFactory.make(BuildCommand));
 
 program
