@@ -33,5 +33,7 @@ module.exports = {
       aspects: ['invalidHref', 'preferButton'],
     }],
     'react/sort-comp': 'off',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
   },
 };
