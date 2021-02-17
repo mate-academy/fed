@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Simplified standard config for Mate academy students",
   "main": "index.js",
   "scripts": {
