@@ -3,7 +3,10 @@
 module.exports = {
   "extends": [
     "standard",
-    require.resolve("./rules/style"),
+    ...[
+      "./rules/style",
+      "./rules/best-practices",
+    ].map(require.resolve)
   ],
   "env": {
     "node": true,
