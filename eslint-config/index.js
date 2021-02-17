@@ -1,7 +1,10 @@
 "use strict";
 
 module.exports = {
-  "extends": "standard",
+  "extends": [
+    "standard",
+    require.resolve("./rules/style"),
+  ],
   "env": {
     "node": true,
   },
