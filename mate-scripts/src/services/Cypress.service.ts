@@ -40,7 +40,7 @@ export class CypressService {
 
       this.log('CYPRESS TESTS RUN SUCCESS');
     } catch (error) {
-      this.log('CYPRESS TESTS RUN FAIL', error);
+      this.log('CYPRESS TESTS RUN FAIL', error, true);
 
       failed = true;
     } finally {
@@ -149,8 +149,8 @@ export class CypressService {
     await open(`file://${path.join(this.reportsDir, 'report.html')}`);
   }
 
-  private log(message: string, data?: any) {
-    if (!this.shouldShowLogs) {
+  private log(message: string, data?: any, force = false) {
+    if (!this.shouldShowLogs && !force) {
       return;
     }
 

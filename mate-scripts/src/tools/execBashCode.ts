@@ -56,24 +56,27 @@ export function execBashCodeAsync(bashCode: string, params: ExecBashCodeAsyncPar
     const childProcess = exec(bashCode, execOptions);
     let stdout = '';
 
-    if (shouldBindStdout) {
-      if (childProcess.stdout) {
-        childProcess.stdout.on('data', (data) => {
-          stdout += data.toString();
-          console.log(data);
-        });
-      }
+    if (childProcess.stdout) {
+      childProcess.stdout.on('data', (data) => {
+        stdout += `${data.toString()}\n`;
 
-      if (childProcess.stderr) {
-        childProcess.stderr.on('data', (data) => {
-          console.error(data);
-        });
-      }
+        if (shouldBindStdout) {
+          console.log(data);
+        }
+      });
+    }
+
+    if (childProcess.stderr) {
+      childProcess.stderr.on('data', (data) => {
+        stdout += `${data.toString()}\n`;
+
+        console.error(data);
+      });
     }
 
     childProcess.on('close',  (code) => {
       code > 0
-        ? reject(new Error(`${bashCode}, errorCode: ${code}`))
+        ? reject(stdout)
         : resolve(stdout);
     });
   }))
