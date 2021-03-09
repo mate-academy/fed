@@ -7,7 +7,7 @@ export interface StartOptions {
 }
 
 export class StartCommand extends Command {
-  private readonly parcel = new ParcelService(this.rootDir);
+  parcel = new ParcelService(this.rootDir);
   private readonly jest = new JestService();
 
   protected common() {
