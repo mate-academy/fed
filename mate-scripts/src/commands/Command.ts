@@ -1,9 +1,10 @@
-import fs from 'fs-extra';
-import path from 'path';
-import { ProjectTypes } from '../constants';
+import { getConfig } from '../tools';
+import { Config, ProjectTypes } from '../typedefs';
 
 export abstract class Command {
   protected readonly rootDir: string;
+
+  protected readonly config: Config;
 
   protected projectType: ProjectTypes = ProjectTypes.None;
 
@@ -27,6 +28,7 @@ export abstract class Command {
 
   constructor(rootDir: string) {
     this.rootDir = rootDir;
+    this.config = getConfig(rootDir);
   }
 
   protected abstract common(options?: any): void;
@@ -47,19 +49,12 @@ export abstract class Command {
       return;
     }
 
-    const { mateAcademy } = JSON.parse(
-      fs.readFileSync(
-        path.join(this.rootDir, 'package.json'),
-        { encoding: 'utf-8' },
-      ),
-    );
-
-    if (!mateAcademy || !mateAcademy.projectType) {
+    if (!this.config || !this.config.projectType) {
       Command.logProjectTypeWarning();
       return;
     }
 
-    this.projectType = mateAcademy.projectType;
+    this.projectType = this.config.projectType;
   }
 
   private static logProjectTypeWarning() {

@@ -1,9 +1,9 @@
 import fs from 'fs-extra';
 import { promises as nodeFs } from 'fs';
 import path from "path";
-import { ProjectTypes } from '../constants';
 import { execBashCodeAsync } from '../tools';
 import { Command } from './Command';
+import { ProjectTypes } from '../typedefs';
 
 export interface MigrateOptions {
   projectType: ProjectTypes;

@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { ProjectTypes } from '../constants';
 import { NPMPackageService } from '../services';
+import { ProjectTypes } from '../typedefs';
 import { Command } from './Command';
 
 export class InitCommand extends Command {

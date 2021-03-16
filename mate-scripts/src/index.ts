@@ -40,7 +40,8 @@ program
 program
   .command('lint [files...]')
   .option('-s, --styles', 'lint styles only', false)
-  .option('-h, --html', 'lint html only', false)
+  .option('-h, --html', 'lint html (markup-style) only', false)
+  .option('-b, --bem', 'lint html (BEM) only', false)
   .option('-j, --javascript', 'lint javascript only', false)
   .description('lint html, css and js files')
   .action(commandFactory.make(LintCommand, lintController));

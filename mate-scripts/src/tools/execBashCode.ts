@@ -71,8 +71,8 @@ export function execBashCodeAsync(bashCode: string, params: ExecBashCodeAsyncPar
       }
     }
 
-    childProcess.on('close',  (code) => {
-      code > 0
+    childProcess.on('close', (code) => {
+      code as number > 0
         ? reject(new Error(`${bashCode}, errorCode: ${code}`))
         : resolve(stdout);
     });
