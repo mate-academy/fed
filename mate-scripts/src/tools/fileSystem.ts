@@ -77,8 +77,8 @@ export function getConfig(rootDir: string): Config {
   const linters = config.linters || {};
 
   return {
-    ...config,
     ...defaultConfig,
+    ...config,
     linters: {
       ...defaultConfig.linters,
       ...linters,
