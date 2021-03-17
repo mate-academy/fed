@@ -1,4 +1,4 @@
-import { Linters } from './typedefs';
+import { Config, Linters, ProjectTypes } from './typedefs';
 
 export const DESTINATION_DIR = 'dist';
 
@@ -9,4 +9,9 @@ export const defaultLintersConfig: Linters = {
   bem: true,
   styles: true,
   javascript: true,
-}
+};
+
+export const defaultConfig: Config = {
+  projectType: ProjectTypes.None,
+  linters: defaultLintersConfig,
+};

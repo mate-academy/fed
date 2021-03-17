@@ -118,6 +118,7 @@
     "js_format_date_advanced",
     "js_advanced_calculator"
   ],
+  "layoutDOM": [], 
   "react": [
     "cra-demo",
     "react_task-boilerplate-ci",
@@ -164,5 +165,6 @@
     "redux-thunk_todos-task",
     "example_react_add-film-to-list"
   ],
+  "typescript": [],
   "reactTypescript": []
 }

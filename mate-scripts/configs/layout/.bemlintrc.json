@@ -2,7 +2,7 @@
   "elementDivider": "__",
   "modifierDivider": "_",
   "ignore": [
-    "node_module",
+    "node_modules",
     "dist"
   ],
   "rules": {

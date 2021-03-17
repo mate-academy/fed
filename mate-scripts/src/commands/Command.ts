@@ -6,10 +6,8 @@ export abstract class Command {
 
   protected readonly config: Config;
 
-  protected projectType: ProjectTypes = ProjectTypes.None;
-
   private logNoImplementationWarning = () => {
-    console.warn(`No implementation for command ${this.constructor.name} for ${this.projectType} project`);
+    console.warn(`No implementation for command ${this.constructor.name} for ${this.config.projectType} project`);
   };
 
   protected [ProjectTypes.None]: (options?: any) => void = this.logNoImplementationWarning;
@@ -34,27 +32,22 @@ export abstract class Command {
   protected abstract common(options?: any): void;
 
   async run(options?: any): Promise<void> {
-    this.setProjectType();
+    this.checkProjectType();
 
     try {
       await this.common(options);
-      await this[this.projectType](options);
+      await this[this.config.projectType](options);
     } catch (error) {
       process.exit(1);
     }
   };
 
-  private setProjectType() {
-    if (this.projectType !== ProjectTypes.None) {
+  private checkProjectType() {
+    if (this.config.projectType !== ProjectTypes.None) {
       return;
     }
 
-    if (!this.config || !this.config.projectType) {
-      Command.logProjectTypeWarning();
-      return;
-    }
-
-    this.projectType = this.config.projectType;
+    Command.logProjectTypeWarning();
   }
 
   private static logProjectTypeWarning() {

@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { defaultLintersConfig } from '../constants';
+import { defaultConfig, defaultLintersConfig } from '../constants';
 import { Config } from '../typedefs';
 
 const packageJson = 'package.json';
@@ -78,8 +78,9 @@ export function getConfig(rootDir: string): Config {
 
   return {
     ...config,
+    ...defaultConfig,
     linters: {
-      ...defaultLintersConfig,
+      ...defaultConfig.linters,
       ...linters,
     }
   };
