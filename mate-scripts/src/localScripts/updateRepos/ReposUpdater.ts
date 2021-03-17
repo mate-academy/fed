@@ -3,8 +3,8 @@ import path from 'path';
 import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 import { repositories } from '../repositories';
-import { ProjectTypes } from '../../constants';
 import { execBashCodeAsync } from '../../tools';
+import { ProjectTypes } from '../../typedefs';
 
 dotenv.config();
 

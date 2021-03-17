@@ -52,6 +52,20 @@ if [[ "$STAGED_HTML_FILES" != "" ]]; then
   fi
 fi
 
+# BEMlint
+if [[ "$STAGED_HTML_FILES" != "" ]]; then
+  echo "Linting (BEM) HTML files"
+
+  npx mate-scripts lint --bem $(join_by " " ${STAGED_HTML_FILES})
+
+  if [[ "$?" == 0 ]]; then
+    printf "\033[32mBEMlint Passed\033[0m\n\n"
+  else
+    printf "\033[031mBEMlint Failed\033[0m\n\n"
+    PASS=false
+  fi
+fi
+
 if ! ${PASS}; then
   printf "Pre-commits check failed. Fix problems above before commit.\n\n"
   exit 1

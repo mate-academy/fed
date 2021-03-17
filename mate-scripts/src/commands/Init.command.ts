@@ -1,14 +1,10 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { ProjectTypes } from '../constants';
 import { NPMPackageService } from '../services';
+import { ProjectTypes } from '../typedefs';
 import { Command } from './Command';
 
 export class InitCommand extends Command {
-  private static readonly lintHtmlConfigDir = 'node_modules/@mate-academy/linthtml-config';
-
-  private static readonly lintHtmlConfigFileName = '.linthtmlrc.json';
-
   private static readonly configsDir = path.join(__dirname, '../configs');
 
   private static readonly gitHooksSourceDir = path.join(InitCommand.configsDir, 'git-hooks');
@@ -30,7 +26,6 @@ export class InitCommand extends Command {
   protected layout = async () => {
     this.copyGitIgnore(ProjectTypes.Layout);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.Layout);
-    this.copyLinthtmlConfig();
     this.initGitHooks(ProjectTypes.Layout);
 
     await this.ensureCrossEnvInstalled();
@@ -39,7 +34,6 @@ export class InitCommand extends Command {
   protected layoutDOM = async () => {
     this.copyGitIgnore(ProjectTypes.LayoutDOM);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.LayoutDOM);
-    this.copyLinthtmlConfig();
     this.initGitHooks(ProjectTypes.LayoutDOM);
 
     await this.ensureCrossEnvInstalled();
@@ -74,21 +68,6 @@ export class InitCommand extends Command {
     const configsDir = path.join(InitCommand.configsDir, projectType);
 
     fs.copySync(configsDir, this.rootDir);
-  }
-
-  private copyLinthtmlConfig() {
-    const lintHtmlConfigSource = path.join(
-      this.rootDir,
-      InitCommand.lintHtmlConfigDir,
-      InitCommand.lintHtmlConfigFileName,
-    );
-
-    const lintHtmlConfigDestination = path.join(
-      this.rootDir,
-      InitCommand.lintHtmlConfigFileName,
-    );
-
-    fs.copyFileSync(lintHtmlConfigSource, lintHtmlConfigDestination);
   }
 
   private initGitHooks(projectType: ProjectTypes) {

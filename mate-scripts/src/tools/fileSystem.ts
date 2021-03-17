@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import { defaultConfig, defaultLintersConfig } from '../constants';
+import { Config } from '../typedefs';
 
 const packageJson = 'package.json';
 const rootDirError = 'Command should be run inside project folder with @mate-academy/scripts as devDependency';
@@ -61,4 +63,25 @@ function hasCorrectDependency(rootDir: string) {
 
 function isSystemRoot(rootDir: string) {
   return rootDir === '/';
+}
+
+export function getConfig(rootDir: string): Config {
+  const { mateAcademy } = JSON.parse(
+    fs.readFileSync(
+      path.join(rootDir, 'package.json'),
+      { encoding: 'utf-8' },
+    ),
+  );
+
+  const config = mateAcademy || {};
+  const linters = config.linters || {};
+
+  return {
+    ...defaultConfig,
+    ...config,
+    linters: {
+      ...defaultConfig.linters,
+      ...linters,
+    }
+  };
 }

@@ -1,23 +1,27 @@
 import { execBashCodeSilent } from '../tools';
+import { Linters } from '../typedefs';
 import { Command } from './Command';
 
-export interface LintOptions {
-  html: boolean;
-  styles: boolean;
-  javascript: boolean;
+export type LintOptions = Linters & {
   files: string[] | null;
 }
 
 export class LintCommand extends Command {
+  constructor(rootDir: string) {
+    super(rootDir);
+  }
+
   protected common(options: LintOptions) {
   }
 
   protected layout = (options: LintOptions) => {
-    const { html, files, styles, javascript } = options;
+    const { html, bem, files, styles, javascript } = options;
+    const { linters } = this.config;
 
-    styles && LintCommand.lintStyles(files);
-    html && LintCommand.lintHtml(files);
-    javascript && LintCommand.lintJs(files);
+    html && linters.html && LintCommand.lintHtml(files);
+    bem && linters.bem && LintCommand.lintBem(files);
+    styles && linters.styles && LintCommand.lintStyles(files);
+    javascript && linters.javascript && LintCommand.lintJs(files);
   };
 
   protected layoutDOM = (options: LintOptions) => {
@@ -36,6 +40,14 @@ export class LintCommand extends Command {
       : './src/**/*.html';
 
     execBashCodeSilent(`npx linthtml ${filesToLint}`);
+  }
+
+  private static lintBem(files: LintOptions['files']) {
+    const filesToLint = files
+      ? files.join(' ')
+      : './src';
+
+    execBashCodeSilent(`npx bemlint ${filesToLint}`);
   }
 
   private static lintStyles(files: LintOptions['files']) {

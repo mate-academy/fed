@@ -1,13 +1,17 @@
+import { Config, Linters, ProjectTypes } from './typedefs';
+
 export const DESTINATION_DIR = 'dist';
 
 export const servePort = 8080;
 
-export enum ProjectTypes {
-  None = 'none',
-  Layout = 'layout',
-  LayoutDOM = 'layoutDOM',
-  Javascript = 'javascript',
-  Typescript = 'typescript',
-  React = 'react',
-  ReactTypescript = 'reactTypescript',
-}
+export const defaultLintersConfig: Linters = {
+  html: true,
+  bem: true,
+  styles: true,
+  javascript: true,
+};
+
+export const defaultConfig: Config = {
+  projectType: ProjectTypes.None,
+  linters: defaultLintersConfig,
+};

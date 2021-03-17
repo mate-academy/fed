@@ -1,14 +1,13 @@
-import fs from 'fs-extra';
-import path from 'path';
-import { ProjectTypes } from '../constants';
+import { getConfig } from '../tools';
+import { Config, ProjectTypes } from '../typedefs';
 
 export abstract class Command {
   protected readonly rootDir: string;
 
-  protected projectType: ProjectTypes = ProjectTypes.None;
+  protected readonly config: Config;
 
   private logNoImplementationWarning = () => {
-    console.warn(`No implementation for command ${this.constructor.name} for ${this.projectType} project`);
+    console.warn(`No implementation for command ${this.constructor.name} for ${this.config.projectType} project`);
   };
 
   protected [ProjectTypes.None]: (options?: any) => void = this.logNoImplementationWarning;
@@ -27,39 +26,28 @@ export abstract class Command {
 
   constructor(rootDir: string) {
     this.rootDir = rootDir;
+    this.config = getConfig(rootDir);
   }
 
   protected abstract common(options?: any): void;
 
   async run(options?: any): Promise<void> {
-    this.setProjectType();
+    this.checkProjectType();
 
     try {
       await this.common(options);
-      await this[this.projectType](options);
+      await this[this.config.projectType](options);
     } catch (error) {
       process.exit(1);
     }
   };
 
-  private setProjectType() {
-    if (this.projectType !== ProjectTypes.None) {
+  private checkProjectType() {
+    if (this.config.projectType !== ProjectTypes.None) {
       return;
     }
 
-    const { mateAcademy } = JSON.parse(
-      fs.readFileSync(
-        path.join(this.rootDir, 'package.json'),
-        { encoding: 'utf-8' },
-      ),
-    );
-
-    if (!mateAcademy || !mateAcademy.projectType) {
-      Command.logProjectTypeWarning();
-      return;
-    }
-
-    this.projectType = mateAcademy.projectType;
+    Command.logProjectTypeWarning();
   }
 
   private static logProjectTypeWarning() {
