@@ -4,36 +4,31 @@ const fs = require('fs');
 const path = require('path');
 const { shouldIgnoreFile } = require('./shouldIgnoreFile');
 
-function findHtmlFiles(dirPath) {
-  return fs.readdirSync(dirPath)
-    .reduce((acc, dir) => {
-      const currentPath = path.join(dirPath, dir);
+function findHtmlFiles(startPath) {
+  if (shouldIgnoreFile(startPath)) {
+    return [];
+  }
 
-      if (shouldIgnoreFile(currentPath)) {
-        return acc;
-      }
+  if (fs.statSync(startPath).isFile()) {
+    return readFile(startPath);
+  }
 
-      const isDir = fs.statSync(currentPath).isDirectory();
+  return fs.readdirSync(startPath)
+    .reduce((acc, dir) => ([
+      ...acc,
+      ...findHtmlFiles(path.join(startPath, dir)),
+    ]), []);
+}
 
-      if (isDir) {
-        return [
-          ...acc,
-          ...findHtmlFiles(currentPath),
-        ];
-      }
+function readFile(filePath) {
+  if (path.extname(filePath) !== '.html') {
+    return [];
+  }
 
-      if (path.extname(currentPath) === '.html') {
-        return [
-          ...acc,
-          {
-            path: currentPath,
-            content: fs.readFileSync(currentPath, 'utf-8'),
-          },
-        ];
-      }
-
-      return acc;
-    }, []);
+  return [{
+    path: filePath,
+    content: fs.readFileSync(filePath, 'utf-8'),
+  }];
 }
 
 module.exports = {
