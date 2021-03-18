@@ -30,7 +30,7 @@
 </div>
 ```
 
-# element-inner-parent-block
+# element-inside-parent-block
 
 - bad example
 
