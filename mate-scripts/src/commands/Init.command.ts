@@ -62,12 +62,16 @@ export class InitCommand extends Command {
       ),
       path.join(this.rootDir, gitIgnoreFileName),
     );
+
+    console.log('.gitignore copied');
   }
 
   private copyProjectTypeSpecificConfigs(projectType: ProjectTypes) {
     const configsDir = path.join(InitCommand.configsDir, projectType);
 
     fs.copySync(configsDir, this.rootDir);
+
+    console.log(`${projectType} specific configs copied`);
   }
 
   private initGitHooks(projectType: ProjectTypes) {
@@ -75,6 +79,8 @@ export class InitCommand extends Command {
     const gitHooksList = fs.readdirSync(hooksDir);
 
     gitHooksList.forEach((hookName) => this.initGitHook(hooksDir, hookName));
+
+    console.log('Git hooks installed');
   }
 
   private initGitHook(hooksDir: string, hookName: string) {
@@ -82,9 +88,13 @@ export class InitCommand extends Command {
     const destinationHookFile = path.join(this.gitHooksDestinationDir, hookName);
 
     fs.copySync(sourceHookFile, destinationHookFile);
+
+    console.log(`Git ${hookName} hook installed`);
   }
 
   private async ensureCrossEnvInstalled() {
-    await this.crossEnvPackageService.ensure({ silent: true });
+    await this.crossEnvPackageService.ensure({ silent: false });
+
+    console.log('Cross-env installed');
   }
 }

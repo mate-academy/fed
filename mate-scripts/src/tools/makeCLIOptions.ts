@@ -6,6 +6,6 @@ export function makeCLIOptions(options: Record<string, any>) {
         : true
     ))
     .reduce((acc, [key, value]) => (
-      `${acc} --${key}${typeof value === 'boolean' ? '' : `=${value}`}`
+      `${acc} --${key}${typeof value === 'boolean' ? '' : ` ${value}`}`
     ), '');
 }
