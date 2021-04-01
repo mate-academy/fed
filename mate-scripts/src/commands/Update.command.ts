@@ -14,7 +14,11 @@ export class UpdateCommand extends Command {
   async common() {
     await this.updateMateScriptsVersions();
 
+    console.log('versions updated successfully');
+
     execBashCode('npx mate-scripts init');
+
+    console.log('init command success');
   }
 
   private async updateMateScriptsVersions() {
