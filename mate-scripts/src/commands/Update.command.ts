@@ -16,7 +16,7 @@ export class UpdateCommand extends Command {
 
     console.log('versions updated successfully');
 
-    execBashCode('npx mate-scripts init');
+    execBashCode(`${this.mateScriptsDir}mate-scripts init`);
 
     console.log('init command success');
   }

@@ -19,6 +19,8 @@ export class CypressService {
 
   private readonly mergedReport = path.join(this.reportsDir, 'report.json');
 
+  private readonly binDir = path.join(this.rootDir, 'node_modules/.bin/');
+
   constructor(private readonly rootDir: string) {
   }
 
@@ -89,7 +91,7 @@ export class CypressService {
 
   private runCypress() {
     return execBashCodeAsync(
-      'npx cypress run',
+      `${this.binDir}cypress run`,
       { shouldBindStdout: this.shouldShowLogs },
     );
   }
@@ -133,14 +135,14 @@ export class CypressService {
     const partsGlob = path.join(this.rawReportsDir, '*.json');
 
     await execBashCodeAsync(
-      `npx mochawesome-merge "${partsGlob}" > ${this.mergedReport}`,
+      `${this.binDir}mochawesome-merge "${partsGlob}" > ${this.mergedReport}`,
       { shouldBindStdout: this.shouldShowLogs }
     );
   }
 
   private async generateHtmlReport() {
     await execBashCodeAsync(
-      `npx marge -o ${this.reportsDir} ${this.mergedReport}`,
+      `${this.binDir}marge -o ${this.reportsDir} ${this.mergedReport}`,
       { shouldBindStdout: this.shouldShowLogs },
     );
   }

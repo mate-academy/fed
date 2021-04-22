@@ -18,10 +18,10 @@ export class LintCommand extends Command {
     const { html, bem, files, styles, javascript } = options;
     const { linters } = this.config;
 
-    html && linters.html && LintCommand.lintHtml(files);
-    bem && linters.bem && LintCommand.lintBem(files);
-    styles && linters.styles && LintCommand.lintStyles(files);
-    javascript && linters.javascript && LintCommand.lintJs(files);
+    html && linters.html && this.lintHtml(files);
+    bem && linters.bem && this.lintBem(files);
+    styles && linters.styles && this.lintStyles(files);
+    javascript && linters.javascript && this.lintJs(files);
   };
 
   protected layoutDOM = (options: LintOptions) => {
@@ -31,38 +31,39 @@ export class LintCommand extends Command {
   protected javascript = (options: LintOptions) => {
     const { javascript, files } = options;
 
-    javascript && LintCommand.lintJs(files);
+    javascript && this.lintJs(files);
   };
 
-  private static lintHtml(files: LintOptions['files']) {
+  private lintHtml(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
       : './src/**/*.html';
 
-    execBashCodeSilent(`npx linthtml ${filesToLint}`);
+
+    execBashCodeSilent(`${this.binDir}linthtml ${filesToLint}`);
   }
 
-  private static lintBem(files: LintOptions['files']) {
+  private lintBem(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
       : './src';
 
-    execBashCodeSilent(`npx bemlint ${filesToLint}`);
+    execBashCodeSilent(`${this.binDir}bemlint ${filesToLint}`);
   }
 
-  private static lintStyles(files: LintOptions['files']) {
+  private lintStyles(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
       : './src/**/*.css ./src/**/*.scss';
 
-    execBashCodeSilent(`npx stylelint ${filesToLint}`);
+    execBashCodeSilent(`${this.binDir}stylelint ${filesToLint}`);
   }
 
-  private static lintJs(files: LintOptions['files']) {
+  private lintJs(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
       : './src';
 
-    execBashCodeSilent(`npx eslint ${filesToLint}`);
+    execBashCodeSilent(`${this.binDir}eslint ${filesToLint}`);
   }
 }
