@@ -1,8 +1,11 @@
+import path from 'path';
 import { getConfig } from '../tools';
 import { Config, ProjectTypes } from '../typedefs';
 
 export abstract class Command {
   protected readonly rootDir: string;
+
+  protected readonly binDir: string;
 
   protected readonly config: Config;
 
@@ -26,6 +29,7 @@ export abstract class Command {
 
   constructor(rootDir: string) {
     this.rootDir = rootDir;
+    this.binDir = path.join(rootDir, 'node_modules/.bin/');
     this.config = getConfig(rootDir);
   }
 

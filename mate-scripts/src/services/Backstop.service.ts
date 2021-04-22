@@ -13,6 +13,8 @@ export class BackstopService {
 
   private readonly testResultsDir = path.join(this.dataDir, 'bitmaps_test');
 
+  private readonly binDir = path.join(this.rootDir, 'node_modules/.bin/');
+
   readonly reportDir = this.dataDir;
 
   constructor(private readonly rootDir: string) {
@@ -28,7 +30,7 @@ export class BackstopService {
       this.ensureReferences();
       this.cleanTestResults();
 
-      BackstopService.run('test', { config: this.configPath });
+      this.run('test', { config: this.configPath });
     }
   }
 
@@ -52,7 +54,7 @@ export class BackstopService {
     if (fs.existsSync(this.configPath)) {
       this.cleanReference();
 
-      BackstopService.run('reference', { config: this.configPath });
+      this.run('reference', { config: this.configPath });
     }
   }
 
@@ -60,9 +62,9 @@ export class BackstopService {
     fs.removeSync(this.referencesDir);
   }
 
-  private static run(subCommand: string, options: Record<string, any>) {
+  private run(subCommand: string, options: Record<string, any>) {
     const optionsString = makeCLIOptions(options);
 
-    execBashCodeSilent(`npx backstop ${subCommand} ${optionsString}`)
+    execBashCodeSilent(`${this.binDir}backstop ${subCommand} ${optionsString}`)
   }
 }

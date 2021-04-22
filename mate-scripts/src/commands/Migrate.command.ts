@@ -163,7 +163,7 @@ export class MigrateCommand extends Command {
 
     await execBashCodeAsync('npm rm husky lint-staged');
     await execBashCodeAsync('npm i');
-    await execBashCodeAsync('npx eslint ./ --fix');
+    await execBashCodeAsync(`${this.binDir}eslint ./ --fix`);
   };
 
   async getPackage(): Promise<any> {
