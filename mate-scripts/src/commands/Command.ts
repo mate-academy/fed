@@ -7,8 +7,6 @@ export abstract class Command {
 
   protected readonly binDir: string;
 
-  protected readonly mateScriptsDir: string;
-
   protected readonly config: Config;
 
   private logNoImplementationWarning = () => {
@@ -32,7 +30,6 @@ export abstract class Command {
   constructor(rootDir: string) {
     this.rootDir = rootDir;
     this.binDir = path.join(rootDir, 'node_modules/.bin/');
-    this.mateScriptsDir = path.join(rootDir, 'node_modules/@mate-academy/scripts/');
     this.config = getConfig(rootDir);
   }
 
