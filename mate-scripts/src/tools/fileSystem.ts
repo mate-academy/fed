@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { defaultConfig, defaultLintersConfig } from '../constants';
 import { Config } from '../typedefs';
+import { getDefaultConfig } from './getDefaultConfig';
 
 const packageJson = 'package.json';
 const rootDirError = 'Command should be run inside project folder with @mate-academy/scripts as devDependency';
@@ -75,6 +75,7 @@ export function getConfig(rootDir: string): Config {
 
   const config = mateAcademy || {};
   const linters = config.linters || {};
+  const defaultConfig = getDefaultConfig(config.projectType);
 
   return {
     ...defaultConfig,

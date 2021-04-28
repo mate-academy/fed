@@ -10,8 +10,3 @@ export const defaultLintersConfig: Linters = {
   styles: true,
   javascript: true,
 };
-
-export const defaultConfig: Config = {
-  projectType: ProjectTypes.None,
-  linters: defaultLintersConfig,
-};
