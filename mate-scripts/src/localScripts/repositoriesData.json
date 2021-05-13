@@ -1,16 +1,6 @@
 {
   "none": [
-    "html-scss-athletes",
-    "js_calendar-table-DOM",
-    "js_tree-from-object-DOM",
-    "js_sort-table-DOM",
-    "js_sliding-tree-DOM",
-    "js_all-is-timed-DOM",
-    "js_task-gallery-DOM",
-    "js_task-carousel-DOM",
-    "js_all-is-counted-DOM",
-    "js_mouse-gun-DOM",
-    "js_registration-form-DOM"
+    "html-scss-athletes"
   ],
   "layout": [
     "layout_hello-world",
@@ -117,7 +107,35 @@
     "js_format_date_advanced",
     "js_advanced_calculator"
   ],
-  "layoutDOM": [], 
+  "layoutDOM": [
+    "js_calendar-table-DOM",
+    "js_tree-from-object-DOM",
+    "js_sort-table-DOM",
+    "js_sliding-tree-DOM",
+    "js_all-is-timed-DOM",
+    "js_task-move-spider-DOM",
+    "js_task-gallery-DOM",
+    "js_task-carousel-DOM",
+    "js_all-is-counted-DOM",
+    "js_mouse-gun-DOM",
+    "js_registration-form-DOM",
+    "js_get_data_DOM",
+    "js_task_fix_form_DOM",
+    "js_task_generate_table_DOM",
+    "js_task_clone_table_column_DOM",
+    "js_task_parse_list_DOM",
+    "js_notification_DOM",
+    "js_center_spider_DOM",
+    "js_employees_table_DOM",
+    "js_growth_table_DOM",
+    "js_sort_table_DOM",
+    "js_gallery_DOM",
+    "js_promise_basic_DOM",
+    "js_promises_practice_DOM",
+    "js_promise_function_DOM",
+    "js_fetch_data_DOM",
+    "js_fetch_data_advanced_DOM"
+  ],
   "react": [
     "cra-demo",
     "react_task-boilerplate-ci",

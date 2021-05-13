@@ -1,5 +1,9 @@
 import { Octokit } from '@octokit/rest';
 import fs from 'fs-extra';
+import path from 'path';
+import { config } from 'dotenv';
+
+config();
 
 const githubToken = process.env.GITHUB_TOKEN;
 const orgName = 'mate-academy';
@@ -9,18 +13,21 @@ export async function getRepos() {
     auth: githubToken
   });
 
-  const repos = await octokit.paginate(octokit.repos.listForOrg, {
+  const repos = await octokit.paginate(octokit.repos.listForOrg as any, {
     org: orgName,
   });
 
   const none = [];
   const layout = [];
+  const layoutDOM = [];
   const javascript = [];
   const react = [];
 
   for (const { name } of repos) {
-    if (name.startsWith('layout_') || name.includes('DOM')) {
+    if (name.startsWith('layout_')) {
       layout.push(name);
+    } else if (name.startsWith('js_') && name.endsWith('DOM')) {
+      layoutDOM.push(name);
     } else if (name.startsWith('js_')) {
       javascript.push(name);
     } else if (name.startsWith('react_') || name.startsWith('redux_')) {
@@ -30,9 +37,10 @@ export async function getRepos() {
     }
   }
 
-  await fs.writeFile('./repositories-raw.json', JSON.stringify({
+  await fs.writeFile(path.join(__dirname, './repositories-raw.json'), JSON.stringify({
     none,
     layout,
+    layoutDOM,
     javascript,
     react,
   }, null, 2));
