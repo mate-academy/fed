@@ -1,6 +1,6 @@
 import { name } from '../../package.json';
 import { NPMPackageService } from '../services';
-import { execBashCode } from '../tools';
+import { execBashCodeSync } from '../tools';
 import { Command } from './Command';
 
 export class UpdateCommand extends Command {
@@ -16,7 +16,7 @@ export class UpdateCommand extends Command {
 
     console.log('versions updated successfully');
 
-    execBashCode(`${this.binDir}mate-scripts init`);
+    execBashCodeSync(`${this.binDir}mate-scripts init`);
 
     console.log('init command success');
   }

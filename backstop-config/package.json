@@ -1,10 +1,12 @@
 {
   "name": "@mate-academy/backstop-config",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "simple backstop config",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish"
   },
   "author": "Mate academy",
   "license": "ISC",
