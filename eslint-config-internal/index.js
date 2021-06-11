@@ -9,7 +9,8 @@ module.exports = {
   extends: [
     "airbnb/base",
     "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:ternary/recommended",
   ],
   plugins: [
     "@typescript-eslint",
@@ -57,6 +58,7 @@ module.exports = {
       ],
       'newlines-between': 'ignore',
     }],
+    "multiline-ternary": ["error', 'always"],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
