@@ -1,10 +1,17 @@
 import path from 'path';
 import { DESTINATION_DIR, servePort } from '../constants';
-import { execBashCode, makeCLIOptions } from '../tools';
+import {
+  execBashCodeSync,
+  execBashCodeControlled,
+  makeCLIOptions,
+  ExecResult,
+} from '../tools';
 
 export interface ServeOptions {
   showLogs: boolean;
   open: boolean;
+  port?: number;
+  sync?: boolean;
 }
 
 export class ParcelService {
@@ -17,14 +24,28 @@ export class ParcelService {
   constructor(private readonly rootDir: string) {
   }
 
-  serve({ showLogs, open }: ServeOptions) {
+  serve<F extends boolean, R = ExecResult<F>>(
+    passedOptions: ServeOptions,
+    async?: F,
+  ): R {
+    const {
+      showLogs,
+      open,
+      port,
+    } = passedOptions;
     const options = {
       ...this.baseOptions,
       open,
-      port: servePort,
+      port: port || servePort,
     };
 
-    this.run('serve', options, 'development', showLogs);
+    return this.run(
+      'serve',
+      options,
+      'development',
+      showLogs,
+      async,
+    );
   }
 
   build(showLogs = false) {
@@ -36,7 +57,13 @@ export class ParcelService {
     this.run('build', options, 'production', showLogs);
   }
 
-  private run(command: string, options: Record<string, any>, env = 'development', showLogs = false) {
+  private run<F extends boolean, R = ExecResult<F>>(
+    command: string,
+    options: Record<string, any>,
+    env = 'development',
+    showLogs = false,
+    async?: F,
+  ): R {
     const optionsString = makeCLIOptions(options);
     const source = ParcelService.escapePathSpaces(this.source);
     const commandWithOptions = `cross-env NODE_ENV=${env} npx parcel ${command} ${source} ${optionsString}`;
@@ -45,7 +72,9 @@ export class ParcelService {
       console.log(commandWithOptions);
     }
 
-    execBashCode(commandWithOptions, showLogs);
+    const execFn = async ? execBashCodeControlled : execBashCodeSync;
+
+    return execFn(commandWithOptions, showLogs) as any;
   };
 
   private static escapePathSpaces(path: string) {

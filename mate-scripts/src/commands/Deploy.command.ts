@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { BackstopService } from '../services';
 import { DESTINATION_DIR } from '../constants';
-import { execBashCode, execBashCodeAsync } from '../tools';
+import { execBashCodeSync, execBashCodeAsync } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
 
@@ -114,12 +114,12 @@ export class DeployCommand extends Command {
   }
 
   private commitBuild(showLogs: boolean) {
-    execBashCode(`git add ${this.destinationDir} -f`, showLogs);
-    execBashCode('git commit -m "make build" --no-verify', showLogs);
+    execBashCodeSync(`git add ${this.destinationDir} -f`, showLogs);
+    execBashCodeSync('git commit -m "make build" --no-verify', showLogs);
   }
 
   private runDeployBashScript(showLogs: boolean) {
-    execBashCode(
+    execBashCodeSync(
       `${this.shellRunner} ${this.deployScriptFile} ${DESTINATION_DIR}`,
       showLogs,
       this.rootDir

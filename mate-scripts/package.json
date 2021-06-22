@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.8.10",
+  "version": "0.9.1",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
@@ -41,9 +41,11 @@
   "license": "MIT",
   "homepage": "https://github.com/mate-academy/fed/mate-scripts#README.md",
   "dependencies": {
+    "@types/get-port": "^4.2.0",
     "commander": "^5.1.0",
     "cross-env": "^7.0.3",
     "fs-extra": "^9.1.0",
+    "get-port": "^5.1.1",
     "open": "^7.4.2"
   },
   "devDependencies": {

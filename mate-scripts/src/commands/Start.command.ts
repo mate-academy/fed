@@ -1,9 +1,12 @@
 import { JestService, ParcelService } from '../services';
 import { Command } from './Command';
+import { ChildProcess } from "child_process";
+import { ExecResult } from '../tools';
 
 export interface StartOptions {
   shouldShowInternalLogs: boolean;
   open: boolean;
+  port?: number;
 }
 
 export class StartCommand extends Command {
@@ -13,14 +16,18 @@ export class StartCommand extends Command {
   protected common() {
   }
 
-  protected layout = (options: StartOptions) => {
-    this.parcel.serve({
+  layout = <F extends boolean, R = ExecResult<F>>(
+    options: StartOptions,
+    async?: F,
+  ): R => {
+    return this.parcel.serve({
       showLogs: options.shouldShowInternalLogs,
       open: options.open,
-    });
+      port: options.port,
+    }, async);
   };
 
-  protected layoutDOM = (options: StartOptions) => {
+  layoutDOM = (options: StartOptions) => {
     this.layout(options);
   };
 

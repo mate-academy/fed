@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { execBashCodeSilent, makeCLIOptions } from '../tools';
+import { execBashCodeSilent, execBashCodeSync, makeCLIOptions } from '../tools';
 
 export class BackstopService {
   private static __instance: BackstopService;
@@ -25,12 +25,12 @@ export class BackstopService {
     return BackstopService.__instance;
   }
 
-  test() {
+  test(port = 8080) {
     if (fs.existsSync(this.configPath)) {
       this.ensureReferences();
       this.cleanTestResults();
 
-      this.run('test', { config: this.configPath });
+      this.run('test', { config: this.configPath, port });
     }
   }
 
@@ -62,9 +62,9 @@ export class BackstopService {
     fs.removeSync(this.referencesDir);
   }
 
-  private run(subCommand: string, options: Record<string, any>) {
+  private run(subCommand: string, { port, ...options }: Record<string, any>) {
     const optionsString = makeCLIOptions(options);
 
-    execBashCodeSilent(`${this.binDir}backstop ${subCommand} ${optionsString}`)
+    execBashCodeSync(`cross-env PORT=${port} ${this.binDir}backstop ${subCommand} ${optionsString}`)
   }
 }

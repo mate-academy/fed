@@ -1,9 +1,11 @@
 'use strict';
 
+const port = process.env.PORT || 8080;
+
 module.exports = {
   basicScenario: {
     label: '', // name of the test
-    url: 'http://localhost:8080/index.html',
+    url: `http://localhost:${port}/index.html`,
     referenceUrl: 'https://mate-academy.github.io/layout_solutions', // put here reference to github-pages with ready project
     readyEvent: '',
     readySelector: '',

@@ -1,6 +1,14 @@
-import { exec, execSync, ExecSyncOptions } from 'child_process';
+import { ChildProcess, exec, execSync, ExecSyncOptions } from 'child_process';
 
-export function execBashCode(bashCode: string, shouldBindStdout = true, cwd = process.cwd()) {
+export type ExecResult<F extends boolean> = F extends true
+  ? ChildProcess
+  : string;
+
+export function execBashCodeSync(
+  bashCode: string,
+  shouldBindStdout = true,
+  cwd = process.cwd(),
+): string {
   let options: ExecSyncOptions = {
     stdio: 'ignore',
   };
@@ -21,17 +29,9 @@ export function execBashCode(bashCode: string, shouldBindStdout = true, cwd = pr
 
 export function execBashCodeSilent(bashCode: string, shouldBindStdout = true) {
   try {
-    return execBashCode(bashCode, shouldBindStdout);
+    return execBashCodeSync(bashCode, shouldBindStdout);
   } catch (error) {
     process.exit(1);
-  }
-}
-
-export function execBashCodeSafely(bashCode: string, shouldBindStdout = true) {
-  try {
-    return execBashCode(bashCode, shouldBindStdout);
-  } catch (error) {
-    // do nothing
   }
 }
 
@@ -45,7 +45,10 @@ const defaultExecBashCodeAsyncParams = {
   cwd: process.cwd(),
 };
 
-export function execBashCodeAsync(bashCode: string, params: ExecBashCodeAsyncParams = defaultExecBashCodeAsyncParams): Promise<string> {
+export function execBashCodeAsync(
+  bashCode: string,
+  params: ExecBashCodeAsyncParams = defaultExecBashCodeAsyncParams,
+): Promise<string> {
   const {
     shouldBindStdout = true,
     cwd,
@@ -77,4 +80,29 @@ export function execBashCodeAsync(bashCode: string, params: ExecBashCodeAsyncPar
         : resolve(stdout);
     });
   }))
+}
+
+export function execBashCodeControlled(
+  bashCode: string,
+  shouldBindStdout = true,
+  cwd = process.cwd(),
+): ChildProcess {
+  const execOptions = { cwd };
+  const childProcess = exec(bashCode, execOptions);
+
+  if (shouldBindStdout) {
+    if (childProcess.stdout) {
+      childProcess.stdout.on('data', (data) => {
+        console.log(data);
+      });
+    }
+
+    if (childProcess.stderr) {
+      childProcess.stderr.on('data', (data) => {
+        console.error(data);
+      });
+    }
+  }
+
+  return childProcess;
 }
