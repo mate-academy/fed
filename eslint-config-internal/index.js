@@ -14,6 +14,7 @@ module.exports = {
   ],
   plugins: [
     "@typescript-eslint",
+    "ternary"
   ],
   rules: {
     // JS
