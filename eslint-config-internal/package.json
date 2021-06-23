@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-internal",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Eslint config for Mate academy developers based on airbnb with Typescript",
   "main": "index.js",
   "scripts": {
