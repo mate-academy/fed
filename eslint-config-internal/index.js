@@ -59,7 +59,7 @@ module.exports = {
       ],
       'newlines-between': 'ignore',
     }],
-    "multiline-ternary": ["error', 'always"],
+    "multiline-ternary": ["error", "always"],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
