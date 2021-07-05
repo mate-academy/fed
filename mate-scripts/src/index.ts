@@ -17,6 +17,7 @@ import {
   migrateController, testController,
 } from './controllers';
 import { startController } from './controllers/start.controller';
+import { buildController } from './controllers/build.controller';
 
 const program = new Commander();
 const commandFactory = new CommandFactory();
@@ -57,7 +58,7 @@ program
   .command('build')
   .description('create production ready build')
   .option('-l, --logs', 'show internal commands logs', false)
-  .action(commandFactory.make(BuildCommand));
+  .action(commandFactory.make(BuildCommand, buildController));
 
 program
   .command('deploy')

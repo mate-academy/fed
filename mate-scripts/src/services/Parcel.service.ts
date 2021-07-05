@@ -54,7 +54,7 @@ export class ParcelService {
       'public-url':  './',
     };
 
-    this.run('build', options, 'production', showLogs);
+    return this.run('build', options, 'production', showLogs);
   }
 
   private run<F extends boolean, R = ExecResult<F>>(
