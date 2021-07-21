@@ -60,6 +60,7 @@ module.exports = {
       'newlines-between': 'ignore',
     }],
     "multiline-ternary": ["error", "always"],
+    "ternary/no-unreachable": "off",
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
