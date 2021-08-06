@@ -15,6 +15,6 @@ Add this to your `tsconfig.json` file:
 
 ```
 {
-  "extends": "@mate-academy/ts-config"
+  "extends": "@mate-academy/students-ts-config"
 }
 ```
