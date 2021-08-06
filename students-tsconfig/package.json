@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/students-ts-config",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "tsconfig.json",
   "author": "Mate Academy",

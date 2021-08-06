@@ -6,15 +6,15 @@
 ## Install
 
 ```bash
-npm install --save-dev @mate-academy/students-ts-config
+npm install @mate-academy/students-ts-config
 ```
 
 ## Usage
 
-Add this to your `.tsconfig` file:
+Add this to your `tsconfig.json` file:
 
 ```
 {
-  extends: "@mate-academy/students-ts-config"
+  "extends": "@mate-academy/ts-config"
 }
 ```
