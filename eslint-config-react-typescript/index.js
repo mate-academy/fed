@@ -25,7 +25,8 @@ module.exports = {
   ],
   rules: {
     // JS
-    semi: [2, 'always'],
+    'semi': 'off',
+    '@typescript-eslint/semi': ['error', 'always'],
     'prefer-const': 2,
     curly: [2, 'all'],
     'no-redeclare': [2, { builtinGlobals: true }],
