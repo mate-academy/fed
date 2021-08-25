@@ -48,7 +48,8 @@ module.exports = {
     "arrow-parens": ["error", "always"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-console": ["error"],
-    "semi": ["error", "always"],
+    "semi": "off",
+    "@typescript-eslint/semi": ["error", "always"],
     "import/order": ["error", {
       "groups": [
         'builtin',
@@ -72,5 +73,6 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'ternary/no-unreachable': 'off',
   },
 };
