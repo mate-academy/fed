@@ -61,6 +61,7 @@ module.exports = {
     }],
     "multiline-ternary": ["error", "always"],
     "ternary/no-unreachable": "off",
+    "no-use-before-define": ["error", { "functions": true }],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
