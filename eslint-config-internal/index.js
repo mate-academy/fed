@@ -33,6 +33,7 @@ module.exports = {
       {"blankLine": "always", "prev": "block-like", "next": "*"},
     ],
     "no-underscore-dangle": ["error", { "allow": [ "__resolveType" ] }],
+    "no-use-before-define": "off",
     "no-useless-constructor": "off",
     "global-require": "off",
     "import/no-dynamic-require": "off",
