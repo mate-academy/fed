@@ -62,7 +62,6 @@ module.exports = {
     }],
     "multiline-ternary": ["error", "always"],
     "ternary/no-unreachable": "off",
-    "no-use-before-define": ["error", { "functions": true }],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -75,5 +74,11 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    "@typescript-eslint/no-use-before-define": ["error", {
+      "functions": false,
+      "classes": false,
+      "typedefs": false,
+      "enums": false,
+    }]
   },
 };
