@@ -50,14 +50,19 @@ module.exports = {
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-console": ["error"],
     "semi": ["error", "always"],
-    "import/order": ["error", {
-      "groups": [
+    'import/order': ['error', {
+      groups: [
         'builtin',
         'external',
         'internal',
         ['parent', 'sibling'],
         'index',
       ],
+      pathGroups: [{
+        pattern: '@*/**',
+        group: 'internal',
+        position: 'before',
+      }],
       'newlines-between': 'ignore',
     }],
     "multiline-ternary": ["error", "always"],
