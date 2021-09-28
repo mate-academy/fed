@@ -1,4 +1,4 @@
-import { JestService, ParcelService } from '../services';
+import { JestService, ParcelService, ReactScriptsService } from '../services';
 import { Command } from './Command';
 import { ChildProcess } from "child_process";
 import { ExecResult } from '../tools';
@@ -12,6 +12,7 @@ export interface StartOptions {
 export class StartCommand extends Command {
   parcel = new ParcelService(this.rootDir);
   private readonly jest = new JestService();
+  private readonly reactScripts = new ReactScriptsService();
 
   protected common() {
   }
@@ -30,6 +31,15 @@ export class StartCommand extends Command {
   layoutDOM = (options: StartOptions) => {
     this.layout(options);
   };
+
+  react = () => {
+    this.reactScripts.start();
+  }
+
+  reactTypescript = () => {
+    this.reactScripts.start();
+  }
+
 
   protected javascript = () => {
     this.jest.watch();

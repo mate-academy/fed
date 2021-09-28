@@ -34,11 +34,24 @@ export class LintCommand extends Command {
     javascript && this.lintJs(files);
   };
 
+  protected react = (options: LintOptions) => {
+    const { javascript, styles, files } = options;
+
+    styles && this.lintStyles(files);
+    javascript && this.lintJs(files);
+  };
+
+  protected reactTypescript = (options: LintOptions) => {
+    const { javascript, styles, files } = options;
+
+    styles && this.lintStyles(files);
+    javascript && this.lintJs(files);
+  };
+
   private lintHtml(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
       : './src/**/*.html';
-
 
     execBashCodeSilent(`${this.binDir}linthtml ${filesToLint}`);
   }
@@ -64,6 +77,8 @@ export class LintCommand extends Command {
       ? files.join(' ')
       : './src';
 
-    execBashCodeSilent(`${this.binDir}eslint ${filesToLint}`);
+    execBashCodeSilent(
+      `${this.binDir}eslint --ext .ts,.tsx,.js,.jsx ${filesToLint} --fix`,
+    );
   }
 }

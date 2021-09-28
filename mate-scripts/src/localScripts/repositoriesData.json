@@ -110,5 +110,7 @@
     "react_phone-catalog"
   ],
   "typescript": [],
-  "reactTypescript": []
+  "reactTypescript": [
+    "react_sum"
+  ]
 }

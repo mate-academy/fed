@@ -32,11 +32,11 @@ export class ReposUpdater {
 
   constructor(private readonly options: UpdateReposOptions) {
     this.octokit = new Octokit({
-      auth: githubToken
+      auth: githubToken,
     });
   }
 
-   updateRepos = async () => {
+  updateRepos = async () => {
     const reposToUpdate = this.getReposToUpdate();
     const reposChunks = reposToUpdate.reduce((chunks, repo, index) => {
       if ((index % this.options.chunkSize) === 0) {
@@ -179,7 +179,7 @@ ${chunk.join('\n')}`);
     try {
       console.log('Clean up repo folder: ', repoDir);
 
-      await execInTmp(`rm -rf ${repoDir}`)
+      await execInTmp(`rm -rf ${repoDir}`);
     } catch (error) {
       // do nothing
     }
@@ -189,7 +189,7 @@ ${chunk.join('\n')}`);
     await execInTmp(`git clone ${repoSSHUrl} ${repoDir}`);
     await execInRepo(`git checkout -b ${prBranch}`);
 
-    for (let command of commands) {
+    for (const command of commands) {
       console.log(`Execute command '${command}' in repo '${repo}'`);
 
       await execInRepo(command);

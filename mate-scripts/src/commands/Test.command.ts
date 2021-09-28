@@ -56,6 +56,14 @@ export class TestCommand extends Command {
     this.cypress.run(options);
   };
 
+  protected react = (options: TestOptions) => {
+    this.cypress.run(options);
+  };
+
+  protected reactTypescript = (options: TestOptions) => {
+    this.cypress.run(options);
+  };
+
   protected javascript = () => {
     this.jest.once();
   };
