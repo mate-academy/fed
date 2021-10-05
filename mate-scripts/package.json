@@ -1,13 +1,13 @@
 {
   "name": "@mate-academy/scripts",
-  "version": "0.9.1",
+  "version": "0.9.3",
   "description": "Scripts to init, run, test, deploy Mate academy homework projects",
   "main": "bin/mateScripts.js",
   "scripts": {
     "start": "rollup -w -c",
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./bin && rollup -c && ./shebangify.js && chmod +x ./bin/mateScripts.js",
+    "build": "rm -rf ./bin && rollup -c && node ./shebangify.js && chmod +x ./bin/mateScripts.js",
     "prepublishOnly": "npm run build",
     "postpublish": "rm -rf ./bin",
     "patch": "npm version patch && npm publish",
@@ -61,6 +61,7 @@
     "eslint-plugin-node": "^11.1.0",
     "jest": "^26.6.3",
     "jest-sinon": "^1.0.4",
+    "react-scripts": "4.0.3",
     "rollup": "^2.41.4",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",

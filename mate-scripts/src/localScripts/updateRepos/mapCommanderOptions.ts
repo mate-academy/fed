@@ -8,7 +8,7 @@ export function mapCommanderOptions(commanderOptions: CommanderOptions): UpdateR
     types: projectTypes,
     include: includedProjects,
     exclude: excludedProjects,
-    merge:  shouldMerge,
+    merge: shouldMerge,
     silent: isSilent,
     chunkSize,
     mergeOnly,

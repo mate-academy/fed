@@ -1,7 +1,7 @@
 import fs from 'fs-extra';
 import path from 'path';
 import { DESTINATION_DIR } from '../constants';
-import { ParcelService } from '../services';
+import { ParcelService, ReactScriptsService } from '../services';
 import { Command } from './Command';
 
 export interface BuildOptions {
@@ -11,8 +11,9 @@ export interface BuildOptions {
 export class BuildCommand extends Command {
   private readonly parcel = new ParcelService(this.rootDir);
 
-  protected common() {
-  }
+  private reactScripts = new ReactScriptsService();
+
+  protected common() {}
 
   protected layout = (options: BuildOptions) => {
     fs.removeSync(path.join(this.rootDir, DESTINATION_DIR));
@@ -22,5 +23,13 @@ export class BuildCommand extends Command {
 
   protected layoutDOM = (options: BuildOptions) => {
     this.layout(options);
-  }
+  };
+
+  protected react = () => {
+    this.reactScripts.build();
+  };
+
+  protected reactTypescript = () => {
+    this.reactScripts.build();
+  };
 }
