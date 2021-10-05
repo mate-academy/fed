@@ -29,7 +29,7 @@ export function getCommander(argv: string[]) {
     .option('--chunk-size <number>', 'Number of repos to process in parallel', parseInteger, 10)
     .option('--merge-only', 'Merge previously created repos', false);
 
-    commander.parse(argv);
+  commander.parse(argv);
 
   return commander;
 }
