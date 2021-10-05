@@ -44,6 +44,7 @@ export class TestCommand extends Command {
 
       try {
         this.backstop.test(freePort);
+        this.jest.once();
         childProcess.kill('SIGTERM');
       } catch {
         childProcess.kill('SIGTERM');
@@ -53,6 +54,7 @@ export class TestCommand extends Command {
   };
 
   protected layoutDOM = (options: TestOptions) => {
+    this.jest.once();
     this.cypress.run(options);
   };
 
