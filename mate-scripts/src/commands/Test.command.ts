@@ -54,7 +54,6 @@ export class TestCommand extends Command {
   };
 
   protected layoutDOM = (options: TestOptions) => {
-    this.jest.once();
     this.cypress.run(options);
   };
 
