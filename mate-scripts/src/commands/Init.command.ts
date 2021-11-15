@@ -45,6 +45,16 @@ export class InitCommand extends Command {
     this.initGitHooks(ProjectTypes.Javascript);
   };
 
+  protected react = () => {
+    this.copyProjectTypeSpecificConfigs(ProjectTypes.React);
+    this.initGitHooks(ProjectTypes.React);
+  };
+
+  protected reactTypescript = () => {
+    this.copyProjectTypeSpecificConfigs(ProjectTypes.ReactTypescript);
+    this.initGitHooks(ProjectTypes.ReactTypescript);
+  };
+
   private copyCommonConfigs() {
     const commonConfigsDir = path.join(InitCommand.configsDir, 'common');
 
