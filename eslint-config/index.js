@@ -14,7 +14,8 @@ module.exports = {
   "rules": {
     "max-len": ["error", {
       "code": 80,
-      "comments": 80
+      "comments": 80,
+      "ignoreTemplateLiterals": true,
     }],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
