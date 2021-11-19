@@ -46,6 +46,7 @@ export class TestCommand extends Command {
         this.backstop.test(freePort);
         this.jest.once();
         childProcess.kill('SIGTERM');
+        process.exit(0);
       } catch {
         childProcess.kill('SIGTERM');
         process.exit(1);

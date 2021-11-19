@@ -16,6 +16,6 @@ export interface Linters {
 }
 
 export interface Config {
-  projectType: ProjectTypes,
-  linters: Linters,
+  projectType: ProjectTypes;
+  linters: Linters;
 }
