@@ -1,3 +1,7 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
+
 import fs from 'fs-extra';
 import path from 'path';
 import { Octokit } from '@octokit/rest';
@@ -53,7 +57,7 @@ export class ReposUpdater {
       ? this.mergePR
       : this.tryToUpdateRepo;
 
-    for (let i = 0; i < reposChunks.length; i++) {
+    for (let i = 0; i < reposChunks.length; i += 1) {
       const chunk = reposChunks[i];
 
       console.log(`Processing chunk ${i}
@@ -97,7 +101,7 @@ ${chunk.join('\n')}`);
     try {
       return await this.updateRepo(repo);
     } catch (error) {
-      return await ReposUpdater.catchUpdateRepoError(repo, error);
+      return await ReposUpdater.catchUpdateRepoError(repo, error as any);
     } finally {
       await ReposUpdater.cleanUpAfterUpdateRepo(repo);
     }
@@ -144,7 +148,7 @@ ${chunk.join('\n')}`);
         return {
           [repo]: pr.html_url,
         };
-      } catch (error) {
+      } catch (errors) {
         return {
           [repo]: false,
           message: 'Cannot merge PR',
@@ -158,7 +162,9 @@ ${chunk.join('\n')}`);
     };
   };
 
-  private execInDir = (cwd: string) => (command: string) => execBashCodeAsync(command, {
+  private execInDir = (
+    cwd: string,
+  ) => (command: string) => execBashCodeAsync(command, {
     shouldBindStdout: !this.options.isSilent, cwd,
   });
 
@@ -212,7 +218,10 @@ ${chunk.join('\n')}`);
 
       pr = data;
     } catch (error) {
-      console.log(`Repo: ${repo}`, error.errors[0].message);
+      const firstError: any = (error as any)?.errors?.[0];
+
+      console.log(`Repo: ${repo}`, firstError?.message);
+      console.log(`Repo: ${error}`);
       console.log('Will try to merge existing PR', repo);
 
       const { data } = await this.octokit.pulls.list({
@@ -224,7 +233,7 @@ ${chunk.join('\n')}`);
         direction: 'desc',
       });
 
-      pr = data[0];
+      [pr] = data;
 
       if (pr.head.ref !== prBranch) {
         throw error;
@@ -271,7 +280,8 @@ in repo ${repo}`);
     try {
       await fs.remove(repoDir);
     } catch (error) {
-      // NOTE: do nothing, failing here means updateRepo fails before create folder(before clone repo)
+      // NOTE: do nothing, failing here means updateRepo
+      // fails before create folder(before clone repo)
     }
   }
 }

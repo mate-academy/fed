@@ -98,5 +98,20 @@
   "layout_catalog",
   "layout_calendar",
   "layout_stop-watch",
-  "layout_antisnake"
+  "layout_antisnake",
+  "layout_stars",
+  "layout_catalog_grid",
+  "layout_catalog_hovers",
+  "layout_dia",
+  "layout_miami",
+  "layout_hello-world",
+  "layout_creativeBakery",
+  "layout_KateVR",
+  "layout_listing-details-airbnb",
+  "layout_enclosures",
+  "layout_human-rights",
+  "layout_style-it-up",
+  "layout_colored-blocks",
+  "layout_grid",
+  "layout_catalog-grid"
 ]
