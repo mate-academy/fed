@@ -43,8 +43,8 @@ export class TestCommand extends Command {
       testsStarted = true;
 
       try {
-        this.backstop.test(freePort);
         this.jest.once();
+        this.backstop.test(freePort);
         childProcess.kill('SIGTERM');
         process.exit(0);
       } catch {
