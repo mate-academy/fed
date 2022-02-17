@@ -14,7 +14,8 @@
     "minor": "npm version minor && npm publish",
     "major": "npm version major && npm publish",
     "updateRepos": "ts-node-dev --project ./tsconfig.localScripts.json ./src/localScripts/updateRepos/index.ts",
-    "getRepos": "ts-node-dev --project ./tsconfig.localScripts.json ./src/localScripts/getRepos.ts"
+    "getRepos": "ts-node-dev --project ./tsconfig.localScripts.json ./src/localScripts/getRepos.ts",
+    "redeliever": "ts-node-dev --project ./tsconfig.localScripts.json ./src/localScripts/redelieverFailedWebHooks/main.ts"
   },
   "repository": {
     "type": "git",
