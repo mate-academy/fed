@@ -1,7 +1,9 @@
 import { CommanderOptions } from './getCommander';
 import { UpdateReposOptions } from './ReposUpdater';
 
-export function mapCommanderOptions(commanderOptions: CommanderOptions): UpdateReposOptions {
+export function mapCommanderOptions(
+  commanderOptions: CommanderOptions,
+): UpdateReposOptions {
   const {
     scripts: commands,
     message,

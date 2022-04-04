@@ -1,7 +1,7 @@
-import fs from 'fs-extra';
 import path from 'path';
-import { execBashCodeAsync } from '../tools';
+import fs from 'fs-extra';
 import open from 'open';
+import { execBashCodeAsync } from '../tools';
 
 interface RunOptions {
   showLogs?: boolean;
@@ -67,10 +67,10 @@ export class CypressService {
   private processOptions(options: RunOptions = {}) {
     const {
       showLogs = false,
-      open = true,
+      open: shouldOpen = true,
     } = options;
 
-    this.shouldOpen = open;
+    this.shouldOpen = shouldOpen;
     this.shouldShowLogs = showLogs;
   }
 
@@ -136,7 +136,7 @@ export class CypressService {
 
     await execBashCodeAsync(
       `${this.binDir}mochawesome-merge "${partsGlob}" > ${this.mergedReport}`,
-      { shouldBindStdout: this.shouldShowLogs }
+      { shouldBindStdout: this.shouldShowLogs },
     );
   }
 

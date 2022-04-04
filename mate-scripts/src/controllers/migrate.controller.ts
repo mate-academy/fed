@@ -1,9 +1,10 @@
 import { MigrateOptions } from '../commands';
 import { ProjectTypes } from '../typedefs';
-import { Controller } from './Controller.js';
+import { Controller } from './Controller';
 
-export const migrateController: Controller<MigrateOptions> = (command, projectType: ProjectTypes) => {
-  return {
-    projectType,
-  };
-};
+export const migrateController: Controller<MigrateOptions> = (
+  command,
+  projectType: ProjectTypes,
+) => ({
+  projectType,
+});

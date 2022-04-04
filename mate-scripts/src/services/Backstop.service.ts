@@ -1,9 +1,9 @@
-import fs from 'fs-extra';
 import path from 'path';
-import { execBashCodeSilent, execBashCodeSync, makeCLIOptions } from '../tools';
+import fs from 'fs-extra';
+import { execBashCodeSync, makeCLIOptions } from '../tools';
 
 export class BackstopService {
-  private static __instance: BackstopService;
+  private static instance: BackstopService;
 
   private readonly configPath = path.join(this.rootDir, './backstopConfig.js');
 
@@ -18,11 +18,11 @@ export class BackstopService {
   readonly reportDir = this.dataDir;
 
   constructor(private readonly rootDir: string) {
-    if (!BackstopService.__instance) {
-      BackstopService.__instance = this;
+    if (!BackstopService.instance) {
+      BackstopService.instance = this;
     }
 
-    return BackstopService.__instance;
+    return BackstopService.instance;
   }
 
   test(port = 8080) {
@@ -65,6 +65,6 @@ export class BackstopService {
   private run(subCommand: string, { port, ...options }: Record<string, any>) {
     const optionsString = makeCLIOptions(options);
 
-    execBashCodeSync(`cross-env PORT=${port} ${this.binDir}backstop ${subCommand} ${optionsString}`)
+    execBashCodeSync(`cross-env PORT=${port} ${this.binDir}backstop ${subCommand} ${optionsString}`);
   }
 }

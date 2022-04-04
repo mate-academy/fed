@@ -48,10 +48,11 @@
     "get-port": "^5.1.1",
     "@octokit/rest": "^17.11.2",
     "dotenv": "^8.6.0",
-    "open": "^7.4.2"
+    "open": "^7.4.2",
+    "sinon": "^9.2.4"
   },
   "devDependencies": {
-    "@mate-academy/eslint-config-react-typescript": "0.0.4",
+    "@mate-academy/eslint-config-internal": "^1.0.3",
     "@rollup/plugin-json": "^4.1.0",
     "@types/commander": "^2.12.2",
     "@types/dotenv": "^8.2.0",
@@ -59,14 +60,12 @@
     "@types/jest": "^26.0.20",
     "@types/node": "^14.14.35",
     "@types/sinon": "^9.0.10",
-    "eslint-plugin-node": "^11.1.0",
     "jest": "^26.6.3",
     "jest-sinon": "^1.0.4",
     "react-scripts": "4.0.3",
     "rollup": "^2.41.4",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.27.3",
-    "sinon": "^9.2.4",
     "ts-jest": "^26.5.3",
     "ts-node-dev": "^1.1.6",
     "typescript": "^3.9.9"

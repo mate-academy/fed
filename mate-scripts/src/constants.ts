@@ -1,4 +1,4 @@
-import { Config, Linters, ProjectTypes } from './typedefs';
+import { Linters } from './typedefs';
 
 export const DESTINATION_DIR = 'dist';
 

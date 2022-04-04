@@ -1,7 +1,6 @@
 import path from 'path';
 import sinon, { SinonSandbox } from 'sinon';
 import { StartCommand } from './Start.command';
-import { ParcelService } from '../services';
 
 describe('Start Command', () => {
   let sandbox: SinonSandbox;

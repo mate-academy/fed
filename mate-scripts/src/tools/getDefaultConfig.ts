@@ -3,16 +3,14 @@ import { Config, Linters, ProjectTypes } from '../typedefs';
 
 export const getDefaultConfig = (
   projectType = ProjectTypes.None,
-): Config => {
-  return {
-    projectType,
-    linters: {
-      ...getDefaultLintersConfig(projectType),
-    }
-  };
-}
+): Config => ({
+  projectType,
+  linters: {
+    ...getDefaultLintersConfig(projectType),
+  },
+});
 
-function getDefaultLintersConfig (projectType: ProjectTypes): Linters {
+function getDefaultLintersConfig(projectType: ProjectTypes): Linters {
   switch (projectType) {
     case ProjectTypes.Layout:
       return defaultLintersConfig;
@@ -41,6 +39,7 @@ function getDefaultLintersConfig (projectType: ProjectTypes): Linters {
         ...defaultLintersConfig,
         bem: false,
       };
+    default:
     case ProjectTypes.None:
       return defaultLintersConfig;
   }

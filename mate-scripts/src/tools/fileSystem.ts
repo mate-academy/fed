@@ -24,7 +24,7 @@ export function getRootDir() {
       folderContent = fs.readdirSync(rootDir);
     }
   } catch (error) {
-    console.error(error.message);
+    console.error((error as any)?.message);
 
     rootDir = process.cwd();
   }
@@ -83,6 +83,6 @@ export function getConfig(rootDir: string): Config {
     linters: {
       ...defaultConfig.linters,
       ...linters,
-    }
+    },
   };
 }

@@ -1,5 +1,9 @@
 import { Command as Commander } from 'commander';
 
-export interface Controller<O extends {}> {
+type AnyObject = {
+  [key: string]: any;
+}
+
+export interface Controller<O extends AnyObject> {
   (command: Commander, ...args: any[]): O;
 }

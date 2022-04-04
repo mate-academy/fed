@@ -1,13 +1,13 @@
-import { Octokit } from '@octokit/rest';
-import fs from 'fs-extra';
 import path from 'path';
+// import { Octokit } from '@octokit/rest';
+import fs from 'fs-extra';
 import { config } from 'dotenv';
 import repos from './repoNamesFromDb.json';
 
 config();
 
-const githubToken = process.env.GITHUB_TOKEN;
-const orgName = 'mate-academy';
+// const githubToken = process.env.GITHUB_TOKEN;
+// const orgName = 'mate-academy';
 
 export async function getRepos() {
   // const octokit = new Octokit({
