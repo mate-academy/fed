@@ -39,13 +39,13 @@ const defaultInstallOptions: InstallOptions = {
 };
 
 export class NPMPackageService {
-  private _versions: PackageVersions | undefined;
+  private privateVersions: PackageVersions | undefined;
 
   constructor(private packageName: string) {}
 
   async ensure(
     {
-      envs= defaultUpdateOptions.envs as Environments,
+      envs = defaultUpdateOptions.envs as Environments,
       silent = defaultUpdateOptions.silent as boolean,
     }: UpdateOptions = defaultUpdateOptions,
   ) {
@@ -62,7 +62,7 @@ export class NPMPackageService {
 
   async update(
     {
-      envs= defaultUpdateOptions.envs as Environments,
+      envs = defaultUpdateOptions.envs as Environments,
       silent = defaultUpdateOptions.silent as boolean,
     }: UpdateOptions = defaultUpdateOptions,
   ) {
@@ -88,20 +88,27 @@ export class NPMPackageService {
 
     if (!versionToInstall) {
       const versions = await this.getVersions();
+
       versionToInstall = versions.available.versionString;
     }
 
     if (!silent) {
       const versions = await this.getVersions();
-      const targetVersion = versions[isGlobal ? 'global' : 'local'];
+      const targetVersion = versions[isGlobal
+        ? 'global'
+        : 'local'];
 
       console.log(
-        `Update ${isGlobal ? 'global' : 'local'} ${this.packageName} from ${targetVersion?.versionString || '"none"'} to ${versions.available.versionString}`
+        `Update ${isGlobal
+          ? 'global'
+          : 'local'} ${this.packageName} from ${targetVersion?.versionString || '"none"'} to ${versions.available.versionString}`,
       );
     }
 
     await execBashCodeAsync(
-      `npm i ${isGlobal ? '-g' : ''} ${this.packageName}@${versionToInstall}`,
+      `npm i ${isGlobal
+        ? '-g'
+        : ''} ${this.packageName}@${versionToInstall}`,
       {
         shouldBindStdout: false,
       },
@@ -109,11 +116,11 @@ export class NPMPackageService {
   }
 
   async getVersions(): Promise<PackageVersions> {
-    if (!this._versions) {
+    if (!this.privateVersions) {
       await this.setVersions();
     }
 
-    return this._versions as PackageVersions;
+    return this.privateVersions as PackageVersions;
   }
 
   async setVersions() {
@@ -127,7 +134,7 @@ export class NPMPackageService {
       this.getLocalVersion(),
     ]);
 
-    this._versions = {
+    this.privateVersions = {
       available: availableVersion,
       global: globalVersion,
       local: localVersion,
@@ -150,10 +157,15 @@ export class NPMPackageService {
     return this.getInstalledVersion();
   }
 
-  private async getInstalledVersion(global = false, deps = 0): Promise<Semver | null> {
+  private async getInstalledVersion(
+    global = false,
+    deps = 0,
+  ): Promise<Semver | null> {
     try {
       const versionList = await execBashCodeAsync(
-        `npm ls ${global ? '-g' : ''} --deps=${deps} ${this.packageName} version`,
+        `npm ls ${global
+          ? '-g'
+          : ''} --deps=${deps} ${this.packageName} version`,
       );
 
       return Semver.fromVersionList(versionList);

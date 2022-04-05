@@ -2,8 +2,8 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 
-import fs from 'fs-extra';
 import path from 'path';
+import fs from 'fs-extra';
 import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 import { repositories } from '../repositories';

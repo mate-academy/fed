@@ -1,5 +1,5 @@
-import fs from 'fs-extra';
 import path from 'path';
+import fs from 'fs-extra';
 import { NPMPackageService } from '../services';
 import { ProjectTypes } from '../typedefs';
 import { Command } from './Command';
@@ -85,7 +85,10 @@ export class InitCommand extends Command {
 
   private initGitHook(hooksDir: string, hookName: string) {
     const sourceHookFile = path.join(hooksDir, hookName);
-    const destinationHookFile = path.join(this.gitHooksDestinationDir, hookName);
+    const destinationHookFile = path.join(
+      this.gitHooksDestinationDir,
+      hookName,
+    );
 
     fs.copySync(sourceHookFile, destinationHookFile);
 

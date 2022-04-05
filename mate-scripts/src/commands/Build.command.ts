@@ -1,5 +1,5 @@
-import fs from 'fs-extra';
 import path from 'path';
+import fs from 'fs-extra';
 import { DESTINATION_DIR } from '../constants';
 import { ParcelService, ReactScriptsService } from '../services';
 import { Command } from './Command';
@@ -13,7 +13,9 @@ export class BuildCommand extends Command {
 
   private reactScripts = new ReactScriptsService();
 
-  protected common() {}
+  protected common(): void {
+    // do nothing
+  }
 
   protected layout = (options: BuildOptions) => {
     fs.removeSync(path.join(this.rootDir, DESTINATION_DIR));

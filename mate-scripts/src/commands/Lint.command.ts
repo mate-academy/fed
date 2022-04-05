@@ -4,24 +4,34 @@ import { Command } from './Command';
 
 export type LintOptions = Linters & {
   files: string[] | null;
-}
+};
 
 export class LintCommand extends Command {
-  constructor(rootDir: string) {
-    super(rootDir);
-  }
-
-  protected common(options: LintOptions) {
+  protected common(): void {
+    // do nothing
   }
 
   protected layout = (options: LintOptions) => {
-    const { html, bem, files, styles, javascript } = options;
+    const {
+      html, bem, files, styles, javascript,
+    } = options;
     const { linters } = this.config;
 
-    html && linters.html && this.lintHtml(files);
-    bem && linters.bem && this.lintBem(files);
-    styles && linters.styles && this.lintStyles(files);
-    javascript && linters.javascript && this.lintJs(files);
+    if (html && linters.html) {
+      this.lintHtml(files);
+    }
+
+    if (bem && linters.bem) {
+      this.lintBem(files);
+    }
+
+    if (styles && linters.styles) {
+      this.lintStyles(files);
+    }
+
+    if (javascript && linters.javascript) {
+      this.lintJs(files);
+    }
   };
 
   protected layoutDOM = (options: LintOptions) => {
@@ -31,21 +41,33 @@ export class LintCommand extends Command {
   protected javascript = (options: LintOptions) => {
     const { javascript, files } = options;
 
-    javascript && this.lintJs(files);
+    if (javascript) {
+      this.lintJs(files);
+    }
   };
 
   protected react = (options: LintOptions) => {
     const { javascript, styles, files } = options;
 
-    styles && this.lintStyles(files);
-    javascript && this.lintJs(files);
+    if (styles) {
+      this.lintStyles(files);
+    }
+
+    if (javascript) {
+      this.lintJs(files);
+    }
   };
 
   protected reactTypescript = (options: LintOptions) => {
     const { javascript, styles, files } = options;
 
-    styles && this.lintStyles(files);
-    javascript && this.lintJs(files);
+    if (styles) {
+      this.lintStyles(files);
+    }
+
+    if (javascript) {
+      this.lintJs(files);
+    }
   };
 
   private lintHtml(files: LintOptions['files']) {

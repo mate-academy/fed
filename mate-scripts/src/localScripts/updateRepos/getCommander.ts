@@ -39,5 +39,5 @@ function parseCommaSeparatedList(value: string) {
 }
 
 function parseInteger(value: string) {
-  return Number.parseInt(value);
+  return Number.parseInt(value, 10);
 }

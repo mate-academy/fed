@@ -34,15 +34,25 @@ export class Semver {
 
     if (this.major > version.major) {
       return true;
-    } else if (this.major < version.major) {
+    }
+
+    if (this.major < version.major) {
       return false;
-    } else if (this.minor > version.minor) {
+    }
+
+    if (this.minor > version.minor) {
       return true;
-    } else if (this.minor < version.minor) {
+    }
+
+    if (this.minor < version.minor) {
       return false;
-    } else if (this.patch > version.patch) {
+    }
+
+    if (this.patch > version.patch) {
       return true;
-    } else if (this.patch < version.patch) {
+    }
+
+    if (this.patch < version.patch) {
       return false;
     }
 

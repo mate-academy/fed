@@ -1,10 +1,7 @@
 import path from 'path';
 import { DESTINATION_DIR, servePort } from '../constants';
 import {
-  execBashCodeSync,
-  execBashCodeControlled,
-  makeCLIOptions,
-  ExecResult,
+  execBashCodeControlled, execBashCodeSync, ExecResult, makeCLIOptions,
 } from '../tools';
 
 export interface ServeOptions {
@@ -51,7 +48,7 @@ export class ParcelService {
   build(showLogs = false) {
     const options = {
       ...this.baseOptions,
-      'public-url':  './',
+      'public-url': './',
     };
 
     return this.run('build', options, 'production', showLogs);
@@ -72,12 +69,14 @@ export class ParcelService {
       console.log(commandWithOptions);
     }
 
-    const execFn = async ? execBashCodeControlled : execBashCodeSync;
+    const execFn = async
+      ? execBashCodeControlled
+      : execBashCodeSync;
 
     return execFn(commandWithOptions, showLogs) as any;
-  };
+  }
 
-  private static escapePathSpaces(path: string) {
-    return path.replace(' ', '\\ ');
+  private static escapePathSpaces(pathToEscape: string) {
+    return pathToEscape.replace(' ', '\\ ');
   }
 }

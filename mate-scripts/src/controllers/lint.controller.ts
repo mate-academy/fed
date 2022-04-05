@@ -1,7 +1,10 @@
 import { LintOptions } from '../commands';
 import { Controller } from './Controller';
 
-export const lintController: Controller<LintOptions> = (command, files: string[]) => {
+export const lintController: Controller<LintOptions> = (
+  command,
+  files: string[],
+) => {
   const {
     styles,
     html,
@@ -23,5 +26,7 @@ export const lintController: Controller<LintOptions> = (command, files: string[]
     };
   }
 
-  return { styles, html, bem, javascript, files: ensuredFiles };
+  return {
+    styles, html, bem, javascript, files: ensuredFiles,
+  };
 };

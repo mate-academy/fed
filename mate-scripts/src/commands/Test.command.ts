@@ -3,7 +3,6 @@ import { BackstopService, JestService } from '../services';
 import { Command } from './Command';
 import { CypressService } from '../services/Cypress.service';
 import { StartCommand } from './Start.command';
-import { ProjectTypes } from '../typedefs';
 
 export interface TestOptions {
   open: boolean;
@@ -12,11 +11,15 @@ export interface TestOptions {
 
 export class TestCommand extends Command {
   private readonly backstop = new BackstopService(this.rootDir);
+
   private readonly jest = new JestService();
+
   private readonly cypress = new CypressService(this.rootDir);
+
   private readonly startCommand = this.child(StartCommand);
 
   protected common(): void {
+    // do nothing
   }
 
   protected layout = async ({ showLogs }: TestOptions) => {

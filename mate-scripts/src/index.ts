@@ -71,7 +71,6 @@ program
   .description('update @mate-academy/scripts')
   .action(commandFactory.make(UpdateCommand));
 
-
 program
   .command('migrate <type>')
   .description('(global) migrate project to @mate-academy/scripts')

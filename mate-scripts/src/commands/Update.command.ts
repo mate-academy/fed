@@ -1,6 +1,6 @@
 import { name } from '../../package.json';
 import { NPMPackageService } from '../services';
-import { execBashCodeSync } from '../tools';
+import { emptyFn, execBashCodeSync } from '../tools';
 import { Command } from './Command';
 
 export class UpdateCommand extends Command {
@@ -11,6 +11,7 @@ export class UpdateCommand extends Command {
 
     this.mateScriptsPackageService = new NPMPackageService(name);
   }
+
   async common() {
     await this.updateMateScriptsVersions();
 
@@ -27,13 +28,13 @@ export class UpdateCommand extends Command {
     });
   }
 
-  protected layout = () => {};
+  protected layout = emptyFn;
 
-  protected layoutDOM = () => {};
+  protected layoutDOM = emptyFn;
 
-  protected javascript = () => {};
+  protected javascript = emptyFn;
 
-  protected react = () => {};
+  protected react = emptyFn;
 
-  protected reactTypescript = () => {};
+  protected reactTypescript = emptyFn;
 }
