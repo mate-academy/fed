@@ -11,7 +11,7 @@ export interface BuildOptions {
 export class BuildCommand extends Command {
   private readonly parcel = new ParcelService(this.rootDir);
 
-  private reactScripts = new ReactScriptsService();
+  private reactScripts = new ReactScriptsService(this.rootDir);
 
   protected common(): void {
     // do nothing
@@ -27,11 +27,15 @@ export class BuildCommand extends Command {
     this.layout(options);
   };
 
-  protected react = () => {
-    this.reactScripts.build();
+  protected react = (options: BuildOptions) => {
+    if (options.shouldShowInternalLogs) {
+      console.log('START react-scripts build');
+    }
+
+    this.reactScripts.build(DESTINATION_DIR, options.shouldShowInternalLogs);
   };
 
-  protected reactTypescript = () => {
-    this.reactScripts.build();
+  protected reactTypescript = (options: BuildOptions) => {
+    this.react(options);
   };
 }

@@ -5,12 +5,15 @@ import { DESTINATION_DIR } from '../constants';
 import { execBashCodeAsync, execBashCodeSync } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
+import { GitHubPagesService } from '../services/GitHubPages.service';
 
 export interface DeployOptions {
   shouldShowInternalLogs: boolean;
 }
 
 export class DeployCommand extends Command {
+  private readonly ghPages = new GitHubPagesService(this.rootDir);
+
   private readonly buildCommand = this.child<BuildCommand>(BuildCommand);
 
   private readonly destinationDir = path.join(this.rootDir, DESTINATION_DIR);
@@ -77,6 +80,14 @@ export class DeployCommand extends Command {
       console.error('\x1b[31mDeploy error: ', (error as any)?.message, '\x1b[0m');
     }
   };
+
+  protected react = () => {
+    this.ghPages.deploy(DESTINATION_DIR);
+  };
+
+  protected reactTypescript = () => {
+    this.react();
+  }
 
   private async setShellRunner() {
     try {

@@ -1,4 +1,4 @@
-import { Linters } from './typedefs';
+import { Linters, Tests } from './typedefs';
 
 export const DESTINATION_DIR = 'dist';
 
@@ -9,4 +9,11 @@ export const defaultLintersConfig: Linters = {
   bem: true,
   styles: true,
   javascript: true,
+};
+
+export const defaultTestsConfig: Tests = {
+  jest: false,
+  backstop: false,
+  cypress: false,
+  cypressComponents: false,
 };

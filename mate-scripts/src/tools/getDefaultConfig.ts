@@ -1,5 +1,7 @@
-import { defaultLintersConfig } from '../constants';
-import { Config, Linters, ProjectTypes } from '../typedefs';
+import { defaultLintersConfig, defaultTestsConfig } from '../constants';
+import {
+  Config, Linters, ProjectTypes, Tests,
+} from '../typedefs';
 
 export const getDefaultConfig = (
   projectType = ProjectTypes.None,
@@ -7,6 +9,9 @@ export const getDefaultConfig = (
   projectType,
   linters: {
     ...getDefaultLintersConfig(projectType),
+  },
+  tests: {
+    ...getDefaultTestsConfig(projectType),
   },
 });
 
@@ -42,5 +47,44 @@ function getDefaultLintersConfig(projectType: ProjectTypes): Linters {
     default:
     case ProjectTypes.None:
       return defaultLintersConfig;
+  }
+}
+
+function getDefaultTestsConfig(projectType: ProjectTypes): Tests {
+  switch (projectType) {
+    case ProjectTypes.Layout:
+      return {
+        ...defaultTestsConfig,
+        jest: true,
+        backstop: true,
+      };
+    case ProjectTypes.LayoutDOM:
+      return {
+        ...defaultTestsConfig,
+        cypress: true,
+      };
+    case ProjectTypes.Javascript:
+      return {
+        ...defaultTestsConfig,
+        jest: true,
+      };
+    case ProjectTypes.Typescript:
+      return {
+        ...defaultTestsConfig,
+        jest: true,
+      };
+    case ProjectTypes.React:
+      return {
+        ...defaultTestsConfig,
+        cypress: true,
+      };
+    case ProjectTypes.ReactTypescript:
+      return {
+        ...defaultTestsConfig,
+        cypress: true,
+      };
+    default:
+    case ProjectTypes.None:
+      return defaultTestsConfig;
   }
 }

@@ -13,7 +13,7 @@ export class StartCommand extends Command {
 
   private readonly jest = new JestService();
 
-  private readonly reactScripts = new ReactScriptsService();
+  private readonly reactScripts = new ReactScriptsService(this.rootDir);
 
   protected common(): void {
     // do nothing
@@ -32,13 +32,21 @@ export class StartCommand extends Command {
     this.layout(options);
   };
 
-  react = () => {
-    this.reactScripts.start();
-  };
+  react = <
+    Async extends boolean,
+    Result = ExecResult<Async>
+  >(options: StartOptions, async?: Async): Result => (
+    this.reactScripts.start({
+      showLogs: options.shouldShowInternalLogs,
+      open: options.open,
+      port: options.port,
+    }, async)
+  );
 
-  reactTypescript = () => {
-    this.reactScripts.start();
-  };
+  reactTypescript = <
+    Async extends boolean,
+    Result = ExecResult<Async>
+  >(options: StartOptions, async?: Async): Result => this.react(options, async);
 
   protected javascript = () => {
     this.jest.watch();
