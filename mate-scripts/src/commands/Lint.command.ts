@@ -59,15 +59,7 @@ export class LintCommand extends Command {
   };
 
   protected reactTypescript = (options: LintOptions) => {
-    const { javascript, styles, files } = options;
-
-    if (styles) {
-      this.lintStyles(files);
-    }
-
-    if (javascript) {
-      this.lintJs(files);
-    }
+    this.react(options);
   };
 
   private lintHtml(files: LintOptions['files']) {

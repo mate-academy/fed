@@ -15,7 +15,15 @@ export interface Linters {
   javascript: boolean;
 }
 
+export interface Tests {
+  backstop: boolean;
+  jest: boolean;
+  cypress: boolean;
+  cypressComponents: boolean;
+}
+
 export interface Config {
   projectType: ProjectTypes;
   linters: Linters;
+  tests: Tests;
 }

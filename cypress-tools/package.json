@@ -1,0 +1,20 @@
+{
+  "name": "@mate-academy/cypress-tools",
+  "version": "1.0.4",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@cypress/react": "^5.12.4",
+    "@cypress/webpack-dev-server": "^1.8.4"
+  },
+  "devDependencies": {
+    "@mate-academy/eslint-config-internal": "^1.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.18.0"
+  }
+}

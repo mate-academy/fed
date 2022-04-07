@@ -3,15 +3,31 @@ import fs from 'fs-extra';
 import open from 'open';
 import { execBashCodeAsync } from '../tools';
 
-interface RunOptions {
+export interface StartedServer {
+  stop: () => void;
+  port: number;
+}
+
+export type StartServer = () => Promise<StartedServer>;
+
+export interface RunOptions {
   showLogs?: boolean;
   open?: boolean;
+  e2e?: boolean;
+  components?: boolean;
+  startServer?: StartServer;
 }
 
 export class CypressService {
   private shouldOpen: boolean = true;
 
   private shouldShowLogs: boolean = false;
+
+  private shouldRunE2E: boolean = true;
+
+  private shouldRunComponents: boolean = false;
+
+  private startServer?: StartServer;
 
   private readonly reportsDir = path.join(this.rootDir, 'reports');
 
@@ -41,8 +57,8 @@ export class CypressService {
       await this.runCypress();
 
       this.log('CYPRESS TESTS RUN SUCCESS');
-    } catch (error) {
-      this.log('CYPRESS TESTS RUN FAIL', error);
+    } catch (errors) {
+      this.log('CYPRESS TESTS RUN FAIL', errors);
 
       failed = true;
     } finally {
@@ -68,10 +84,16 @@ export class CypressService {
     const {
       showLogs = false,
       open: shouldOpen = true,
+      e2e = true,
+      components = false,
+      startServer,
     } = options;
 
     this.shouldOpen = shouldOpen;
     this.shouldShowLogs = showLogs;
+    this.shouldRunE2E = e2e;
+    this.shouldRunComponents = components;
+    this.startServer = startServer;
   }
 
   private async cleanPrevReports() {
@@ -89,11 +111,48 @@ export class CypressService {
     await fs.remove(this.rawReportsDir);
   }
 
-  private runCypress() {
-    return execBashCodeAsync(
-      `${this.binDir}cypress run`,
-      { shouldBindStdout: this.shouldShowLogs },
-    );
+  private async runCypress() {
+    const errors = [];
+
+    if (this.shouldRunE2E) {
+      let startedServer: StartedServer | undefined;
+
+      if (this.startServer) {
+        startedServer = await this.startServer();
+      }
+
+      try {
+        const baseUrl = startedServer
+          ? ` --config baseUrl=http://localhost:${startedServer.port}`
+          : '';
+
+        await execBashCodeAsync(
+          `${this.binDir}cypress run${baseUrl}`,
+          { shouldBindStdout: this.shouldShowLogs },
+        );
+      } catch (e2eError) {
+        errors.push(e2eError);
+      } finally {
+        if (startedServer) {
+          startedServer.stop();
+        }
+      }
+    }
+
+    if (this.shouldRunComponents) {
+      try {
+        await execBashCodeAsync(
+          `${this.binDir}cypress run-ct`,
+          { shouldBindStdout: this.shouldShowLogs },
+        );
+      } catch (componentsError) {
+        errors.push(componentsError);
+      }
+    }
+
+    if (errors.length) {
+      throw errors;
+    }
   }
 
   private async prepareReports(): Promise<boolean> {

@@ -29,6 +29,7 @@ export interface UpdateReposOptions {
   isSilent: boolean;
   chunkSize: number;
   mergeOnly: boolean;
+  updateExisting: boolean;
 }
 
 export class ReposUpdater {
@@ -193,7 +194,11 @@ ${chunk.join('\n')}`);
     console.log('Clone: ', repoSSHUrl);
 
     await execInTmp(`git clone ${repoSSHUrl} ${repoDir}`);
-    await execInRepo(`git checkout -b ${prBranch}`);
+    const branchFlag = this.options.updateExisting
+      ? ''
+      : '-b ';
+
+    await execInRepo(`git checkout ${branchFlag}${prBranch}`);
 
     for (const command of commands) {
       console.log(`Execute command '${command}' in repo '${repo}'`);
@@ -208,6 +213,10 @@ ${chunk.join('\n')}`);
     let pr;
 
     try {
+      if (this.options.updateExisting) {
+        throw new Error('Skip creating, only update enabled');
+      }
+
       const { data } = await this.octokit.pulls.create({
         owner: orgName,
         repo,
@@ -222,7 +231,10 @@ ${chunk.join('\n')}`);
 
       console.log(`Repo: ${repo}`, firstError?.message);
       console.log(`Repo: ${error}`);
-      console.log('Will try to merge existing PR', repo);
+
+      if (this.options.shouldMerge) {
+        console.log('Will try to merge existing PR', repo);
+      }
 
       const { data } = await this.octokit.pulls.list({
         owner: orgName,

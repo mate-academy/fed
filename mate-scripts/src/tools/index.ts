@@ -7,3 +7,4 @@ export * from './fileSystem';
 export * from './makeCLIOptions';
 export * from './array';
 export * from './Semver';
+export * from './kill';

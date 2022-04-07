@@ -1,5 +1,5 @@
-import fs from 'fs';
 import path from 'path';
+import fs from 'fs-extra';
 import { Config } from '../typedefs';
 import { getDefaultConfig } from './getDefaultConfig';
 
@@ -75,6 +75,7 @@ export function getConfig(rootDir: string): Config {
 
   const config = mateAcademy || {};
   const linters = config.linters || {};
+  const tests = config.tests || {};
   const defaultConfig = getDefaultConfig(config.projectType);
 
   return {
@@ -84,5 +85,29 @@ export function getConfig(rootDir: string): Config {
       ...defaultConfig.linters,
       ...linters,
     },
+    tests: {
+      ...defaultConfig.tests,
+      ...tests,
+    },
   };
+}
+
+export function readDirRecursive(
+  pathLike: string,
+  prefix = '',
+): string[] {
+  const dirPath = path.join(pathLike, prefix);
+  const list = fs.readdirSync(dirPath);
+
+  return list.flatMap((name) => {
+    const fullPath = path.join(dirPath, name);
+    const stats = fs.lstatSync(fullPath);
+    const prefixedName = path.join(prefix, name);
+
+    if (stats.isDirectory()) {
+      return readDirRecursive(fullPath, prefixedName);
+    }
+
+    return prefixedName;
+  });
 }
