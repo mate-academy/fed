@@ -51,12 +51,14 @@ export class InitCommand extends Command {
   protected react = () => {
     this.copyGitIgnore(ProjectTypes.React);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.React);
+    this.copyProjectTypeSpecificTemplates(ProjectTypes.React);
     this.initGitHooks(ProjectTypes.React);
   };
 
   protected reactTypescript = () => {
     this.copyGitIgnore(ProjectTypes.ReactTypescript);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.ReactTypescript);
+    this.copyProjectTypeSpecificTemplates(ProjectTypes.ReactTypescript);
     this.initGitHooks(ProjectTypes.ReactTypescript);
   };
 
@@ -87,8 +89,6 @@ export class InitCommand extends Command {
     fs.copySync(configsDir, this.rootDir);
 
     console.log(`${projectType} specific configs copied`);
-
-    this.copyProjectTypeSpecificTemplates(projectType);
   }
 
   private copyProjectTypeSpecificTemplates(projectType: ProjectTypes) {
