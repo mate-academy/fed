@@ -9,6 +9,10 @@ module.exports = {
     'react/prop-types': 0,
     'max-len': ['error', {
       ignoreTemplateLiterals: true,
+      ignoreComments: true,
+    }],
+    'jsx-a11y/label-has-associated-control': ["error", {
+      assert: "either",
     }],
   },
 };

@@ -32,6 +32,7 @@ function main() {
         'README.md',
         'readme.md',
         'Readme.md',
+        'checklist.md',
       ].includes(name)
     ) {
       fs.unlinkSync(itemPath, {
@@ -46,23 +47,23 @@ function main() {
   exec('npm i -D @mate-academy/scripts@latest');
 
   const packagePath = path.join(folderPath, 'package.json');
-  const package = require(packagePath);
+  const pkg = require(packagePath);
 
-  delete package.husky;
-  delete package['lint-staged'];
-  delete package.eslintConfig;
+  delete pkg.husky;
+  delete pkg['lint-staged'];
+  delete pkg.eslintConfig;
 
-  package.scripts.start = 'mate-scripts start -l';
-  package.scripts.deploy = 'mate-scripts deploy';
+  pkg.scripts.start = 'mate-scripts start -l';
+  pkg.scripts.deploy = 'mate-scripts deploy';
 
-  package.mateAcademy.tests = {
+  pkg.mateAcademy.tests = {
     _comment: 'Add `cypressComponents: true` to enable component tests',
     cypress: true,
   };
 
   fs.writeFileSync(
     packagePath,
-    `${JSON.stringify(package, null, 2)}\n`,
+    `${JSON.stringify(pkg, null, 2)}\n`,
     'utf-8',
   );
 
@@ -70,7 +71,7 @@ function main() {
   exec('npm audit fix');
 }
 
-main(process.argv[2]);
+main();
 
 function execBashCodeSync(
   bashCode,

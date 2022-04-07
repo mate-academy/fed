@@ -14,6 +14,7 @@ export function mapCommanderOptions(
     silent: isSilent,
     chunkSize,
     mergeOnly,
+    updateExisting,
   } = commanderOptions;
 
   return {
@@ -26,5 +27,6 @@ export function mapCommanderOptions(
     isSilent,
     chunkSize,
     mergeOnly,
+    updateExisting,
   };
 }

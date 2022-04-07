@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-react",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "description": "React config for Mate academy students based on airbnb",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "@mate-academy/eslint-config": "*",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-react": "^7.13.0"
+    "eslint-plugin-react": "^6.10.3"
   },
   "repository": {
     "type": "git",
