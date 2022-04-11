@@ -50,7 +50,7 @@ export class ReactScriptsService {
     const BUILD_PATH = buildPath
       ? `BUILD_PATH=./${buildPath} `
       : '';
-    const command = `${BUILD_PATH}${this.binDir}react-scripts build`;
+    const command = `cross-env ${BUILD_PATH}${this.binDir}react-scripts build`;
 
     if (showLogs) {
       console.log(`Execute command: ${command}`);
