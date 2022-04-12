@@ -38,7 +38,7 @@ export class ReactScriptsService {
       : 'BROWSER=none ';
 
     return execFn(
-      `${PORT}${OPEN}${this.binDir}react-scripts start`,
+      `cross-env ${PORT}${OPEN}${this.binDir}react-scripts start`,
       showLogs,
     ) as any;
   }
