@@ -122,6 +122,7 @@
     "react_tabs-with-router",
     "react_people-table-advanced",
     "react_todo-app",
-    "react_phone-catalog"
+    "react_phone-catalog",
+    "react_person"
   ]
 }
