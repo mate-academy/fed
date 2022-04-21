@@ -49,7 +49,7 @@ module.exports = {
     "arrow-parens": ["error", "always"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-console": ["error"],
-    "semi": ["error", "always"],
+    semi: 'off',
     'import/order': ['error', {
       groups: [
         'builtin',
@@ -84,6 +84,8 @@ module.exports = {
       "classes": false,
       "typedefs": false,
       "enums": false,
-    }]
+    }],
+    '@typescript-eslint/semi': ['error'],
+    '@typescript-eslint/member-delimiter-style': ['error'],
   },
 };
