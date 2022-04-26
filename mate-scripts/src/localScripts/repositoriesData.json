@@ -123,7 +123,8 @@
     "react_people-table-advanced",
     "react_todo-app",
     "react_phone-catalog",
-    "react_person"
+    "react_person",
+    "react_list-of-goods-hooks"
   ],
   "typescript": [],
   "reactTypescript": [
