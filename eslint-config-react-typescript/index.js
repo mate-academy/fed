@@ -77,4 +77,12 @@ module.exports = {
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off'
   },
+  overrides: [
+    {
+      'files': ['**/*.spec.jsx'],
+      'rules': {
+        'react/jsx-filename-extension': ['off'],
+      }
+    }
+  ],
 };
