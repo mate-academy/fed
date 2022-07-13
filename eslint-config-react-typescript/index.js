@@ -63,7 +63,6 @@ module.exports = {
     }],
     'react/jsx-uses-react': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/sort-comp': 'off',
 
     // Typescript
     '@typescript-eslint/explicit-function-return-type': 'off',
