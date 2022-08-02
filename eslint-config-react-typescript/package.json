@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-react-typescript",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "React config for Mate academy students based on airbnb with Typescript",
   "main": "index.js",
   "scripts": {
@@ -9,10 +9,7 @@
   "author": "Mate academy",
   "license": "ISC",
   "dependencies": {
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^6.10.3",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-config-airbnb-typescript": "^17.0.0"
   },
   "repository": {
     "type": "git",
