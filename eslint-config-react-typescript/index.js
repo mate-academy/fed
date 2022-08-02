@@ -29,9 +29,13 @@ module.exports = {
     '@typescript-eslint/semi': ['error', 'always'],
     'prefer-const': 2,
     curly: [2, 'all'],
+    'max-len': ['error', {
+      ignoreTemplateLiterals: true,
+      ignoreComments: true,
+    }],
     'no-redeclare': [2, { builtinGlobals: true }],
-    'operator-linebreak': [2, 'before'],
     'no-console': 2,
+    'operator-linebreak': [2, 'before'],
     'brace-style': [2, '1tbs'],
     'arrow-body-style': 0,
     'arrow-parens': 0,
@@ -55,6 +59,9 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/state-in-constructor': [2, 'never'],
     'react-hooks/rules-of-hooks': 2,
+    'jsx-a11y/label-has-associated-control': ["error", {
+      assert: "either",
+    }],
     'jsx-a11y/label-has-for': [2, {
       components: ['Label'],
       required: {
