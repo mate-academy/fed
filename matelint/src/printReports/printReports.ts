@@ -60,6 +60,6 @@ export const printReports = (reports: Report[]) => {
       : 'error'}`));
     console.log(chalk.gray('https://mate-academy.github.io/fed/matelint/rules-description.html'));
   } else {
-    console.log('✨✨ Your BEM is fine! ✨✨\n');
+    console.log('✨✨ Your HTML is fine! ✨✨\n');
   }
 };
