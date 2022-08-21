@@ -2,11 +2,11 @@
 
 ## Usage
 ```
- $ npm install matelint
+ $ npm install @mate-academy/lint
 ```
 next
 ```
- $ npx matelint
+ $ npx @mate-academy/lint
 ```
 ## Config
 file name - `matelintrc`

@@ -1,73 +1,31 @@
-# one-block
+# Rules description
+
+## closing-and-opening-on-seme-level
 - bad example
 ```html
-<div class="bar foo"></div>
+<input type="text" name="surname"
+       id="surname" required>
+```
+
+```html
+<input type="text"
+       name="surname"
+       id="surname"
+       required>
+```
+
+```html
+<input type="text"
+  name="surname"
+  id="surname"
+  required>
 ```
 - good example
 ```html
-<div class="bar"></div>
-```
-# one-element
-- bad example
-```html
-<div class="bar">
-  <div class="bar__foo bar__baz"></div>
-</div>
-```
-- good example
-```html
-<div class="bar">
-  <div class="bar__baz"></div>
-</div>
-```
-# element-inner-parent-block
-- bad example
-```html
-<div>
-  <div class="bar"></div>
-  <div class="bar__foo"></div>
-</div>
-```
-- good example
-```html
-<div class="bar">
-  <div class="bar__foo"></div>
-</div>
-```
-# no-double-element
-- bad example
-```html
-<div class="bar">
-  <div class="bar__foo__bar"></div>
-</div>
-```
-- good example
-```html
-<div class="bar">
-  <div class="bar__foo-bar"></div>
-</div>
-```
-# no-neighbour-parent-block
-- bad example
-```html
-<div class="bar bar__foo"></div>
-```
-- good example
-```html
-<div class="bar">
-  <div class="bar__foo"></div>
-</div>
-```
-# modifiable-class
-- bad example
-```html
-<div class="bar">
-  <div class="bar__foo_baz"></div>
-</div>
-```
-- good example
-```html
-<div class="bar">
-    <div class="bar__foo bar__foo_baz"></div>
-</div>
+<input
+  type="text"
+  name="surname"
+  id="surname"
+  required
+>
 ```
