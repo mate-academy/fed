@@ -1,8 +1,8 @@
 import { findHtmlFiles } from './fs/findHtmlFiles';
-import { lint } from "./lint";
+import { lint } from './lint';
 import config from './config';
-import { formatError } from "./printReports/formatError";
-import { printReports } from "./printReports/printReports";
+import { formatError } from './printReports/formatError';
+import { printReports } from './printReports/printReports';
 
 export const matelint = (startPath: string) => {
   const htmlFiles = findHtmlFiles(startPath);
@@ -11,7 +11,7 @@ export const matelint = (startPath: string) => {
 
   const formatReports = reports.map(({ path, errors }) => ({
     path,
-    errors: errors.map(error => error && formatError(error)),
+    errors: errors.map((error) => error && formatError(error)),
   }));
 
   printReports(formatReports);
@@ -25,4 +25,4 @@ export const matelint = (startPath: string) => {
   } else {
     process.exit(0);
   }
-}
+};

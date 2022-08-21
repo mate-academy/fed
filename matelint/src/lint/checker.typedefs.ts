@@ -1,5 +1,5 @@
-import { Node } from "parse5/dist/tree-adapters/default";
-import { MateLintConfig } from "../matelint.typedefs";
+import { Node } from 'parse5/dist/tree-adapters/default';
+import { MateLintConfig } from '../matelint.typedefs';
 
 export interface CheckerOptions {
   isElement: boolean;

@@ -1,18 +1,18 @@
 import { findConfig } from './fs/findConfig';
 import defaultConfig from './defaultConfig';
-import {MateLintConfig} from "./matelint.typedefs";
+import { MateLintConfig } from './matelint.typedefs';
 
 const config: MateLintConfig = findConfig();
 
 const convertStringsToRegExps = (
-  values: string[]
-): RegExp[] => values.map(pattern => (
+  values: string[],
+): RegExp[] => values.map((pattern) => (
   new RegExp(
     pattern
       .replace(/\*\*/g, `[^/]+`)
       .replace(/\*/, '[^/]+\\'),
   )
-))
+));
 
 const mergedConfig: MateLintConfig<RegExp> = {
   ...defaultConfig,

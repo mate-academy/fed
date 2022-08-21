@@ -1,4 +1,4 @@
-import { MateLintConfig } from "./matelint.typedefs";
+import { MateLintConfig } from './matelint.typedefs';
 
 const defaultConfig: MateLintConfig = {
   ignore: [

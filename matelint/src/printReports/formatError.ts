@@ -1,5 +1,5 @@
-import { Node } from "parse5/dist/tree-adapters/default";
-import { FormatedError } from "../matelint.typedefs";
+import { Node } from 'parse5/dist/tree-adapters/default';
+import { FormatedError } from '../matelint.typedefs';
 
 interface Args {
   massage: string;
@@ -8,7 +8,7 @@ interface Args {
 }
 
 export const formatError = (
-  { massage, id, node }: Args
+  { massage, id, node }: Args,
 ): FormatedError => ({
   massage,
   ruleId: id,

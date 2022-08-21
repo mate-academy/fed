@@ -1,13 +1,13 @@
-/* eslint-disable max-len */
 /* eslint-disable no-console */
-import chalk from "chalk";
-import {FormatedError} from "../matelint.typedefs";
+import chalk from 'chalk';
+import { FormatedError } from '../matelint.typedefs';
 
-const Table = require("table-layout");
+// eslint-disable-next-line import/no-extraneous-dependencies
+const Table = require('table-layout');
 
 interface Report {
   path: string;
-  errors: (null | FormatedError)[]
+  errors: (null | FormatedError)[];
 }
 
 const printReport = (report: Report) => {
@@ -17,14 +17,14 @@ const printReport = (report: Report) => {
 
   console.log(chalk.underline(report.path));
 
-  const errors = report.errors.map((report) => {
-    if (!report) {
+  const errors = report.errors.map((error) => {
+    if (!error) {
       return null;
     }
 
     const {
       massage, ruleId, startLine, startCol,
-    } = report;
+    } = error;
 
     return {
       positions: chalk.gray(`${startLine}:${startCol}`),
@@ -55,7 +55,9 @@ export const printReports = (reports: Report[]) => {
   if (errorsCount > 0) {
     reports.forEach(printReport);
 
-    console.log(chalk.red(`${errorsCount} ${errorsCount > 1 ? 'errors' : 'error'}`));
+    console.log(chalk.red(`${errorsCount} ${errorsCount > 1
+      ? 'errors'
+      : 'error'}`));
     console.log(chalk.gray('https://mate-academy.github.io/fed/matelint/rules-description.html'));
   } else {
     console.log('✨✨ Your BEM is fine! ✨✨\n');

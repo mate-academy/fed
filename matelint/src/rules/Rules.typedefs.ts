@@ -1,16 +1,16 @@
-import { Node } from "parse5/dist/tree-adapters/default";
-import { CheckerContext } from "../lint/checker.typedefs";
+import { Node } from 'parse5/dist/tree-adapters/default';
+import { CheckerContext } from '../lint/checker.typedefs';
 
 export enum RuleName {
   closingAndOpeningOnSemeLevel = 'closing-and-opening-on-seme-level',
 }
 
 export interface MateLintRules {
-  [RuleName.closingAndOpeningOnSemeLevel]: boolean,
+  [RuleName.closingAndOpeningOnSemeLevel]: boolean;
 }
 
 export enum RuleType {
-  Indent = "Indent",
+  Indent = 'Indent',
 }
 
 export interface RuleErrorContent {

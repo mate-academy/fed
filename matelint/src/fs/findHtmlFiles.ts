@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { shouldIgnoreFile } from './shouldIgnoreFile';
-import { ParsedFile } from "../matelint.typedefs";
+import { ParsedFile } from '../matelint.typedefs';
 
 const readFile = (filePath: string): ParsedFile[] => {
   if (path.extname(filePath) !== '.html') {
@@ -12,7 +12,7 @@ const readFile = (filePath: string): ParsedFile[] => {
     path: filePath,
     content: fs.readFileSync(filePath, 'utf-8'),
   }];
-}
+};
 
 export const findHtmlFiles = (startPath: string): ParsedFile[] => {
   if (shouldIgnoreFile(startPath)) {
@@ -25,7 +25,7 @@ export const findHtmlFiles = (startPath: string): ParsedFile[] => {
 
   return fs.readdirSync(startPath)
     .reduce<ParsedFile[]>((acc, dir) => ([
-        ...acc,
-        ...findHtmlFiles(path.join(startPath, dir)),
-      ]), []);
-}
+      ...acc,
+      ...findHtmlFiles(path.join(startPath, dir)),
+    ]), []);
+};

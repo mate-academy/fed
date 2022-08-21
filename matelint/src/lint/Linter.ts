@@ -1,9 +1,9 @@
-import { makeChecker } from "./makeChecker";
-import { getRules } from "./getRules";
-import { MateLintConfig } from "../matelint.typedefs";
-import { Node, Element } from "parse5/dist/tree-adapters/default";
-import { defaultTreeAdapter } from "parse5"
-import { RuleError } from "../rules/Rules.typedefs";
+import { Node, Element } from 'parse5/dist/tree-adapters/default';
+import { defaultTreeAdapter } from 'parse5';
+import { makeChecker } from './makeChecker';
+import { getRules } from './getRules';
+import { MateLintConfig } from '../matelint.typedefs';
+import { RuleError } from '../rules/Rules.typedefs';
 
 export class Linter {
   readonly checker;
@@ -17,7 +17,7 @@ export class Linter {
 
   linter = (node: Node): RuleError[] => {
     const errors = defaultTreeAdapter.isElementNode(node)
-      ? this.checker<Element>({node})
+      ? this.checker<Element>({ node })
       : [];
 
     if ('childNodes' in node) {

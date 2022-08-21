@@ -29,9 +29,10 @@
   "scripts": {
     "start": "rollup -w -c",
     "build": "rm -rf ./bin && rollup -c && node ./shebangify.js && chmod +x ./bin/mateLint.js",
-    "lint": "eslint ./",
+    "lint": "eslint ./src",
     "test": "jest ./lib/tests",
-    "prepublishOnly": "npm run lint && npm run test"
+    "prepublishOnly": "npm run lint && npm run test",
+    "postpublish": "rm -rf ./bin"
   },
   "dependencies": {
     "@rollup/plugin-json": "^4.1.0",
@@ -44,6 +45,8 @@
     "@mate-academy/eslint-config": "0.0.16",
     "@mate-academy/eslint-config-internal": "^1.1.0",
     "@types/commander": "^2.12.2",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
     "eslint": "^7.21.0",
     "eslint-plugin-node": "^11.1.0",
     "jest": "^26.6.3",

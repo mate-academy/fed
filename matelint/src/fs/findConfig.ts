@@ -1,5 +1,5 @@
 import { cosmiconfigSync } from 'cosmiconfig';
-import { MateLintConfig } from "../matelint.typedefs";
+import { MateLintConfig } from '../matelint.typedefs';
 
 export const findConfig = (): MateLintConfig => {
   const configFile = cosmiconfigSync(
@@ -8,4 +8,4 @@ export const findConfig = (): MateLintConfig => {
   ).search();
 
   return configFile?.config || {};
-}
+};
