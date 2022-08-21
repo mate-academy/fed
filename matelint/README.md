@@ -22,4 +22,4 @@ file name - `matelintrc`
 }
 ```
 ## Rules
-- [some-rule](https://mate-academy.github.io/fed/matelint/rules-description.html#some-rule)
+- [closing-and-opening-on-seme-level](https://mate-academy.github.io/fed/matelint/rules-description.html#closing-and-opening-on-seme-level)

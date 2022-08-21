@@ -32,7 +32,10 @@
     "lint": "eslint ./src",
     "test": "jest ./src",
     "prepublishOnly": "npm run lint && npm run test && npm run build",
-    "postpublish": "rm -rf ./bin"
+    "postpublish": "rm -rf ./bin",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish"
   },
   "dependencies": {
     "chalk": "^4.1.0",
