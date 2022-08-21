@@ -1,6 +1,6 @@
 import { Element } from 'parse5/dist/tree-adapters/default';
-import { Rule, RuleName, RuleType } from './Rules.typedefs';
-import { CheckerContext } from '../lint/checker.typedefs';
+import { Rule, RuleName, RuleType } from '../Rules.typedefs';
+import { CheckerContext } from '../../lint/checker.typedefs';
 
 export default <Rule>{
   id: RuleName.closingAndOpeningOnSemeLevel,

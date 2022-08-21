@@ -6,7 +6,7 @@ export enum RuleName {
 }
 
 export interface MateLintRules {
-  [RuleName.closingAndOpeningOnSemeLevel]: boolean;
+  [RuleName.closingAndOpeningOnSemeLevel]?: boolean;
 }
 
 export enum RuleType {
@@ -14,7 +14,7 @@ export enum RuleType {
 }
 
 export interface RuleErrorContent {
-  id: string;
+  id: RuleName;
   node: Node;
   massage: string;
 }
