@@ -9,6 +9,7 @@ export const defaultLintersConfig: Linters = {
   bem: true,
   styles: true,
   javascript: true,
+  matelint: false,
 };
 
 export const defaultTestsConfig: Tests = {
