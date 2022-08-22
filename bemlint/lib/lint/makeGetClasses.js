@@ -40,7 +40,7 @@ const makeGetClasses = ({ elementDivider, modifierDivider }) => {
       .map((_class) => _class.trim());
 
     return classes.filter(
-        (_class) => Boolean(_class) && filterByClass[classType](_class),
+      (_class) => Boolean(_class) && filterByClass[classType](_class),
     );
   };
 
