@@ -1,6 +1,6 @@
-import { MateLintConfig } from './matelint.typedefs';
+import { LintConfig } from './htmlLint.typedefs';
 
-const defaultConfig: MateLintConfig = {
+const defaultConfig: LintConfig = {
   ignore: [
     'node_module',
     'dist',

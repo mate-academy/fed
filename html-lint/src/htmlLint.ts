@@ -4,7 +4,7 @@ import config from './config';
 import { formatError } from './printReports/formatError';
 import { printReports } from './printReports/printReports';
 
-export const matelint = (startPath: string) => {
+export const htmlLint = (startPath: string) => {
   const htmlFiles = findHtmlFiles(startPath);
 
   const reports = lint(htmlFiles, config);

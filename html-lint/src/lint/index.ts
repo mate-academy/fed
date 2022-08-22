@@ -1,9 +1,9 @@
-import { FileErrors, MateLintConfig, ParsedFile } from '../matelint.typedefs';
+import { FileErrors, LintConfig, ParsedFile } from '../htmlLint.typedefs';
 import { makeLinter } from './makeLinter';
 
 export const lint = (
   files: ParsedFile[],
-  config: MateLintConfig<RegExp>,
+  config: LintConfig<RegExp>,
 ): FileErrors[] => {
   const linter = makeLinter(config);
 

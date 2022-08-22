@@ -5,7 +5,7 @@ export enum RuleName {
   closingAndOpeningOnSemeLevel = 'closing-and-opening-on-seme-level',
 }
 
-export interface MateLintRules {
+export interface LintRules {
   [RuleName.closingAndOpeningOnSemeLevel]?: boolean;
 }
 
@@ -22,7 +22,7 @@ export interface RuleErrorContent {
 export type RuleError = RuleErrorContent | null;
 
 export interface Rule {
-  id: keyof MateLintRules;
+  id: keyof LintRules;
   type: RuleType;
   check: <T = Node>(ctx: CheckerContext<T>) => RuleError;
 }

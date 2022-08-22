@@ -18,7 +18,7 @@ export class LintCommand extends Command {
       files,
       styles,
       javascript,
-      matelint,
+      htmlLint,
     } = options;
 
     const { linters } = this.config;
@@ -27,7 +27,7 @@ export class LintCommand extends Command {
       this.lintHtml(files);
     }
 
-    if (matelint && linters.matelint) {
+    if (htmlLint && linters.htmlLint) {
       this.mateLintHtml(files);
     }
 
@@ -77,7 +77,7 @@ export class LintCommand extends Command {
       ? files.join(' ')
       : './src/';
 
-    execBashCodeSilent(`${this.binDir}matelint ${filesToLint}`);
+    execBashCodeSilent(`${this.binDir}html-lint ${filesToLint}`);
   }
 
   private lintHtml(files: LintOptions['files']) {

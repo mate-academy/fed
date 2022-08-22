@@ -1,11 +1,13 @@
 import { cosmiconfigSync } from 'cosmiconfig';
-import { MateLintConfig } from '../matelint.typedefs';
+import { LintConfig } from '../htmlLint.typedefs';
 
-export const findConfig = (): MateLintConfig => {
+export const findConfig = (): LintConfig => {
   const configFile = cosmiconfigSync(
-    'matelint',
+    'html-lint',
     { stopDir: process.cwd() },
   ).search();
+
+  console.log(configFile);
 
   return configFile?.config || {};
 };

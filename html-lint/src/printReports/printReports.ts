@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import chalk from 'chalk';
-import { FormatedError } from '../matelint.typedefs';
+import { FormattedError } from '../htmlLint.typedefs';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 const Table = require('table-layout');
 
 interface Report {
   path: string;
-  errors: (null | FormatedError)[];
+  errors: (null | FormattedError)[];
 }
 
 const printReport = (report: Report) => {
@@ -58,7 +58,7 @@ export const printReports = (reports: Report[]) => {
     console.log(chalk.red(`${errorsCount} ${errorsCount > 1
       ? 'errors'
       : 'error'}`));
-    console.log(chalk.gray('https://mate-academy.github.io/fed/matelint/rules-description.html'));
+    console.log(chalk.gray('https://mate-academy.github.io/fed/html-lint/rules-description.html'));
   } else {
     console.log('✨✨ Your HTML is fine! ✨✨\n');
   }
