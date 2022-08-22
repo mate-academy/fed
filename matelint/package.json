@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/lint",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "bin/matelint.js",
   "repository": {
     "type": "git",
