@@ -13,7 +13,7 @@ export interface Linters {
   bem: boolean;
   styles: boolean;
   javascript: boolean;
-  matelint: boolean;
+  htmlLint: boolean;
 }
 
 export interface Tests {

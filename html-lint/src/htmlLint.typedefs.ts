@@ -1,8 +1,8 @@
-import { MateLintRules, RuleError } from './rules/Rules.typedefs';
+import { LintRules, RuleError } from './rules/Rules.typedefs';
 
-export interface MateLintConfig<T = string> {
+export interface LintConfig<T = string> {
   ignore: T[];
-  rules: MateLintRules;
+  rules: LintRules;
 }
 
 export interface ParsedFile {
@@ -15,7 +15,7 @@ export interface FileErrors {
   errors: RuleError[];
 }
 
-export interface FormatedError {
+export interface FormattedError {
   massage: string;
   ruleId: string;
   startLine?: number;

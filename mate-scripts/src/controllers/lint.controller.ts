@@ -10,25 +10,25 @@ export const lintController: Controller<LintOptions> = (
     html,
     bem,
     javascript,
-    matelint,
+    htmlLint,
   } = command;
 
   const ensuredFiles = !files || !files.length
     ? null
     : files;
 
-  if (!(styles || html || javascript || bem || matelint)) {
+  if (!(styles || html || javascript || bem || htmlLint)) {
     return {
       styles: true,
       html: true,
       bem: true,
       javascript: true,
-      matelint: true,
+      htmlLint: true,
       files: ensuredFiles,
     };
   }
 
   return {
-    styles, html, bem, javascript, files: ensuredFiles, matelint
+    styles, html, bem, javascript, files: ensuredFiles, htmlLint
   };
 };

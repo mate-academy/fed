@@ -1,5 +1,5 @@
 import { Node } from 'parse5/dist/tree-adapters/default';
-import { MateLintConfig } from '../matelint.typedefs';
+import { LintConfig } from '../htmlLint.typedefs';
 
 export interface CheckerOptions {
   isElement: boolean;
@@ -7,6 +7,6 @@ export interface CheckerOptions {
 
 export interface CheckerContext<T = Node> {
   node: T;
-  config?: MateLintConfig<RegExp>;
+  config?: LintConfig<RegExp>;
   options?: CheckerOptions;
 }

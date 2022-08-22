@@ -1,8 +1,8 @@
 import { Linter } from './Linter';
 import { parseHtml } from './parseHtml';
-import { MateLintConfig, ParsedFile } from '../matelint.typedefs';
+import { LintConfig, ParsedFile } from '../htmlLint.typedefs';
 
-export const makeLinter = (config: MateLintConfig<RegExp>) => {
+export const makeLinter = (config: LintConfig<RegExp>) => {
   const linter = new Linter(config);
 
   return (content: ParsedFile['content']) => {

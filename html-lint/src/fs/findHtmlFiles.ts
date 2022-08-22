@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { shouldIgnoreFile } from './shouldIgnoreFile';
-import { ParsedFile } from '../matelint.typedefs';
+import { ParsedFile } from '../htmlLint.typedefs';
 
 const readFile = (filePath: string): ParsedFile[] => {
   if (path.extname(filePath) !== '.html') {

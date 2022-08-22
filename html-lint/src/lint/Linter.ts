@@ -2,13 +2,13 @@ import { Node, Element } from 'parse5/dist/tree-adapters/default';
 import { defaultTreeAdapter } from 'parse5';
 import { makeChecker } from './makeChecker';
 import { getRules } from './getRules';
-import { MateLintConfig } from '../matelint.typedefs';
+import { LintConfig } from '../htmlLint.typedefs';
 import { RuleError } from '../rules/Rules.typedefs';
 
 export class Linter {
-  readonly checker;
+  readonly checker: ReturnType<typeof makeChecker>;
 
-  constructor(config: MateLintConfig<RegExp>) {
+  constructor(config: LintConfig<RegExp>) {
     this.checker = makeChecker(
       getRules(config),
       config,

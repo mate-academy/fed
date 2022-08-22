@@ -1,8 +1,8 @@
 import { findConfig } from './fs/findConfig';
 import defaultConfig from './defaultConfig';
-import { MateLintConfig } from './matelint.typedefs';
+import { LintConfig } from './htmlLint.typedefs';
 
-const config: MateLintConfig = findConfig();
+const config: LintConfig = findConfig();
 
 const convertStringsToRegExps = (
   values: string[],
@@ -14,7 +14,7 @@ const convertStringsToRegExps = (
   )
 ));
 
-const mergedConfig: MateLintConfig<RegExp> = {
+const mergedConfig: LintConfig<RegExp> = {
   ...defaultConfig,
   ...config,
   ignore: convertStringsToRegExps(config.ignore || defaultConfig.ignore),
