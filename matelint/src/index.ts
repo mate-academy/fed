@@ -1,9 +1,7 @@
-#!/usr/bin/env node
-
-const path = require('path');
-const { Command } = require('commander');
-const { version } = require('../package.json');
-const { matelint } = require('../lib/matelint');
+import path from 'path';
+import { Command } from 'commander';
+import { version } from '../package.json';
+import { matelint } from './matelint';
 
 const program = new Command();
 
@@ -15,7 +13,7 @@ program
   .option('[files...]')
   .description('check code style in html')
   .action((_, destination) => (
-      matelint(path.join(process.cwd(), ...destination.args))
+    matelint(path.join(process.cwd(), ...destination.args))
   ));
 
 program.parse(process.argv);
