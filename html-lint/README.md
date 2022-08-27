@@ -22,4 +22,4 @@ file name - `.html-lintrc.json`
 }
 ```
 ## Rules
-- [closing-and-opening-on-seme-level](https://mate-academy.github.io/fed/html-lint/rules-description.html#closing-and-opening-on-seme-level)
+- [closing-bracket-location](https://mate-academy.github.io/fed/html-lint/rules-description.html#closing-bracket-location)

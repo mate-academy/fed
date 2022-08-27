@@ -7,7 +7,5 @@ export const findConfig = (): LintConfig => {
     { stopDir: process.cwd() },
   ).search();
 
-  console.log(configFile);
-
   return configFile?.config || {};
 };

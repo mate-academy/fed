@@ -1,14 +1,16 @@
 import { LintConfig } from './htmlLint.typedefs';
+import { RuleName } from './rules/Rules.typedefs';
 
-const defaultConfig: LintConfig = {
+const defaultConfig: LintConfig & {
+  rules: Required<LintConfig['rules']>;
+} = {
   ignore: [
     'node_module',
     'dist',
   ],
   rules: {
-    'closing-and-opening-on-seme-level': true,
-    // 'max-attrs-count-in-line': 2,
-    // 'indents-for-attrs': true,
+    [RuleName.closingBracketLocation]: true,
+    [RuleName.maxAttrsPerLine]: 2,
   },
 };
 

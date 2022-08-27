@@ -2,15 +2,13 @@ import { Node } from 'parse5/dist/tree-adapters/default';
 import { CheckerContext } from '../lint/checker.typedefs';
 
 export enum RuleName {
-  closingAndOpeningOnSemeLevel = 'closing-and-opening-on-seme-level',
+  closingBracketLocation = 'closing-bracket-location',
+  maxAttrsPerLine = 'max-attrs-per-line'
 }
 
 export interface LintRules {
-  [RuleName.closingAndOpeningOnSemeLevel]?: boolean;
-}
-
-export enum RuleType {
-  Indent = 'Indent',
+  [RuleName.closingBracketLocation]?: boolean;
+  [RuleName.maxAttrsPerLine]?: number;
 }
 
 export interface RuleErrorContent {
@@ -21,8 +19,7 @@ export interface RuleErrorContent {
 
 export type RuleError = RuleErrorContent | null;
 
-export interface Rule {
+export interface Rule<T = Node> {
   id: keyof LintRules;
-  type: RuleType;
-  check: <T = Node>(ctx: CheckerContext<T>) => RuleError;
+  check: (ctx: CheckerContext<T>) => RuleError;
 }

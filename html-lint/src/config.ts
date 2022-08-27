@@ -18,7 +18,10 @@ const mergedConfig: LintConfig<RegExp> = {
   ...defaultConfig,
   ...config,
   ignore: convertStringsToRegExps(config.ignore || defaultConfig.ignore),
-  rules: config.rules || defaultConfig.rules,
+  rules: {
+    ...defaultConfig.rules,
+    ...config.rules,
+  },
 };
 
 export default mergedConfig;

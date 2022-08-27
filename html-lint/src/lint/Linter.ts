@@ -1,5 +1,4 @@
-import { Node, Element } from 'parse5/dist/tree-adapters/default';
-import { defaultTreeAdapter } from 'parse5';
+import { Node } from 'parse5/dist/tree-adapters/default';
 import { makeChecker } from './makeChecker';
 import { getRules } from './getRules';
 import { LintConfig } from '../htmlLint.typedefs';
@@ -16,9 +15,7 @@ export class Linter {
   }
 
   linter = (node: Node): RuleError[] => {
-    const errors = defaultTreeAdapter.isElementNode(node)
-      ? this.checker<Element>({ node })
-      : [];
+    const errors = this.checker({ node });
 
     if ('childNodes' in node) {
       const childNodesErrors: RuleError[] = node.childNodes
