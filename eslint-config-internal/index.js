@@ -49,7 +49,8 @@ module.exports = {
     "arrow-parens": ["error", "always"],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-console": ["error"],
-    "semi": ["error", "always"],
+    "semi": "off",
+    "@typescript-eslint/semi": ["error", "always"],
     'import/order': ['error', {
       groups: [
         'builtin',
