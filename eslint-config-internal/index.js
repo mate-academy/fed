@@ -85,6 +85,8 @@ module.exports = {
       "classes": false,
       "typedefs": false,
       "enums": false,
-    }]
+    }],
+    '@typescript-eslint/semi': ['error'],
+    '@typescript-eslint/member-delimiter-style': ['error'],
   },
 };
