@@ -29,9 +29,13 @@ module.exports = {
     '@typescript-eslint/semi': ['error', 'always'],
     'prefer-const': 2,
     curly: [2, 'all'],
+    'max-len': ['error', {
+      ignoreTemplateLiterals: true,
+      ignoreComments: true,
+    }],
     'no-redeclare': [2, { builtinGlobals: true }],
-    'operator-linebreak': [2, 'before'],
     'no-console': 2,
+    'operator-linebreak': [2, 'before'],
     'brace-style': [2, '1tbs'],
     'arrow-body-style': 0,
     'arrow-parens': 0,
@@ -47,6 +51,7 @@ module.exports = {
 
     // React
     'react/prop-types': 0,
+    'react/require-default-props': 0,
     'import/prefer-default-export': 0,
     'standard/no-callback-literal': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
@@ -54,6 +59,9 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/state-in-constructor': [2, 'never'],
     'react-hooks/rules-of-hooks': 2,
+    'jsx-a11y/label-has-associated-control': ["error", {
+      assert: "either",
+    }],
     'jsx-a11y/label-has-for': [2, {
       components: ['Label'],
       required: {
@@ -77,4 +85,12 @@ module.exports = {
     ],
     '@typescript-eslint/explicit-module-boundary-types': 'off'
   },
+  overrides: [
+    {
+      'files': ['**/*.spec.jsx'],
+      'rules': {
+        'react/jsx-filename-extension': ['off'],
+      }
+    }
+  ],
 };

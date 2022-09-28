@@ -13,12 +13,22 @@ export class LintCommand extends Command {
 
   protected layout = (options: LintOptions) => {
     const {
-      html, bem, files, styles, javascript,
+      html,
+      bem,
+      files,
+      styles,
+      javascript,
+      htmlLint,
     } = options;
+
     const { linters } = this.config;
 
     if (html && linters.html) {
       this.lintHtml(files);
+    }
+
+    if (htmlLint && linters.htmlLint) {
+      this.mateLintHtml(files);
     }
 
     if (bem && linters.bem) {
@@ -62,10 +72,18 @@ export class LintCommand extends Command {
     this.react(options);
   };
 
+  private mateLintHtml(files: LintOptions['files']) {
+    const filesToLint = files
+      ? files.join(' ')
+      : './src/';
+
+    execBashCodeSilent(`${this.binDir}html-lint ${filesToLint}`);
+  }
+
   private lintHtml(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
-      : './src/**/*.html';
+      : 'src/**/*.html';
 
     execBashCodeSilent(`${this.binDir}linthtml ${filesToLint}`);
   }

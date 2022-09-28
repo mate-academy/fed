@@ -36,9 +36,12 @@ const makeGetClasses = ({ elementDivider, modifierDivider }) => {
       return [];
     }
 
-    const classes = attrClass.value.split(' ');
+    const classes = attrClass.value.split(' ')
+      .map((_class) => _class.trim());
 
-    return classes.filter(filterByClass[classType]);
+    return classes.filter(
+      (_class) => Boolean(_class) && filterByClass[classType](_class),
+    );
   };
 
   return (node) => ({
