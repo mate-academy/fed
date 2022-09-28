@@ -13,6 +13,7 @@ export interface CommanderOptions {
   silent: boolean;
   chunkSize: number;
   mergeOnly: boolean;
+  updateExisting: boolean;
 }
 
 export function getCommander(argv: string[]) {
@@ -27,9 +28,10 @@ export function getCommander(argv: string[]) {
     .option('--merge', 'Merge pull requests automatically', false)
     .option('--silent', 'Hide internal commands logs', false)
     .option('--chunk-size <number>', 'Number of repos to process in parallel', parseInteger, 10)
-    .option('--merge-only', 'Merge previously created repos', false);
+    .option('--merge-only', 'Merge previously created repos', false)
+    .option('-u, --update-existing', 'Update existing pr if exists', false);
 
-    commander.parse(argv);
+  commander.parse(argv);
 
   return commander;
 }
@@ -39,5 +41,5 @@ function parseCommaSeparatedList(value: string) {
 }
 
 function parseInteger(value: string) {
-  return Number.parseInt(value);
+  return Number.parseInt(value, 10);
 }

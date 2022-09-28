@@ -14,7 +14,8 @@ module.exports = {
   "rules": {
     "max-len": ["error", {
       "code": 80,
-      "comments": 80
+      "comments": 80,
+      "ignoreTemplateLiterals": true,
     }],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
@@ -41,7 +42,7 @@ module.exports = {
     "object-curly-newline": [2, {
       "ObjectExpression": {
         "consistent": true,
-        "minProperties": 2,
+        "minProperties": 4,
       },
     }],
   },

@@ -1,5 +1,9 @@
-import fs from 'fs-extra';
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-console */
+
 import path from 'path';
+import fs from 'fs-extra';
 import { Octokit } from '@octokit/rest';
 import dotenv from 'dotenv';
 import { repositories } from '../repositories';
@@ -25,6 +29,7 @@ export interface UpdateReposOptions {
   isSilent: boolean;
   chunkSize: number;
   mergeOnly: boolean;
+  updateExisting: boolean;
 }
 
 export class ReposUpdater {
@@ -32,11 +37,11 @@ export class ReposUpdater {
 
   constructor(private readonly options: UpdateReposOptions) {
     this.octokit = new Octokit({
-      auth: githubToken
+      auth: githubToken,
     });
   }
 
-   updateRepos = async () => {
+  updateRepos = async () => {
     const reposToUpdate = this.getReposToUpdate();
     const reposChunks = reposToUpdate.reduce((chunks, repo, index) => {
       if ((index % this.options.chunkSize) === 0) {
@@ -53,7 +58,7 @@ export class ReposUpdater {
       ? this.mergePR
       : this.tryToUpdateRepo;
 
-    for (let i = 0; i < reposChunks.length; i++) {
+    for (let i = 0; i < reposChunks.length; i += 1) {
       const chunk = reposChunks[i];
 
       console.log(`Processing chunk ${i}
@@ -97,7 +102,7 @@ ${chunk.join('\n')}`);
     try {
       return await this.updateRepo(repo);
     } catch (error) {
-      return await ReposUpdater.catchUpdateRepoError(repo, error);
+      return await ReposUpdater.catchUpdateRepoError(repo, error as any);
     } finally {
       await ReposUpdater.cleanUpAfterUpdateRepo(repo);
     }
@@ -144,7 +149,7 @@ ${chunk.join('\n')}`);
         return {
           [repo]: pr.html_url,
         };
-      } catch (error) {
+      } catch (errors) {
         return {
           [repo]: false,
           message: 'Cannot merge PR',
@@ -158,7 +163,9 @@ ${chunk.join('\n')}`);
     };
   };
 
-  private execInDir = (cwd: string) => (command: string) => execBashCodeAsync(command, {
+  private execInDir = (
+    cwd: string,
+  ) => (command: string) => execBashCodeAsync(command, {
     shouldBindStdout: !this.options.isSilent, cwd,
   });
 
@@ -179,7 +186,7 @@ ${chunk.join('\n')}`);
     try {
       console.log('Clean up repo folder: ', repoDir);
 
-      await execInTmp(`rm -rf ${repoDir}`)
+      await execInTmp(`rm -rf ${repoDir}`);
     } catch (error) {
       // do nothing
     }
@@ -187,9 +194,13 @@ ${chunk.join('\n')}`);
     console.log('Clone: ', repoSSHUrl);
 
     await execInTmp(`git clone ${repoSSHUrl} ${repoDir}`);
-    await execInRepo(`git checkout -b ${prBranch}`);
+    const branchFlag = this.options.updateExisting
+      ? ''
+      : '-b ';
 
-    for (let command of commands) {
+    await execInRepo(`git checkout ${branchFlag}${prBranch}`);
+
+    for (const command of commands) {
       console.log(`Execute command '${command}' in repo '${repo}'`);
 
       await execInRepo(command);
@@ -202,6 +213,10 @@ ${chunk.join('\n')}`);
     let pr;
 
     try {
+      if (this.options.updateExisting) {
+        throw new Error('Skip creating, only update enabled');
+      }
+
       const { data } = await this.octokit.pulls.create({
         owner: orgName,
         repo,
@@ -212,8 +227,14 @@ ${chunk.join('\n')}`);
 
       pr = data;
     } catch (error) {
-      console.log(`Repo: ${repo}`, error.errors[0].message);
-      console.log('Will try to merge existing PR', repo);
+      const firstError: any = (error as any)?.errors?.[0];
+
+      console.log(`Repo: ${repo}`, firstError?.message);
+      console.log(`Repo: ${error}`);
+
+      if (this.options.shouldMerge) {
+        console.log('Will try to merge existing PR', repo);
+      }
 
       const { data } = await this.octokit.pulls.list({
         owner: orgName,
@@ -224,7 +245,7 @@ ${chunk.join('\n')}`);
         direction: 'desc',
       });
 
-      pr = data[0];
+      [pr] = data;
 
       if (pr.head.ref !== prBranch) {
         throw error;
@@ -271,7 +292,8 @@ in repo ${repo}`);
     try {
       await fs.remove(repoDir);
     } catch (error) {
-      // NOTE: do nothing, failing here means updateRepo fails before create folder(before clone repo)
+      // NOTE: do nothing, failing here means updateRepo
+      // fails before create folder(before clone repo)
     }
   }
 }

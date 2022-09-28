@@ -1,7 +1,7 @@
-import fs from 'fs-extra';
 import { promises as nodeFs } from 'fs';
-import path from "path";
-import { execBashCodeAsync } from '../tools';
+import path from 'path';
+import fs from 'fs-extra';
+import { emptyFn, execBashCodeAsync } from '../tools';
 import { Command } from './Command';
 import { ProjectTypes } from '../typedefs';
 
@@ -30,40 +30,40 @@ export class MigrateCommand extends Command {
       update: 'mate-scripts update',
       postinstall: 'npm run update',
       test: 'npm run lint && npm run test:only',
-    }
+    },
   };
 
   private static mateConfig: Record<ProjectTypes, any> = {
     [ProjectTypes.None]: null,
     [ProjectTypes.Layout]: {
       mateAcademy: {
-        projectType: ProjectTypes.Layout
-      }
+        projectType: ProjectTypes.Layout,
+      },
     },
     [ProjectTypes.LayoutDOM]: {
       mateAcademy: {
-        projectType: ProjectTypes.LayoutDOM
-      }
+        projectType: ProjectTypes.LayoutDOM,
+      },
     },
     [ProjectTypes.Javascript]: {
       mateAcademy: {
-        projectType: ProjectTypes.Javascript
-      }
+        projectType: ProjectTypes.Javascript,
+      },
     },
     [ProjectTypes.React]: {
       mateAcademy: {
-        projectType: ProjectTypes.React
-      }
+        projectType: ProjectTypes.React,
+      },
     },
     [ProjectTypes.ReactTypescript]: {
       mateAcademy: {
-        projectType: ProjectTypes.ReactTypescript
-      }
+        projectType: ProjectTypes.ReactTypescript,
+      },
     },
     [ProjectTypes.Typescript]: {
       mateAcademy: {
-        projectType: ProjectTypes.Typescript
-      }
+        projectType: ProjectTypes.Typescript,
+      },
     },
   };
 
@@ -172,9 +172,9 @@ export class MigrateCommand extends Command {
     return JSON.parse(pkg);
   }
 
-  protected react = () => {};
+  protected react = emptyFn;
 
-  protected reactTypescript = () => {};
+  protected reactTypescript = emptyFn;
 
   private static async safeRun(promise: Promise<any>) {
     try {

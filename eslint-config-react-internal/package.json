@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-react-internal",
-  "version": "0.0.18",
+  "version": "0.0.23",
   "description": "React eslint config for internal development",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "Mate academy",
   "license": "ISC",
   "dependencies": {
-    "@mate-academy/eslint-config-internal": "0.0.14",
+    "@mate-academy/eslint-config-internal": "^1.0.3",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",

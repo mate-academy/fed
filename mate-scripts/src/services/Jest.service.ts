@@ -5,7 +5,7 @@ export class JestService {
   private readonly binDir = path.join(getRootDir(), 'node_modules/.bin/');
 
   once() {
-    return execBashCodeSync(`${this.binDir}jest ./`);
+    return execBashCodeSync(`${this.binDir}jest ./ --passWithNoTests`);
   }
 
   watch() {

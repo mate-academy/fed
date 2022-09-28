@@ -1,16 +1,19 @@
-import fs from 'fs-extra';
 import path from 'path';
+import fs from 'fs-extra';
 import { BackstopService } from '../services';
 import { DESTINATION_DIR } from '../constants';
-import { execBashCodeSync, execBashCodeAsync } from '../tools';
+import { execBashCodeAsync, execBashCodeSync } from '../tools';
 import { BuildCommand } from './Build.command';
 import { Command } from './Command';
+import { GitHubPagesService } from '../services/GitHubPages.service';
 
 export interface DeployOptions {
   shouldShowInternalLogs: boolean;
 }
 
 export class DeployCommand extends Command {
+  private readonly ghPages = new GitHubPagesService(this.rootDir);
+
   private readonly buildCommand = this.child<BuildCommand>(BuildCommand);
 
   private readonly destinationDir = path.join(this.rootDir, DESTINATION_DIR);
@@ -32,7 +35,8 @@ export class DeployCommand extends Command {
 
   private readonly backstop = new BackstopService(this.rootDir);
 
-  protected common(options: DeployOptions) {
+  protected common(): void {
+    // do nothing
   }
 
   protected layout = async (options: DeployOptions): Promise<void> => {
@@ -53,10 +57,9 @@ export class DeployCommand extends Command {
 
       console.log('\x1b[32mSuccessfully deployed to gh-pages!\n\x1b[0m');
     } catch (error) {
-      console.error('\x1b[31mDeploy error: ', error.message, '\x1b[0m');
+      console.error('\x1b[31mDeploy error: ', (error as any)?.message, '\x1b[0m');
     }
   };
-
 
   protected layoutDOM = async (options: DeployOptions) => {
     await this.setShellRunner();
@@ -74,9 +77,17 @@ export class DeployCommand extends Command {
 
       console.log('\x1b[32mSuccessfully deployed to gh-pages!\n\x1b[0m');
     } catch (error) {
-      console.error('\x1b[31mDeploy error: ', error.message, '\x1b[0m');
+      console.error('\x1b[31mDeploy error: ', (error as any)?.message, '\x1b[0m');
     }
   };
+
+  protected react = () => {
+    this.ghPages.deploy(DESTINATION_DIR);
+  };
+
+  protected reactTypescript = () => {
+    this.react();
+  }
 
   private async setShellRunner() {
     try {
@@ -122,7 +133,7 @@ export class DeployCommand extends Command {
     execBashCodeSync(
       `${this.shellRunner} ${this.deployScriptFile} ${DESTINATION_DIR}`,
       showLogs,
-      this.rootDir
+      this.rootDir,
     );
   }
 }

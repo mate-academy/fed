@@ -1,17 +1,20 @@
 import { CommanderOptions } from './getCommander';
 import { UpdateReposOptions } from './ReposUpdater';
 
-export function mapCommanderOptions(commanderOptions: CommanderOptions): UpdateReposOptions {
+export function mapCommanderOptions(
+  commanderOptions: CommanderOptions,
+): UpdateReposOptions {
   const {
     scripts: commands,
     message,
     types: projectTypes,
     include: includedProjects,
     exclude: excludedProjects,
-    merge:  shouldMerge,
+    merge: shouldMerge,
     silent: isSilent,
     chunkSize,
     mergeOnly,
+    updateExisting,
   } = commanderOptions;
 
   return {
@@ -24,5 +27,6 @@ export function mapCommanderOptions(commanderOptions: CommanderOptions): UpdateR
     isSilent,
     chunkSize,
     mergeOnly,
+    updateExisting,
   };
 }

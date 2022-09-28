@@ -35,6 +35,7 @@ program
   .command('start')
   .option('-l, --logs', 'show internal commands logs', false)
   .option('-o, --open', 'open web browser after start', true)
+  .option('-p, --port <number>', 'choose port')
   .description('run development server')
   .action(commandFactory.make(StartCommand, startController));
 
@@ -42,6 +43,7 @@ program
   .command('lint [files...]')
   .option('-s, --styles', 'lint styles only', false)
   .option('-h, --html', 'lint html (markup-style) only', false)
+  .option('-m, --mate-htmllint', 'Mate HTML linter: lint html (markup-style) only', false)
   .option('-b, --bem', 'lint html (BEM) only', false)
   .option('-j, --javascript', 'lint javascript only', false)
   .description('lint html, css and js files')
@@ -70,7 +72,6 @@ program
   .command('update')
   .description('update @mate-academy/scripts')
   .action(commandFactory.make(UpdateCommand));
-
 
 program
   .command('migrate <type>')

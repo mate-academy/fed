@@ -1,4 +1,6 @@
-import { ChildProcess, exec, execSync, ExecSyncOptions } from 'child_process';
+import {
+  ChildProcess, exec, execSync, ExecSyncOptions,
+} from 'child_process';
 
 export type ExecResult<F extends boolean> = F extends true
   ? ChildProcess
@@ -27,11 +29,14 @@ export function execBashCodeSync(
     : result;
 }
 
-export function execBashCodeSilent(bashCode: string, shouldBindStdout = true) {
+export function execBashCodeSilent(
+  bashCode: string,
+  shouldBindStdout = true,
+) {
   try {
     return execBashCodeSync(bashCode, shouldBindStdout);
   } catch (error) {
-    process.exit(1);
+    return process.exit(1);
   }
 }
 
@@ -75,11 +80,13 @@ export function execBashCodeAsync(
     }
 
     childProcess.on('close', (code) => {
-      code as number > 0
-        ? reject(new Error(`${bashCode}, errorCode: ${code}`))
-        : resolve(stdout);
+      if (code as number > 0) {
+        reject(new Error(`${bashCode}, errorCode: ${code}`));
+      } else {
+        resolve(stdout);
+      }
     });
-  }))
+  }));
 }
 
 export function execBashCodeControlled(

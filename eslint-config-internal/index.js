@@ -33,6 +33,7 @@ module.exports = {
       {"blankLine": "always", "prev": "block-like", "next": "*"},
     ],
     "no-underscore-dangle": ["error", { "allow": [ "__resolveType" ] }],
+    "no-use-before-define": "off",
     "no-useless-constructor": "off",
     "global-require": "off",
     "import/no-dynamic-require": "off",
@@ -50,17 +51,23 @@ module.exports = {
     "no-console": ["error"],
     "semi": "off",
     "@typescript-eslint/semi": ["error", "always"],
-    "import/order": ["error", {
-      "groups": [
+    'import/order': ['error', {
+      groups: [
         'builtin',
         'external',
         'internal',
         ['parent', 'sibling'],
         'index',
       ],
+      pathGroups: [{
+        pattern: '@*/**',
+        group: 'internal',
+        position: 'before',
+      }],
       'newlines-between': 'ignore',
     }],
     "multiline-ternary": ["error", "always"],
+    "ternary/no-unreachable": "off",
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -73,6 +80,11 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    'ternary/no-unreachable': 'off',
+    "@typescript-eslint/no-use-before-define": ["error", {
+      "functions": false,
+      "classes": false,
+      "typedefs": false,
+      "enums": false,
+    }]
   },
 };
