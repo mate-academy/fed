@@ -1,11 +1,15 @@
 {
   "name": "@mate-academy/stylelint-config",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-scss": "^3.17.2"
+  }
 }

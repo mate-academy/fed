@@ -1,0 +1,18 @@
+# IDE
+.idea
+.vscode
+
+# Node
+node_modules
+
+# MacOS
+.DS_Store
+
+# Generated files
+bin
+
+# Environment
+.env
+
+# Dynamic data
+src/localScripts/lastcreatedPRs.json

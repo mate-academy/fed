@@ -1,18 +1,24 @@
 "use strict";
 
 module.exports = {
-  "extends": "standard",
+  "extends": [
+    "standard",
+    ...[
+      "./rules/style",
+      "./rules/best-practices",
+    ].map(require.resolve)
+  ],
   "env": {
     "node": true,
   },
   "rules": {
     "max-len": ["error", {
       "code": 80,
-      "comments": 80
+      "comments": 80,
+      "ignoreTemplateLiterals": true,
     }],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
-    "strict": "error",
     "space-before-function-paren": ["error", "never"],
     "no-var": "error",
     "prefer-const": "error",
@@ -36,11 +42,12 @@ module.exports = {
     "object-curly-newline": [2, {
       "ObjectExpression": {
         "consistent": true,
-        "minProperties": 2,
+        "minProperties": 4,
       },
     }],
   },
+  "parser": "babel-eslint",
   "parserOptions": {
-    "sourceType": "script"
+    "sourceType": "module"
   },
 };
