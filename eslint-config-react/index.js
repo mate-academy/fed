@@ -30,6 +30,7 @@ module.exports = {
       },
       "allowChildren": true
     }],
+    "jsx-a11y/label-has-associated-control": [2, { assert: "either" }],
     "padding-line-between-statements": [
       "error",
       {"blankLine": "always", "prev": "*", "next": "return"},
