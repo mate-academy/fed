@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-react-internal",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "React eslint config for internal development",
   "main": "index.js",
   "scripts": {
