@@ -50,7 +50,6 @@ module.exports = {
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-console": ["error"],
     "semi": "off",
-    "@typescript-eslint/semi": ["error", "always"],
     'import/order': ['error', {
       groups: [
         'builtin',
