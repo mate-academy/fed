@@ -45,7 +45,7 @@ module.exports = {
         "minProperties": 4,
       },
     }],
-    "no-prototype-builtins": false
+    "no-prototype-builtins": 0
   },
   "parser": "babel-eslint",
   "parserOptions": {
