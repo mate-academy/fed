@@ -8,8 +8,10 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    "@mate-academy/eslint-config-internal",
-    "./custom-rules/no-window-outside-useeffect.js"
+    '@mate-academy/eslint-config-internal',
+  ],
+  plugins: [
+    '@mate-academy',
   ],
   rules: {
     // React
@@ -21,7 +23,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/state-in-constructor': ['error', 'never'],
     'react-hooks/rules-of-hooks': 'error',
-    'no-window-outside-useeffect': 'error',
+    '@mate-academy/no-window-outside-useeffect': 'error',
     'jsx-a11y/label-has-for': ['error', {
       components: ['Label'],
       required: {
