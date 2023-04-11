@@ -1,0 +1,36 @@
+{
+  "name": "@mate-academy/eslint-plugin-mate-custom-rules",
+  "version": "0.0.1",
+  "description": "Custom Eslint plugins for Mate academy developers with Typescript",
+  "main": "index.js",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "author": "Mate academy",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:mate-academy/fed.git"
+  },
+  "homepage": "https://github.com/mate-academy/fed#readme",
+  "bugs": {
+    "url": "https://github.com/mate-academy/fed/issues"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "mate",
+    "rules"
+  ],
+  "files": [
+    "index.js",
+    "readme.md",
+    "rules/**/*"
+  ],
+  "peerDependencies": {
+    "eslint": "^7.0.0",
+    "typescript": "^4.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
