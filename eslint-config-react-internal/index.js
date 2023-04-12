@@ -8,7 +8,10 @@ module.exports = {
   extends: [
     'airbnb',
     'airbnb/hooks',
-    "@mate-academy/eslint-config-internal"
+    '@mate-academy/eslint-config-internal',
+  ],
+  plugins: [
+    '@mate-academy/frontend',
   ],
   rules: {
     // React
@@ -20,6 +23,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/state-in-constructor': ['error', 'never'],
     'react-hooks/rules-of-hooks': 'error',
+    '@mate-academy/frontend/restrict-window-usage': 'error',
     'jsx-a11y/label-has-for': ['error', {
       components: ['Label'],
       required: {
