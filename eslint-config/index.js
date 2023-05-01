@@ -47,7 +47,7 @@ module.exports = {
     }],
     "no-prototype-builtins": 0
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "sourceType": "module"
   },
