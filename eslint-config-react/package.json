@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@mate-academy/eslint-config": "*",
+    "babel-eslint": "^10.1.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^6.10.3"
