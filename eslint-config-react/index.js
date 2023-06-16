@@ -19,6 +19,8 @@ module.exports = {
   ],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": 0,
+    "react/react-in-jsx-scope": 0,
     "no-console": "error",
     "no-param-reassign": [2, { "props": true }],
     "no-shadow": ["error", { "builtinGlobals": false }],
