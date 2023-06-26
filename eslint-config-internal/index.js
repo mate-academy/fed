@@ -87,5 +87,6 @@ module.exports = {
     }],
     '@typescript-eslint/semi': ['error'],
     '@typescript-eslint/member-delimiter-style': ['error'],
+    'require-await': ['error'],
   },
 };
