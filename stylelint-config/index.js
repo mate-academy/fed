@@ -2,7 +2,7 @@
 
 module.exports = {
   "extends": [
-    "stylelint-config-standard",
+    "stylelint-config-standard-scss",
   ],
   plugins: [
     "stylelint-scss"
@@ -15,8 +15,7 @@ module.exports = {
     "declaration-empty-line-before": ["always", {
       except: ["first-nested"],
       ignore: ["after-comment", "after-declaration", "inside-single-line-block"]
-    },
-    ],
+    }],
 
     "selector-max-id": 1,
     "selector-max-universal": 1,
