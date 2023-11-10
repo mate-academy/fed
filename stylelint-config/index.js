@@ -8,6 +8,11 @@ module.exports = {
     "stylelint-scss"
   ],
   rules: {
+    "alpha-value-notation": null,
+    "color-function-notation": null,
+    "no-invalid-position-at-import-rule": null,
+    "property-no-vendor-prefix": null,
+    "value-keyword-case": null,
     "declaration-empty-line-before": ["always", {
       except: ["first-nested"],
       ignore: ["after-comment", "after-declaration", "inside-single-line-block"]
