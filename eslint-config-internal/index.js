@@ -37,7 +37,7 @@ module.exports = {
     "no-useless-constructor": "off",
     "global-require": "off",
     "import/no-dynamic-require": "off",
-    'import/no-default-export': 'error',
+    "import/prefer-default-export": "off",
     "import/extensions": "off",
     "max-classes-per-file": "off",
     "max-len": ["error", 80, {
