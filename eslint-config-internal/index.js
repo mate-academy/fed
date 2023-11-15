@@ -67,6 +67,7 @@ module.exports = {
     }],
     "multiline-ternary": ["error", "always"],
     "ternary/no-unreachable": "off",
+    'function-paren-newline': ['error', 'multiline-arguments'],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
