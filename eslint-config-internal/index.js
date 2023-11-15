@@ -37,7 +37,7 @@ module.exports = {
     "no-useless-constructor": "off",
     "global-require": "off",
     "import/no-dynamic-require": "off",
-    "import/prefer-default-export": "off",
+    'import/no-default-export': 'error',
     "import/extensions": "off",
     "max-classes-per-file": "off",
     "max-len": ["error", 80, {
@@ -67,6 +67,7 @@ module.exports = {
     }],
     "multiline-ternary": ["error", "always"],
     "ternary/no-unreachable": "off",
+    'function-paren-newline': ['error', 'multiline-arguments'],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
