@@ -13,7 +13,7 @@ export interface ServeOptions {
 
 export class ParcelService {
   private readonly baseOptions = {
-    'out-dir': path.join(this.rootDir, DESTINATION_DIR),
+    'dist-dir': path.join(this.rootDir, DESTINATION_DIR),
   };
 
   private readonly source = path.join(this.rootDir, 'src/index.html');
