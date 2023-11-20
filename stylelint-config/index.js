@@ -24,7 +24,8 @@ module.exports = {
       ignore: ["after-comment", "first-nested", "inside-block"]
     }],
     "selector-max-id": 0,
-    "selector-max-universal": 0,
+    "selector-max-universal": 1,
     "unit-no-unknown": [true, {"ignoreUnits": ["fr"]}],
+    "selector-class-pattern": null,
   },
 };
