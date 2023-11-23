@@ -24,7 +24,7 @@ export class UpdateCommand extends Command {
 
   private async updateMateScriptsVersions() {
     await this.mateScriptsPackageService.update({
-      envs: { global: true, local: true },
+      envs: { local: true },
     });
   }
 
