@@ -27,5 +27,6 @@ module.exports = {
     "selector-max-universal": 1,
     "unit-no-unknown": [true, {"ignoreUnits": ["fr"]}],
     "selector-class-pattern": null,
+    "scss/dollar-variable-pattern": null,
   },
 };
