@@ -27,7 +27,7 @@
   },
   "author": "dev@mate.academy",
   "license": "MIT",
-  "homepage": "https://github.com/mate-academy/fed/mate-scripts#README.md",
+  "homepage": "https://github.com/mate-academy/fed/jest-mochawesome-reporter#README.md",
   "dependencies": {
     "@jest/reporters": "^29.7.0",
     "@jest/test-result": "^29.7.0",
