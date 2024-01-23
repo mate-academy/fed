@@ -35,10 +35,10 @@
   },
   "devDependencies": {
     "@mate-academy/eslint-config-internal": "^1.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/uuid": "^9.0.7",
     "eslint": "^8.56.0",
     "rollup": "^4.9.6",
-    "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "^5.3.3"
   },

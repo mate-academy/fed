@@ -10,10 +10,10 @@ import {
   TestResult,
 } from '@jest/reporters';
 import { AssertionResult } from '@jest/test-result';
-import { 
-  ErrorLog, 
-  JestMochawesomeReporterOptions, 
-  Suite, 
+import {
+  ErrorLog,
+  JestMochawesomeReporterOptions,
+  Suite,
   Test,
   Report,
 } from './typedefs';
