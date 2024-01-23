@@ -2,7 +2,7 @@
 
 ## Description
 
-This package is a reporter for Jest that generates a report in mochawesome compatible JSON format. You can use it with [mochawesome](https://www.npmjs.com/package/mochawesome) to show a fansy report in HTML format.
+This package is a reporter for Jest that generates a report in mochawesome compatible JSON format. You can use it with [mochawesome](https://www.npmjs.com/package/mochawesome) to show a fancy report in HTML format.
 
 ## Install
 - `npm i -D @mate-academy/jest-mochawesome-reporter`
