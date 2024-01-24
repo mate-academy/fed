@@ -40,15 +40,15 @@ export class ReportService {
       this.log('REPORTER WAS NOT STARTED. SKIP REPORTS PREPARING');
     }
 
-    let hasBeenReportsCreated = false;
+    let haveReportsBeenCreated = false;
 
     try {
-      hasBeenReportsCreated = await this.prepareReports();
+      haveReportsBeenCreated = await this.prepareReports();
     } catch (error) {
       this.log('REPORTS PREPARING FAIL', error);
     }
 
-    if (hasBeenReportsCreated && this.shouldOpen) {
+    if (haveReportsBeenCreated && this.shouldOpen) {
       this.log('OPEN REPORTS IN BROWSER');
 
       await this.openReportInBrowser();
