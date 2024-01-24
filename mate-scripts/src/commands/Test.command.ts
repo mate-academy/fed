@@ -5,6 +5,7 @@ import { Command } from './Command';
 import { CypressService, StartServer } from '../services/Cypress.service';
 import { StartCommand } from './Start.command';
 import { ReportService } from '../services/Report.service';
+import { Spinner } from '../tools/Spinner';
 
 export interface TestOptions {
   open: boolean;
@@ -21,6 +22,8 @@ export class TestCommand extends Command {
   private readonly report = new ReportService(this.rootDir);
 
   private readonly startCommand = this.child(StartCommand);
+
+  private readonly spinner = new Spinner();
 
   private showLogs?: boolean;
 
@@ -68,6 +71,8 @@ export class TestCommand extends Command {
 
   protected layoutDOM = async (options: TestOptions) => {
     const { showLogs } = options;
+
+    this.showLogs = showLogs;
 
     const { jest } = this.config.tests;
 
@@ -159,23 +164,27 @@ export class TestCommand extends Command {
       };
     };
 
-    try {
-      await this.report.runBeforeTests();
+    await this.executeWithReportAndSpinner(async () => {
+      let testsFailed = false;
 
       if (jest) {
-        this.jest.once();
+        const { exitCode } = await this.jest.onceAsync();
+
+        testsFailed = exitCode !== 0;
       }
 
-      await this.cypress.run({
+      const failedCasesCount = await this.cypress.run({
         ...options,
         e2e: true,
         startServer,
       });
-    } catch (error) {
-      this.log('TESTS EXECUTION FAILED', error);
-    } finally {
-      await this.report.runAfterTests();
-    }
+
+      testsFailed = testsFailed || failedCasesCount > 0;
+
+      return testsFailed
+        ? 1
+        : 0;
+    });
   };
 
   protected react = async (options: TestOptions) => {
@@ -278,17 +287,25 @@ export class TestCommand extends Command {
       };
     };
 
-    if (cypress || cypressComponents) {
-      await this.report.runBeforeTests();
-      await this.cypress.run({
-        ...options,
-        e2e: cypress,
-        components: cypressComponents,
-        startServer,
-      });
-      await this.report.runAfterTests();
-    }
-  };
+    await this.executeWithReportAndSpinner(async () => {
+      let testsFailed = false;
+
+      if (cypress || cypressComponents) {
+        const failedCasesCount = await this.cypress.run({
+          ...options,
+          e2e: cypress,
+          components: cypressComponents,
+          startServer,
+        });
+
+        testsFailed = failedCasesCount > 0;
+      }
+
+      return testsFailed
+        ? 1
+        : 0;
+    });
+  }
 
   protected reactTypescript = async (options: TestOptions) => {
     await this.react(options);
@@ -309,6 +326,34 @@ export class TestCommand extends Command {
   private log(...args: any) {
     if (this.showLogs) {
       console.log(...args);
+    }
+  }
+
+  async executeWithReportAndSpinner(
+    callback: () => Promise<number>,
+  ) {
+    let exitCode = 0;
+
+    try {
+      await this.report.runBeforeTests();
+
+      if (!this.showLogs) {
+        this.spinner.start();
+      }
+
+      exitCode = await callback();
+    } catch (error) {
+      this.log('TESTS EXECUTION FAILED', error);
+
+      process.exit(1);
+    } finally {
+      this.spinner.stop();
+
+      await this.report.runAfterTests();
+    }
+
+    if (exitCode > 0) {
+      process.exit(1);
     }
   }
 }

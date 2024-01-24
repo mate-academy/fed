@@ -30,28 +30,31 @@ export class CypressService {
   constructor(private readonly rootDir: string) {
   }
 
-  async run(options?: RunOptions) {
+  async run(options?: RunOptions): Promise<number> {
     this.processOptions(options);
 
     this.log('CYPRESS RUN CALLED', options);
 
-    let failed = false;
+    let executionFailed = false;
+    let failedCasesCount = 0;
 
     try {
       this.log('RUN CYPRESS');
 
-      await this.runCypress();
+      failedCasesCount = await this.runCypress();
 
       this.log('CYPRESS TESTS RUN SUCCESS');
     } catch (errors) {
       this.log('CYPRESS TESTS RUN FAIL', errors);
 
-      failed = true;
+      executionFailed = true;
     } finally {
-      if (failed) {
+      if (executionFailed) {
         process.exit(1);
       }
     }
+
+    return failedCasesCount;
   }
 
   private processOptions(options: RunOptions = {}) {
@@ -68,8 +71,9 @@ export class CypressService {
     this.startServer = startServer;
   }
 
-  private async runCypress() {
+  private async runCypress(): Promise<number> {
     const errors = [];
+    let failedCasesCount = 0;
 
     if (this.shouldRunE2E) {
       let startedServer: StartedServer | undefined;
@@ -94,6 +98,8 @@ export class CypressService {
           if (!stdout.includes('(Run Finished)')) {
             throw new Error(stderr);
           }
+
+          failedCasesCount += exitCode;
         }
       } catch (e2eError) {
         errors.push(e2eError);
@@ -117,6 +123,8 @@ export class CypressService {
           if (!stdout.includes('(Run Finished)')) {
             throw new Error(stderr);
           }
+
+          failedCasesCount += exitCode;
         }
       } catch (componentsError) {
         errors.push(componentsError);
@@ -126,6 +134,8 @@ export class CypressService {
     if (errors.length) {
       throw errors;
     }
+
+    return failedCasesCount;
   }
 
   private log(message: string, data?: any) {
