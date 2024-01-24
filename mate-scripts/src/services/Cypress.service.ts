@@ -1,5 +1,5 @@
 import path from 'path';
-import { execBashCodeAsync } from '../tools';
+import { execBashCodeAsyncWithOutput } from '../tools';
 
 export interface StartedServer {
   stop: () => void;
@@ -83,10 +83,18 @@ export class CypressService {
           ? ` --config baseUrl=http://localhost:${startedServer.port}`
           : '';
 
-        await execBashCodeAsync(
+        const { stdout, stderr, exitCode } = await execBashCodeAsyncWithOutput(
           `${this.binDir}cypress run${baseUrl}`,
           { shouldBindStdout: this.shouldShowLogs },
         );
+
+        // Cypress can return non-zero exit code
+        // because some tests are failed
+        if (exitCode !== 0) {
+          if (!stdout.includes('(Run Finished)')) {
+            throw new Error(stderr);
+          }
+        }
       } catch (e2eError) {
         errors.push(e2eError);
       } finally {
@@ -98,10 +106,18 @@ export class CypressService {
 
     if (this.shouldRunComponents) {
       try {
-        await execBashCodeAsync(
+        const { stdout, stderr, exitCode } = await execBashCodeAsyncWithOutput(
           `${this.binDir}cypress run-ct`,
           { shouldBindStdout: this.shouldShowLogs },
         );
+
+        // Cypress can return non-zero exit code
+        // because some tests are failed
+        if (exitCode !== 0) {
+          if (!stdout.includes('(Run Finished)')) {
+            throw new Error(stderr);
+          }
+        }
       } catch (componentsError) {
         errors.push(componentsError);
       }

@@ -6,6 +6,12 @@ export type ExecResult<F extends boolean> = F extends true
   ? ChildProcess
   : string;
 
+type ExecBashCodeSyncOuputResult = {
+  stdout: string;
+  stderr: string;
+  exitCode: number;
+}
+
 export function execBashCodeSync(
   bashCode: string,
   shouldBindStdout = true,
@@ -85,6 +91,55 @@ export function execBashCodeAsync(
       } else {
         resolve(stdout);
       }
+    });
+  }));
+}
+
+export function execBashCodeAsyncWithOutput(
+  bashCode: string,
+  params: ExecBashCodeAsyncParams = defaultExecBashCodeAsyncParams,
+): Promise<ExecBashCodeSyncOuputResult> {
+  const {
+    shouldBindStdout = true,
+    cwd,
+  } = params;
+
+  return new Promise<ExecBashCodeSyncOuputResult>(((resolve, reject) => {
+    const execOptions = { cwd };
+    const childProcess = exec(bashCode, execOptions);
+    let stdout = '';
+    let stderr = '';
+
+    if (childProcess.stdout) {
+      childProcess.stdout.on('data', (data) => {
+        stdout += data.toString();
+
+        if (shouldBindStdout) {
+          console.log(data);
+        }
+      });
+    }
+
+    if (childProcess.stderr) {
+      childProcess.stderr.on('data', (data) => {
+        stderr += data.toString();
+
+        if (shouldBindStdout) {
+          console.error(data);
+        }
+      });
+    }
+
+    childProcess.on('close', (code) => {
+      resolve({
+        stdout,
+        stderr,
+        exitCode: code as number,
+      });
+    });
+
+    childProcess.on('error', (error) => {
+      reject(new Error(`${bashCode}, error: ${error}`));
     });
   }));
 }
