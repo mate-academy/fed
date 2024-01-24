@@ -44,13 +44,19 @@ export default class JestMochawesomeReporter extends BaseReporter {
     _?: any,
     results?: AggregatedResult,
   ): void {
-    if (!results) {
-      return;
+    try {
+      if (!results) {
+        this.log('No test results available. Exiting...');
+
+        return;
+      }
+
+      const report = this.buildReport(results);
+
+      this.writeReport(report);
+    } catch (err) {
+      this.log('An error occurred while generating the report:', err);
     }
-
-    const report = this.buildReport(results);
-
-    this.writeReport(report);
   }
 
   private writeReport(report: Report): void {
@@ -95,13 +101,19 @@ export default class JestMochawesomeReporter extends BaseReporter {
         throw err;
       }
 
-      console.log(`Test results written to ${filepath}`);
+      this.log(`Test results written to ${filepath}`);
     });
   }
 
   private getFullTitle(test: AssertionResult): string {
     const ancestors = test.ancestorTitles
-      .reduce((sum, val) => `${sum} + ${val} > `, '');
+      .reduce((sum, val) => {
+        if (val) {
+          return `${sum}${val} > `;
+        }
+
+        return sum;
+      }, '');
 
     return ancestors + test.title;
   }
@@ -242,5 +254,9 @@ export default class JestMochawesomeReporter extends BaseReporter {
       },
       results: testSuites,
     };
+  }
+
+  log(message: string, ...args: any[]): void {
+    console.log(message, ...args);
   }
 }
