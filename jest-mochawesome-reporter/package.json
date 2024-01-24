@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/jest-mochawesome-reporter",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Jest mochawesome reporter for Mate Academy homework projects",
   "main": "dist/index.js",
   "scripts": {
