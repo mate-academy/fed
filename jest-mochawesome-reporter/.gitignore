@@ -1,0 +1,15 @@
+# IDE
+.idea
+.vscode
+
+# Node
+node_modules
+
+# MacOS
+.DS_Store
+
+# Generated files
+dist
+
+# Environment
+.env

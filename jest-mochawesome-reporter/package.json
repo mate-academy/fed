@@ -1,0 +1,51 @@
+{
+  "name": "@mate-academy/jest-mochawesome-reporter",
+  "version": "1.0.0",
+  "description": "Jest mochawesome reporter for Mate Academy homework projects",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "rollup -w -c",
+    "lint": "eslint ./src",
+    "build": "rm -rf ./dist && rollup -c",
+    "prepublishOnly": "npm run build",
+    "postpublish": "rm -rf ./dist",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jest",
+    "mochawesome",
+    "reporter",
+    "tools",
+    "mate-academy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mate-academy/fed.git"
+  },
+  "author": "dev@mate.academy",
+  "license": "MIT",
+  "homepage": "https://github.com/mate-academy/fed/jest-mochawesome-reporter#README.md",
+  "dependencies": {
+    "@jest/reporters": "^29.7.0",
+    "@jest/test-result": "^29.7.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@mate-academy/eslint-config-internal": "^1.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/uuid": "^9.0.7",
+    "eslint": "^8.56.0",
+    "rollup": "^4.9.6",
+    "rollup-plugin-typescript2": "^0.36.0",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "package-lock.json",
+    "README.md"
+  ]
+}
