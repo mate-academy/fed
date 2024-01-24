@@ -1,5 +1,5 @@
 import path from 'path';
-import { execBashCodeSync, getRootDir } from '../tools';
+import { execBashCodeAsyncWithOutput, execBashCodeSync, getRootDir } from '../tools';
 
 export class JestService {
   private readonly binDir = path.join(getRootDir(), 'node_modules/.bin/');
@@ -10,5 +10,9 @@ export class JestService {
 
   watch() {
     return execBashCodeSync(`${this.binDir}jest ./ --watch`);
+  }
+
+  onceAsync() {
+    return execBashCodeAsyncWithOutput(`${this.binDir}jest ./ --passWithNoTests`);
   }
 }

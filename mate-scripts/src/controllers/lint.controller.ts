@@ -29,6 +29,6 @@ export const lintController: Controller<LintOptions> = (
   }
 
   return {
-    styles, html, bem, javascript, files: ensuredFiles, htmlLint
+    styles, html, bem, javascript, files: ensuredFiles, htmlLint,
   };
 };

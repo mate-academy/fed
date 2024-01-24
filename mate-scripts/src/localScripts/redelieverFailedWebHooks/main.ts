@@ -88,7 +88,9 @@ class Redelivery {
 
       const currentDeliveries = await this.getNextDeliveries(
         hookId,
-        last ? last.id : undefined,
+        last
+          ? last.id
+          : undefined,
       );
 
       log(`Fetched Deliveries ${count} time`);
