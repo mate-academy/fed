@@ -46,6 +46,7 @@ program
   .option('-m, --mate-htmllint', 'Mate HTML linter: lint html (markup-style) only', false)
   .option('-b, --bem', 'lint html (BEM) only', false)
   .option('-j, --javascript', 'lint javascript only', false)
+  .option('-j, --nodeJs', 'lint javascript only', false)
   .description('lint html, css and js files')
   .action(commandFactory.make(LintCommand, lintController));
 

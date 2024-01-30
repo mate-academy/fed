@@ -315,6 +315,10 @@ export class TestCommand extends Command {
     this.jest.once();
   };
 
+  protected nodeJs = () => {
+    this.jest.once();
+  }
+
   protected typescript = () => {
     this.jest.once();
   };

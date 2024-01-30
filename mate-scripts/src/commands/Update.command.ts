@@ -34,6 +34,8 @@ export class UpdateCommand extends Command {
 
   protected javascript = emptyFn;
 
+  protected nodeJs = emptyFn;
+
   protected react = emptyFn;
 
   protected reactTypescript = emptyFn;

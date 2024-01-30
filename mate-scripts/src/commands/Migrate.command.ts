@@ -31,6 +31,15 @@ export class MigrateCommand extends Command {
       postinstall: 'npm run update',
       test: 'npm run lint && npm run test:only',
     },
+    nodeJs: {
+      init: 'mate-scripts init',
+      start: 'mate-scripts start',
+      lint: 'mate-scripts lint',
+      'test:only': 'mate-scripts test',
+      update: 'mate-scripts update',
+      postinstall: 'npm run update',
+      test: 'npm run lint && npm run test:only',
+    },
   };
 
   private static mateConfig: Record<ProjectTypes, any> = {
@@ -63,6 +72,11 @@ export class MigrateCommand extends Command {
     [ProjectTypes.Typescript]: {
       mateAcademy: {
         projectType: ProjectTypes.Typescript,
+      },
+    },
+    [ProjectTypes.NodeJs]: {
+      mateAcademy: {
+        projectType: ProjectTypes.NodeJs,
       },
     },
   };
@@ -154,6 +168,33 @@ export class MigrateCommand extends Command {
       JSON.stringify({
         ...pkg,
         ...MigrateCommand.mateConfig.javascript,
+      }, null, 2),
+    );
+
+    await MigrateCommand.safeRun(
+      fs.remove(path.join(this.rootDir, '.travis.yml')),
+    );
+
+    await execBashCodeAsync('npm rm husky lint-staged');
+    await execBashCodeAsync('npm i');
+    await execBashCodeAsync(`${this.binDir}eslint ./ --fix`);
+  };
+
+  protected nodeJs = async () => {
+    await execBashCodeAsync('npm i -D @mate-academy/scripts');
+
+    const pkg = await this.getPackage();
+
+    pkg.scripts = MigrateCommand.scripts.nodeJs;
+
+    delete pkg['lint-staged'];
+    delete pkg.husky;
+
+    await nodeFs.writeFile(
+      path.join(this.rootDir, 'package.json'),
+      JSON.stringify({
+        ...pkg,
+        ...MigrateCommand.mateConfig.nodeJs,
       }, null, 2),
     );
 

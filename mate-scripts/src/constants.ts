@@ -10,6 +10,7 @@ export const defaultLintersConfig: Linters = {
   styles: true,
   javascript: true,
   htmlLint: false,
+  nodeJs: true,
 };
 
 export const defaultTestsConfig: Tests = {
