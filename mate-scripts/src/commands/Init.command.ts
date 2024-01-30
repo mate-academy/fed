@@ -71,12 +71,6 @@ export class InitCommand extends Command {
   private copyCommonConfigs() {
     const commonConfigsDir = path.join(InitCommand.configsDir, 'common');
 
-    console.log({
-      commonConfigsDir,
-      rootDir: this.rootDir,
-      initCommConfiDir: InitCommand.configsDir,
-    });
-
     fs.copySync(commonConfigsDir, this.rootDir);
   }
 
