@@ -43,6 +43,10 @@ export abstract class Command {
     this.logNoImplementationWarning
   );
 
+  protected [ProjectTypes.NodeJs]: (options?: any) => void = (
+    this.logNoImplementationWarning
+  );
+
   constructor(rootDir: string) {
     this.rootDir = rootDir;
     this.binDir = path.join(rootDir, 'node_modules/.bin/');
@@ -76,7 +80,7 @@ export abstract class Command {
 {
   ...
   "mateAcademy": {
-    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "typescript" | "layoutDOM"
+    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "typescript" | "layoutDOM" | "nodeJs"
   }
 }
 `,

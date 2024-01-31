@@ -6,6 +6,7 @@ export enum ProjectTypes {
   Typescript = 'typescript',
   React = 'react',
   ReactTypescript = 'reactTypescript',
+  NodeJs = 'nodeJs',
 }
 
 export interface Linters {
@@ -14,6 +15,7 @@ export interface Linters {
   styles: boolean;
   javascript: boolean;
   htmlLint: boolean;
+  nodeJs: boolean;
 }
 
 export interface Tests {

@@ -56,6 +56,14 @@ export class LintCommand extends Command {
     }
   };
 
+  protected nodeJs = (options: LintOptions) => {
+    const { nodeJs, files } = options;
+
+    if (nodeJs) {
+      this.lintJs(files);
+    }
+  };
+
   protected react = (options: LintOptions) => {
     const { javascript, styles, files } = options;
 
