@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  "extends": ["airbnb", "@mate-academy/eslint-config", "plugin:prettier/recommended"],
+  "extends": ["airbnb", "plugin:prettier/recommended", "@mate-academy/eslint-config"],
   "env": {
     "es6": true,
     "browser": true
