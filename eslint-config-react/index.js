@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-  "extends": ["airbnb", "@mate-academy/eslint-config"],
+  "extends": ["airbnb", "plugin:prettier/recommended", "@mate-academy/eslint-config"],
   "env": {
     "es6": true,
     "browser": true
@@ -16,6 +16,7 @@ module.exports = {
   },
   "plugins": [
     "react",
+    "prettier"
   ],
   rules: {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -41,6 +42,7 @@ module.exports = {
       {"blankLine": "always", "prev": "directive", "next": "*"},
       {"blankLine": "always", "prev": "block-like", "next": "*"},
     ],
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "implicit-arrow-linebreak": 0
   }
 };
