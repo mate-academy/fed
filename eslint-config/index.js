@@ -3,10 +3,11 @@
 module.exports = {
   "extends": [
     "standard",
+    "plugin:prettier/recommended",
     ...[
       "./rules/style",
       "./rules/best-practices",
-    ].map(require.resolve)
+    ].map(require.resolve),
   ],
   "env": {
     "node": true,
