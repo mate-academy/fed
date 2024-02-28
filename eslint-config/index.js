@@ -20,7 +20,7 @@ module.exports = {
     }],
     "semi": ["error", "always"],
     "semi-style": ["error", "last"],
-    "space-before-function-paren": ["error", "never"],
+    "space-before-function-paren": 0,
     "no-var": "error",
     "prefer-const": "error",
     "comma-dangle": ["error", "always-multiline"],
