@@ -28,7 +28,7 @@ module.exports = {
     "no-shadow": ["error", {"builtinGlobals": true, "hoist": "all", "allow": []}],
     "no-redeclare": ["error", { "builtinGlobals": true }],
     "no-param-reassign": "error",
-    "operator-linebreak": ["error", "before"],
+    "operator-linebreak": 0,
     "no-console": "error",
     "standard/no-callback-literal": 0,
     "import/prefer-default-export": 0,
