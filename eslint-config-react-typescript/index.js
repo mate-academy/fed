@@ -9,7 +9,15 @@ module.exports = {
     'airbnb-typescript',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
+  ],
+  overrides: [
+    {
+      'files': ['**/*.spec.jsx'],
+      'rules': {
+        'react/jsx-filename-extension': ['off'],
+      }
+    }
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -21,6 +29,8 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: [
+    'jsx-a11y',
+    'import',
     'react',
     'react-hooks',
     '@typescript-eslint',
@@ -38,7 +48,7 @@ module.exports = {
     }],
     'no-redeclare': [2, { builtinGlobals: true }],
     'no-console': 2,
-    'operator-linebreak': [2, 'before'],
+    'operator-linebreak': 0,
     'brace-style': [2, '1tbs'],
     'arrow-body-style': 0,
     'arrow-parens': 0,
@@ -63,7 +73,9 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/state-in-constructor': [2, 'never'],
     'react-hooks/rules-of-hooks': 2,
-    'jsx-a11y/label-has-associated-control': 0,
+    'jsx-a11y/label-has-associated-control': ["error", {
+      assert: "either",
+    }],
     'jsx-a11y/label-has-for': [2, {
       components: ['Label'],
       required: {
@@ -76,6 +88,7 @@ module.exports = {
 
     // Typescript
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/indent': ['error', 2],
     '@typescript-eslint/ban-types': ['error', {
@@ -85,14 +98,5 @@ module.exports = {
         },
       },
     ],
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
   },
-  overrides: [
-    {
-      'files': ['**/*.spec.jsx'],
-      'rules': {
-        'react/jsx-filename-extension': ['off'],
-      }
-    }
-  ],
 };
