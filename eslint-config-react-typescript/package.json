@@ -1,6 +1,6 @@
 {
   "name": "@mate-academy/eslint-config-react-typescript",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "React config for Mate academy students based on airbnb with Typescript",
   "main": "index.js",
   "scripts": {

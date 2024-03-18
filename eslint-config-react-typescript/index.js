@@ -31,7 +31,6 @@ module.exports = {
   plugins: [
     'jsx-a11y',
     'import',
-    'react',
     'react-hooks',
     '@typescript-eslint',
     'prettier'
