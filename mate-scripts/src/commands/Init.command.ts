@@ -56,14 +56,14 @@ export class InitCommand extends Command {
 
   protected react = () => {
     this.copyGitIgnore(ProjectTypes.React);
-    this.copyProjectTypeSpecificConfigs(ProjectTypes.React);
+    // this.copyProjectTypeSpecificConfigs(ProjectTypes.React);
     this.copyProjectTypeSpecificTemplates(ProjectTypes.React);
     this.initGitHooks(ProjectTypes.React);
   };
 
   protected reactTypescript = () => {
     this.copyGitIgnore(ProjectTypes.ReactTypescript);
-    this.copyProjectTypeSpecificConfigs(ProjectTypes.ReactTypescript);
+    // this.copyProjectTypeSpecificConfigs(ProjectTypes.ReactTypescript);
     this.copyProjectTypeSpecificTemplates(ProjectTypes.ReactTypescript);
     this.initGitHooks(ProjectTypes.ReactTypescript);
   };
