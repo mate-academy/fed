@@ -1,6 +1,8 @@
 import { JestService, ParcelService, ReactScriptsService } from '../services';
 import { Command } from './Command';
 import { ExecResult } from '../tools';
+import { NodeJsVersions } from '../typedefs';
+import { ViteService } from '../services/Vite.service';
 
 export interface StartOptions {
   shouldShowInternalLogs: boolean;
@@ -13,7 +15,10 @@ export class StartCommand extends Command {
 
   private readonly jest = new JestService();
 
-  private readonly reactScripts = new ReactScriptsService(this.rootDir);
+  private readonly reactScripts =
+    this.config.nodejsMajorVersion === NodeJsVersions.v20
+      ? new ViteService(this.rootDir)
+      : new ReactScriptsService(this.rootDir);
 
   protected common(): void {
     // do nothing

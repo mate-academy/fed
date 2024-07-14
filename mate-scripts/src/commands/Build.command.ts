@@ -3,6 +3,8 @@ import fs from 'fs-extra';
 import { DESTINATION_DIR } from '../constants';
 import { ParcelService, ReactScriptsService } from '../services';
 import { Command } from './Command';
+import { NodeJsVersions } from '../typedefs';
+import { ViteService } from '../services/Vite.service';
 
 export interface BuildOptions {
   shouldShowInternalLogs: boolean;
@@ -11,7 +13,10 @@ export interface BuildOptions {
 export class BuildCommand extends Command {
   private readonly parcel = new ParcelService(this.rootDir);
 
-  private reactScripts = new ReactScriptsService(this.rootDir);
+  private readonly reactScripts =
+    this.config.nodejsMajorVersion === NodeJsVersions.v20
+      ? new ViteService(this.rootDir)
+      : new ReactScriptsService(this.rootDir);
 
   protected common(): void {
     // do nothing
