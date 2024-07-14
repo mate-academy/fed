@@ -37,7 +37,11 @@ export class BuildCommand extends Command {
       console.log('START react-scripts build');
     }
 
-    this.reactScripts.build(DESTINATION_DIR, options.shouldShowInternalLogs);
+    this.reactScripts.build(
+      DESTINATION_DIR,
+      options.shouldShowInternalLogs,
+      this.config.homepage,
+    );
   };
 
   protected reactTypescript = (options: BuildOptions) => {

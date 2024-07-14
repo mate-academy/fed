@@ -33,6 +33,7 @@ export interface Tests {
 export interface Config {
   projectType: ProjectTypes;
   nodejsMajorVersion: NodeJsVersions;
+  homepage: string;
   linters: Linters;
   tests: Tests;
 }

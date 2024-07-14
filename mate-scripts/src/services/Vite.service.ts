@@ -46,11 +46,17 @@ export class ViteService {
   build(
     buildPath?: string,
     showLogs = true,
+    homepage?: string,
   ) {
     const BUILD_PATH = buildPath
       ? ` --out-dir ${buildPath}`
       : '';
-    const command = `cross-env ${this.binDir}vite build${BUILD_PATH}`;
+
+    const BASE = homepage
+      ? `  --base=${homepage}`
+      : '';
+
+    const command = `cross-env ${this.binDir}vite build${BUILD_PATH}${BASE}`;
 
     if (showLogs) {
       console.log(`Execute command: ${command}`);

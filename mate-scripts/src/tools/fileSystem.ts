@@ -66,7 +66,7 @@ function isSystemRoot(rootDir: string) {
 }
 
 export function getConfig(rootDir: string): Config {
-  const { mateAcademy } = JSON.parse(
+  const { mateAcademy, homepage } = JSON.parse(
     fs.readFileSync(
       path.join(rootDir, 'package.json'),
       { encoding: 'utf-8' },
@@ -80,6 +80,7 @@ export function getConfig(rootDir: string): Config {
 
   return {
     ...defaultConfig,
+    homepage,
     ...config,
     linters: {
       ...defaultConfig.linters,

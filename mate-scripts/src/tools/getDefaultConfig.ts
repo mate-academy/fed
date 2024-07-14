@@ -7,6 +7,7 @@ export const getDefaultConfig = (
   projectType = ProjectTypes.None,
 ): Config => ({
   projectType,
+  homepage: '',
   nodejsMajorVersion: NodeJsVersions.v14,
   linters: {
     ...getDefaultLintersConfig(projectType),
