@@ -1,12 +1,13 @@
 import { defaultLintersConfig, defaultTestsConfig } from '../constants';
 import {
-  Config, Linters, ProjectTypes, Tests,
+  Config, Linters, NodeJsVersions, ProjectTypes, Tests,
 } from '../typedefs';
 
 export const getDefaultConfig = (
   projectType = ProjectTypes.None,
 ): Config => ({
   projectType,
+  nodejsMajorVersion: NodeJsVersions.v14,
   linters: {
     ...getDefaultLintersConfig(projectType),
   },

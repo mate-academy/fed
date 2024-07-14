@@ -9,6 +9,11 @@ export enum ProjectTypes {
   NodeJs = 'nodeJs',
 }
 
+export enum NodeJsVersions {
+  v14 = '14',
+  v20 = '20',
+}
+
 export interface Linters {
   html: boolean;
   bem: boolean;
@@ -27,6 +32,7 @@ export interface Tests {
 
 export interface Config {
   projectType: ProjectTypes;
+  nodejsMajorVersion: NodeJsVersions;
   linters: Linters;
   tests: Tests;
 }
