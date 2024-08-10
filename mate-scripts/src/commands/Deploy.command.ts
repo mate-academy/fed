@@ -89,6 +89,14 @@ export class DeployCommand extends Command {
     this.react();
   }
 
+  protected vue = () => {
+    this.ghPages.deploy(DESTINATION_DIR);
+  };
+
+  protected vueTypescript = () => {
+    this.vue();
+  };
+
   private async setShellRunner() {
     try {
       await execBashCodeAsync('sh --version', { shouldBindStdout: false });

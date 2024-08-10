@@ -69,6 +69,16 @@ export class MigrateCommand extends Command {
         projectType: ProjectTypes.ReactTypescript,
       },
     },
+    [ProjectTypes.Vue]: {
+      mateAcademy: {
+        projectType: ProjectTypes.Vue,
+      },
+    },
+    [ProjectTypes.VueTypescript]: {
+      mateAcademy: {
+        projectType: ProjectTypes.VueTypescript,
+      },
+    },
     [ProjectTypes.Typescript]: {
       mateAcademy: {
         projectType: ProjectTypes.Typescript,
@@ -216,6 +226,10 @@ export class MigrateCommand extends Command {
   protected react = emptyFn;
 
   protected reactTypescript = emptyFn;
+
+  protected vue = emptyFn;
+
+  protected vueTypescript = emptyFn;
 
   private static async safeRun(promise: Promise<any>) {
     try {

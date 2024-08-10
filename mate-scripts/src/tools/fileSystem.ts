@@ -11,6 +11,7 @@ export function getRootDir() {
   let folderContent = fs.readdirSync(rootDir);
 
   try {
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (isRoot(folderContent) && hasCorrectDependency(rootDir)) {
         break;

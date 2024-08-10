@@ -7,6 +7,8 @@ export enum ProjectTypes {
   React = 'react',
   ReactTypescript = 'reactTypescript',
   NodeJs = 'nodeJs',
+  Vue = 'vue',
+  VueTypescript = 'vueTypescript',
 }
 
 export enum NodeJsVersions {

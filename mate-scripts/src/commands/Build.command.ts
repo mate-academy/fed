@@ -13,10 +13,9 @@ export interface BuildOptions {
 export class BuildCommand extends Command {
   private readonly parcel = new ParcelService(this.rootDir);
 
-  private readonly reactScripts =
-    this.config.nodejsMajorVersion === NodeJsVersions.v20
-      ? new ViteService(this.rootDir)
-      : new ReactScriptsService(this.rootDir);
+  private readonly reactScripts = new ReactScriptsService(this.rootDir);
+
+  private readonly vite = new ViteService(this.rootDir);
 
   protected common(): void {
     // do nothing
@@ -32,19 +31,39 @@ export class BuildCommand extends Command {
     this.layout(options);
   };
 
-  protected react = (options: BuildOptions) => {
-    if (options.shouldShowInternalLogs) {
+  private buildReactScripts(showInternalLogs = false) {
+    if (showInternalLogs) {
       console.log('START react-scripts build');
     }
 
-    this.reactScripts.build(
-      DESTINATION_DIR,
-      options.shouldShowInternalLogs,
-      this.config.homepage,
-    );
+    this.reactScripts.build(DESTINATION_DIR, showInternalLogs);
+  }
+
+  private buildVite(showInternalLogs = false) {
+    if (showInternalLogs) {
+      console.log('START vite build');
+    }
+
+    this.vite.build(DESTINATION_DIR, showInternalLogs, this.config.homepage);
+  }
+
+  protected react = (options: BuildOptions) => {
+    if (this.config.nodejsMajorVersion === NodeJsVersions.v20) {
+      this.buildVite(options.shouldShowInternalLogs);
+    } else {
+      this.buildReactScripts(options.shouldShowInternalLogs);
+    }
   };
 
   protected reactTypescript = (options: BuildOptions) => {
     this.react(options);
+  };
+
+  protected vue = (options: BuildOptions) => {
+    this.buildVite(options.shouldShowInternalLogs);
+  }
+
+  protected vueTypescript = (options: BuildOptions) => {
+    this.vue(options);
   };
 }
