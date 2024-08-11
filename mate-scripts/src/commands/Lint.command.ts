@@ -86,6 +86,8 @@ export class LintCommand extends Command {
     if (styles) {
       this.lintStyles(files);
     }
+
+    this.lintJs(files);
   };
 
   protected vueTypescript = (options: LintOptions) => {
