@@ -68,6 +68,20 @@ export class InitCommand extends Command {
     this.initGitHooks(ProjectTypes.ReactTypescript);
   };
 
+  protected vue = () => {
+    this.copyGitIgnore(ProjectTypes.Vue);
+    // this.copyProjectTypeSpecificConfigs(ProjectTypes.Vue);
+    this.copyProjectTypeSpecificTemplates(ProjectTypes.Vue);
+    this.initGitHooks(ProjectTypes.Vue);
+  };
+
+  protected vueTypescript = () => {
+    this.copyGitIgnore(ProjectTypes.VueTypescript);
+    // this.copyProjectTypeSpecificConfigs(ProjectTypes.VueTypescript);
+    this.copyProjectTypeSpecificTemplates(ProjectTypes.VueTypescript);
+    this.initGitHooks(ProjectTypes.VueTypescript);
+  };
+
   private copyCommonConfigs() {
     const commonConfigsDir = path.join(InitCommand.configsDir, 'common');
 

@@ -43,6 +43,14 @@ export abstract class Command {
     this.logNoImplementationWarning
   );
 
+  protected [ProjectTypes.Vue]: (options?: any) => void = (
+    this.logNoImplementationWarning
+  );
+
+  protected [ProjectTypes.VueTypescript]: (options?: any) => void = (
+    this.logNoImplementationWarning
+  );
+
   protected [ProjectTypes.NodeJs]: (options?: any) => void = (
     this.logNoImplementationWarning
   );
@@ -80,7 +88,7 @@ export abstract class Command {
 {
   ...
   "mateAcademy": {
-    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "typescript" | "layoutDOM" | "nodeJs"
+    "projectType": "layout" | "javascript" | "react" | "reactTypescript" | "vue" | "vueTypescript" | "typescript" | "layoutDOM" | "nodeJs"
   }
 }
 `,

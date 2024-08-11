@@ -1,3 +1,4 @@
+import { ChildProcess } from 'child_process';
 import getPort from 'get-port';
 import { kill } from '../tools';
 import { BackstopService, JestService } from '../services';
@@ -187,7 +188,26 @@ export class TestCommand extends Command {
     });
   };
 
-  protected react = async (options: TestOptions) => {
+  // eslint-disable-next-line arrow-body-style
+  private startReact = (port: number, shouldShowInternalLogs = false) => {
+    return this.startCommand.react(
+      { shouldShowInternalLogs, open: false, port },
+      true,
+    );
+  };
+
+  // eslint-disable-next-line arrow-body-style
+  private startVue = (port: number, shouldShowInternalLogs = false) => {
+    return this.startCommand.vue(
+      { shouldShowInternalLogs, open: false, port },
+      true,
+    );
+  };
+
+  private test = async (
+    options: TestOptions,
+    start: (port: number, shouldShowInternalLogs?: boolean) => ChildProcess,
+  ) => {
     this.showLogs = options.showLogs;
 
     const {
@@ -197,16 +217,7 @@ export class TestCommand extends Command {
 
     const startServer: StartServer = async () => {
       const freePort = await TestCommand.getPort();
-
-      const childProcess = this.startCommand.react(
-        {
-          shouldShowInternalLogs: options.showLogs,
-          open: false,
-          port: freePort,
-        },
-        true,
-      );
-
+      const childProcess = start(freePort, options.showLogs);
       let testsStarted = false;
 
       const serverStartedPromise = new Promise<void>(
@@ -307,8 +318,20 @@ export class TestCommand extends Command {
     });
   }
 
+  protected react = async (options: TestOptions) => {
+    await this.test(options, this.startReact);
+  };
+
   protected reactTypescript = async (options: TestOptions) => {
     await this.react(options);
+  };
+
+  protected vue = async (options: TestOptions) => {
+    await this.test(options, this.startVue);
+  };
+
+  protected vueTypescript = async (options: TestOptions) => {
+    await this.vue(options);
   };
 
   protected javascript = () => {

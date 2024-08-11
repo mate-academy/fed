@@ -15,10 +15,9 @@ export class StartCommand extends Command {
 
   private readonly jest = new JestService();
 
-  private readonly reactScripts =
-    this.config.nodejsMajorVersion === NodeJsVersions.v20
-      ? new ViteService(this.rootDir)
-      : new ReactScriptsService(this.rootDir);
+  private readonly reactScripts = new ReactScriptsService(this.rootDir);
+
+  private readonly vite = new ViteService(this.rootDir);
 
   protected common(): void {
     // do nothing
@@ -37,21 +36,39 @@ export class StartCommand extends Command {
     this.layout(options);
   };
 
-  react = <
-    Async extends boolean,
-    Result = ExecResult<Async>
-  >(options: StartOptions, async?: Async): Result => (
-    this.reactScripts.start({
-      showLogs: options.shouldShowInternalLogs,
-      open: options.open,
+  react = <Async extends boolean, Result = ExecResult<Async>>(
+    options: StartOptions,
+    async?: Async,
+  ): Result => {
+    const startOptions = {
       port: options.port,
-    }, async)
-  );
+      open: options.open,
+      showLogs: options.shouldShowInternalLogs,
+    };
 
-  reactTypescript = <
-    Async extends boolean,
-    Result = ExecResult<Async>
-  >(options: StartOptions, async?: Async): Result => this.react(options, async);
+    return (this.config.nodejsMajorVersion === NodeJsVersions.v20)
+      ? this.vite.start(startOptions, async)
+      : this.reactScripts.start(startOptions, async);
+  }
+
+  reactTypescript = <Async extends boolean, Result = ExecResult<Async>>(
+    options: StartOptions,
+    async?: Async,
+  ): Result => this.react(options, async);
+
+  vue = <Async extends boolean, Result = ExecResult<Async>>(
+    options: StartOptions,
+    async?: Async,
+  ): Result => this.vite.start({
+    port: options.port,
+    open: options.open,
+    showLogs: options.shouldShowInternalLogs,
+  }, async);
+
+  vueTypescript = <Async extends boolean, Result = ExecResult<Async>>(
+    options: StartOptions,
+    async?: Async,
+  ): Result => this.vue(options, async);
 
   protected javascript = () => {
     this.jest.watch();

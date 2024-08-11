@@ -22,7 +22,9 @@ export async function getRepos() {
   const layout = [];
   const layoutDOM = [];
   const javascript = [];
+  const typescript = [];
   const react = [];
+  const vue = [];
 
   for (const name of repos) {
     if (name.startsWith('layout_')) {
@@ -31,8 +33,12 @@ export async function getRepos() {
       layoutDOM.push(name);
     } else if (name.startsWith('js_')) {
       javascript.push(name);
+    } else if (name.startsWith('ts_')) {
+      typescript.push(name);
     } else if (name.startsWith('react_') || name.startsWith('redux_')) {
       react.push(name);
+    } else if (name.startsWith('vue_')) {
+      vue.push(name);
     } else {
       none.push(name);
     }
@@ -44,6 +50,7 @@ export async function getRepos() {
     layoutDOM,
     javascript,
     react,
+    vue,
   }, null, 2));
 }
 

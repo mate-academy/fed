@@ -39,4 +39,10 @@ export class UpdateCommand extends Command {
   protected react = emptyFn;
 
   protected reactTypescript = emptyFn;
+
+  protected typescript = emptyFn;
+
+  protected vue = emptyFn;
+
+  protected vueTypescript = emptyFn;
 }

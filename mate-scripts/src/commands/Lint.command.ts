@@ -80,6 +80,18 @@ export class LintCommand extends Command {
     this.react(options);
   };
 
+  protected vue = (options: LintOptions) => {
+    const { styles, files } = options;
+
+    if (styles) {
+      this.lintStyles(files);
+    }
+  };
+
+  protected vueTypescript = (options: LintOptions) => {
+    this.vue(options);
+  };
+
   private mateLintHtml(files: LintOptions['files']) {
     const filesToLint = files
       ? files.join(' ')
@@ -118,7 +130,7 @@ export class LintCommand extends Command {
       : './src';
 
     execBashCodeSilent(
-      `${this.binDir}eslint --ext .ts,.tsx,.js,.jsx ${filesToLint} --fix`,
+      `${this.binDir}eslint --ext .ts,.tsx,.js,.jsx,.vue ${filesToLint} --fix`,
     );
   }
 }
