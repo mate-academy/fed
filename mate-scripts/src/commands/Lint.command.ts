@@ -130,7 +130,7 @@ export class LintCommand extends Command {
       : './src';
 
     execBashCodeSilent(
-      `${this.binDir}eslint --ext .ts,.tsx,.js,.jsx ${filesToLint} --fix`,
+      `${this.binDir}eslint --ext .ts,.tsx,.js,.jsx,.vue ${filesToLint} --fix`,
     );
   }
 }
