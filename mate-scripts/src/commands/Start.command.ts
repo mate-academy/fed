@@ -40,19 +40,15 @@ export class StartCommand extends Command {
     options: StartOptions,
     async?: Async,
   ): Result => {
-    if (this.config.nodejsMajorVersion === NodeJsVersions.v20) {
-      return this.vite.start({
-        port: options.port,
-        open: options.open,
-        showLogs: options.shouldShowInternalLogs,
-      }, async);
-    }
-
-    return this.reactScripts.start({
-      showLogs: options.shouldShowInternalLogs,
-      open: options.open,
+    const startOptions = {
       port: options.port,
-    }, async);
+      open: options.open,
+      showLogs: options.shouldShowInternalLogs,
+    };
+
+    return (this.config.nodejsMajorVersion === NodeJsVersions.v20)
+      ? this.vite.start(startOptions, async)
+      : this.reactScripts.start(startOptions, async);
   }
 
   reactTypescript = <Async extends boolean, Result = ExecResult<Async>>(
