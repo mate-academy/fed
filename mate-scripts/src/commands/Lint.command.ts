@@ -81,13 +81,15 @@ export class LintCommand extends Command {
   };
 
   protected vue = (options: LintOptions) => {
-    const { styles, files } = options;
+    const { javascript, styles, files } = options;
 
     if (styles) {
       this.lintStyles(files);
     }
 
-    this.lintJs(files);
+    if (javascript) {
+      this.lintJs(files);
+    }
   };
 
   protected vueTypescript = (options: LintOptions) => {
