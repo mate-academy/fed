@@ -1,17 +1,17 @@
-name: Test
+name: Lint
 
 on:
   pull_request:
     branches: [ master ]
 
 jobs:
-  run_tests:
+  run_linter:
 
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [20.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -20,10 +20,4 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: npm test -- -l
-      - name: Upload tests report(cypress mochaawesome merged HTML report)
-        if: ${{ always() }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: report
-          path: reports
+      - run: npm run lint
