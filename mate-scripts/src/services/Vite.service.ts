@@ -38,7 +38,7 @@ export class ViteService {
       : '';
 
     return execFn(
-      `NO_COLOR=true ${this.binDir}vite dev${PORT}${OPEN}`,
+      `${this.binDir}vite dev${PORT}${OPEN}`,
       showLogs,
     ) as any;
   }
