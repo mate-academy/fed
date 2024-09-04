@@ -38,7 +38,7 @@ export class ViteService {
       : '';
 
     const prexif = process.env.CI
-      ? 'NO_COLORS=true '
+      ? 'NO_COLOR=true '
       : '';
 
     return execFn(

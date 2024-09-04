@@ -241,8 +241,7 @@ export class TestCommand extends Command {
 
           const stdoutListener = (data: any) => {
             if (
-              testsStarted
-              || !(
+              testsStarted || !(
                 data.toString().includes(`http://localhost:${freePort}`)
                 || data.toString().includes('Compiled with warnings')
               )
