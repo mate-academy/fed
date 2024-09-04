@@ -242,10 +242,10 @@ export class TestCommand extends Command {
           const stdoutListener = (data: any) => {
             if (
               testsStarted
-            || !(
-              data.toString().includes(`http://localhost:${freePort}`)
-              || data.toString().includes('Compiled with warnings')
-            )
+              || !(
+                data.toString().includes(`http://localhost:${freePort}`)
+                || data.toString().includes('Compiled with warnings')
+              )
             ) {
               return;
             }

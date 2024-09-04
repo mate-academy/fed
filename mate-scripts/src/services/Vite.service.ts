@@ -37,8 +37,12 @@ export class ViteService {
       ? ' --open'
       : '';
 
+    const prexif = process.env.CI
+      ? 'NO_COLORS=true '
+      : '';
+
     return execFn(
-      `${this.binDir}vite dev${PORT}${OPEN}`,
+      `${prexif}${this.binDir}vite dev${PORT}${OPEN}`,
       showLogs,
     ) as any;
   }
