@@ -22,7 +22,7 @@ export class CheckTypesCommand extends Command {
 
   private checkTypes() {
     execBashCodeSilent(
-      `${this.binDir}tsc --no-emit`,
+      `${this.binDir}tsc --noEmit`,
     );
   }
 }
