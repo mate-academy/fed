@@ -1,5 +1,5 @@
 import { Command } from './Command';
-import {execBashCodeSilent} from "../tools";
+import { execBashCodeSilent } from '../tools';
 
 export type CheckTypesOptions = Record<string, unknown>;
 
@@ -8,17 +8,15 @@ export class CheckTypesCommand extends Command {
     // do nothing
   }
 
-  protected reactTypescript = (options: CheckTypesOptions) => {
+  protected reactTypescript = () => {
     this.checkTypes();
   };
 
-
-  protected vueTypescript = (options: CheckTypesOptions) => {
+  protected vueTypescript = () => {
     this.checkTypes();
   };
 
-
-  protected typescript = (options: CheckTypesOptions) => {
+  protected typescript = () => {
     this.checkTypes();
   };
 
@@ -27,5 +25,4 @@ export class CheckTypesCommand extends Command {
       `${this.binDir}tsc --no-emit`,
     );
   }
-
 }
