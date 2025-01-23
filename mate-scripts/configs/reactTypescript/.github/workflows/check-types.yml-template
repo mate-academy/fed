@@ -5,7 +5,7 @@ on:
     branches: [ master ]
 
 jobs:
-  run_linter:
+  check_types:
 
     runs-on: ubuntu-latest
 
