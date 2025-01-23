@@ -8,6 +8,7 @@
     "lint": "eslint ./src",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf ./bin && rollup -c && node ./shebangify.js && chmod +x ./bin/mateScripts.js",
+    "build:windows": "rollup -c && node ./shebangify.js",
     "prepublishOnly": "npm run build",
     "postpublish": "rm -rf ./bin",
     "patch": "npm version patch && npm publish",
