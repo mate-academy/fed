@@ -7,3 +7,4 @@ export * from './Build.command';
 export * from './Deploy.command';
 export * from './Update.command';
 export * from './Migrate.command';
+export * from './CheckTypes.command';
