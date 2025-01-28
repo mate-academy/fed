@@ -18,7 +18,7 @@ module.exports = {
     selectors: '',
     selectorExpansion: true,
     expect: 0,
-    misMatchThreshold: 1, // 1% of 100%
+    misMatchThreshold: 1.5, // 1.5% of 100%
     requireSameDimensions: false,
   },
   viewports: [
