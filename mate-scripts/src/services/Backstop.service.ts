@@ -22,6 +22,7 @@ export class BackstopService {
       BackstopService.instance = this;
     }
 
+    // eslint-disable-next-line no-constructor-return
     return BackstopService.instance;
   }
 

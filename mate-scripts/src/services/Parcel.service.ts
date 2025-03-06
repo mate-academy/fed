@@ -59,7 +59,7 @@ export class ParcelService {
     options: Record<string, any>,
     env = 'development',
     showLogs = false,
-    async?: F,
+    async: F | undefined = undefined,
   ): R {
     const optionsString = makeCLIOptions(options);
     const source = ParcelService.escapePathSpaces(this.source);

@@ -149,11 +149,11 @@ export class NPMPackageService {
     return Semver.fromVersionString(versionString);
   }
 
-  async getGlobalVersion(): Promise<Semver | null> {
+  getGlobalVersion(): Promise<Semver | null> {
     return this.getInstalledVersion(true);
   }
 
-  async getLocalVersion(): Promise<Semver | null> {
+  getLocalVersion(): Promise<Semver | null> {
     return this.getInstalledVersion();
   }
 

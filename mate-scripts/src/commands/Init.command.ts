@@ -52,7 +52,7 @@ export class InitCommand extends Command {
     this.copyGitIgnore(ProjectTypes.NodeJs);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.NodeJs);
     this.initGitHooks(ProjectTypes.NodeJs);
-  }
+  };
 
   protected react = () => {
     this.copyGitIgnore(ProjectTypes.React);

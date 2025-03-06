@@ -87,7 +87,7 @@ export class DeployCommand extends Command {
 
   protected reactTypescript = () => {
     this.react();
-  }
+  };
 
   protected vue = () => {
     this.ghPages.deploy(DESTINATION_DIR);
