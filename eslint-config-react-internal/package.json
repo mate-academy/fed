@@ -1,18 +1,22 @@
 {
   "name": "@mate-academy/eslint-config-react-internal",
-  "version": "0.0.62",
+  "version": "0.1.1",
   "description": "React eslint config for internal development",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "patch": "npm version patch && npm publish",
+    "minor": "npm version minor && npm publish",
+    "major": "npm version major && npm publish"
   },
   "author": "Mate academy",
   "license": "ISC",
   "dependencies": {
-    "@mate-academy/eslint-config-internal": "^1.0.3",
-    "@mate-academy/eslint-plugin-frontend": "^1.0.3",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "@mate-academy/eslint-config-internal": "^1.2.4",
+    "@mate-academy/eslint-plugin-frontend": "^1.0.10",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.8"
   },
