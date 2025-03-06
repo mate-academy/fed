@@ -44,7 +44,7 @@ export class BuildCommand extends Command {
       console.log('START vite build');
     }
 
-    this.vite.build(DESTINATION_DIR, showInternalLogs, this.config.homepage);
+    this.vite.build(DESTINATION_DIR, this.config.homepage, showInternalLogs);
   }
 
   protected react = (options: BuildOptions) => {
@@ -61,7 +61,7 @@ export class BuildCommand extends Command {
 
   protected vue = (options: BuildOptions) => {
     this.buildVite(options.shouldShowInternalLogs);
-  }
+  };
 
   protected vueTypescript = (options: BuildOptions) => {
     this.vue(options);

@@ -1,6 +1,6 @@
 const { execSync } = require('child_process');
 
-async function main() {
+function main() {
   execBashCodeSync('npm i -D node-sass@6');
   execBashCodeSync('npm i react-scripts@4');
 }

@@ -49,8 +49,8 @@ export class ViteService {
 
   build(
     buildPath?: string,
-    showLogs = true,
     homepage?: string,
+    showLogs = true,
   ) {
     const BUILD_PATH = buildPath
       ? ` --out-dir ${buildPath}`
