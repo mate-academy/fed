@@ -10,7 +10,7 @@ type ExecBashCodeSyncOuputResult = {
   stdout: string;
   stderr: string;
   exitCode: number;
-}
+};
 
 export function execBashCodeSync(
   bashCode: string,

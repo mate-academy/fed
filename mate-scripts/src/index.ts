@@ -10,6 +10,7 @@ import {
   TestCommand,
   UpdateCommand,
   MigrateCommand,
+  CheckTypesCommand,
 } from './commands';
 import {
   deployController,
@@ -49,6 +50,11 @@ program
   .option('-j, --nodeJs', 'lint nodeJs only', false)
   .description('lint html, css and js files')
   .action(commandFactory.make(LintCommand, lintController));
+
+program
+  .command('check:types')
+  .description('validates TS types')
+  .action(commandFactory.make(CheckTypesCommand));
 
 program
   .command('test')

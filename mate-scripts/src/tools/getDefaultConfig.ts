@@ -46,8 +46,8 @@ function getDefaultLintersConfig(projectType: ProjectTypes): Linters {
         ...defaultLintersConfig,
         bem: false,
       };
-    default:
     case ProjectTypes.None:
+    default:
       return defaultLintersConfig;
   }
 }
@@ -85,8 +85,8 @@ function getDefaultTestsConfig(projectType: ProjectTypes): Tests {
         ...defaultTestsConfig,
         cypress: true,
       };
-    default:
     case ProjectTypes.None:
+    default:
       return defaultTestsConfig;
   }
 }

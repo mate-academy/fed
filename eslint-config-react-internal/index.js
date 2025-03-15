@@ -12,6 +12,7 @@ module.exports = {
   ],
   plugins: [
     '@mate-academy/frontend',
+    'import',
   ],
   rules: {
     // React
@@ -23,6 +24,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/state-in-constructor': ['error', 'never'],
     'react-hooks/rules-of-hooks': 'error',
+    'react/function-component-definition': 'off',
     '@mate-academy/frontend/restrict-window-usage': 'error',
     'jsx-a11y/label-has-for': ['error', {
       components: ['Label'],

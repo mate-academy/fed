@@ -315,7 +315,7 @@ export class TestCommand extends Command {
         ? 1
         : 0;
     });
-  }
+  };
 
   protected react = async (options: TestOptions) => {
     await this.test(options, this.startReact);
@@ -339,7 +339,7 @@ export class TestCommand extends Command {
 
   protected nodeJs = () => {
     this.jest.once();
-  }
+  };
 
   protected typescript = () => {
     this.jest.once();

@@ -1,6 +1,6 @@
 const { execSync } = require('child_process');
 
-async function main() {
+function main() {
   execBashCodeSync('npm rm redux');
   execBashCodeSync('npm i redux');
 }

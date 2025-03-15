@@ -49,7 +49,7 @@ export class StartCommand extends Command {
     return (this.config.nodejsMajorVersion === NodeJsVersions.v20)
       ? this.vite.start(startOptions, async)
       : this.reactScripts.start(startOptions, async);
-  }
+  };
 
   reactTypescript = <Async extends boolean, Result = ExecResult<Async>>(
     options: StartOptions,
