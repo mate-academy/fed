@@ -28,5 +28,8 @@ module.exports = {
     "unit-no-unknown": [true, {"ignoreUnits": ["fr"]}],
     "selector-class-pattern": null,
     "scss/dollar-variable-pattern": null,
+    "scss/at-rule-no-unknown": [true, {
+      ignoreAtRules: ["theme"]
+    }],
   },
 };
