@@ -89,7 +89,7 @@ export class CypressService {
 
         const { stdout, stderr, exitCode } = await execBashCodeAsyncWithOutput(
           `${this.binDir}cypress run${baseUrl}`,
-          { shouldBindStdout: this.shouldShowLogs },
+          { shouldBindStdout: true },
         );
 
         // Cypress can return non-zero exit code
@@ -114,7 +114,7 @@ export class CypressService {
       try {
         const { stdout, stderr, exitCode } = await execBashCodeAsyncWithOutput(
           `${this.binDir}cypress run-ct`,
-          { shouldBindStdout: this.shouldShowLogs },
+          { shouldBindStdout: true },
         );
 
         // Cypress can return non-zero exit code
