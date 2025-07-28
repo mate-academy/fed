@@ -21,7 +21,15 @@ module.exports = {
     "prefer-const": "error",
     "curly": ["error", "all"],
     "no-redeclare": ["error", { "builtinGlobals": true }],
-    "operator-linebreak": ["error", "before"],
+    "operator-linebreak": ["error", "before", {
+      "overrides": {
+        "=": "after",
+        "+=": "after",
+        "-=": "after",
+        "*=": "after",
+        "/=": "after"
+      }
+    }],
     "brace-style": ["error", "1tbs"],
     "no-param-reassign": ["error", { "props": true }],
     "padding-line-between-statements": [
