@@ -124,9 +124,7 @@ export function execBashCodeAsyncWithOutput(
       childProcess.stderr.on('data', (data) => {
         stderr += data.toString();
 
-        if (shouldBindStdout) {
-          console.error(data);
-        }
+        console.error(data);
       });
     }
 
@@ -158,12 +156,12 @@ export function execBashCodeControlled(
         console.log(data);
       });
     }
+  }
 
-    if (childProcess.stderr) {
-      childProcess.stderr.on('data', (data) => {
-        console.error(data);
-      });
-    }
+  if (childProcess.stderr) {
+    childProcess.stderr.on('data', (data) => {
+      console.error(data);
+    });
   }
 
   return childProcess;
