@@ -44,6 +44,11 @@ export class MigrateCommand extends Command {
 
   private static mateConfig: Record<ProjectTypes, any> = {
     [ProjectTypes.None]: null,
+    [ProjectTypes.LayoutVite]: {
+      mateAcademy: {
+        projectType: ProjectTypes.LayoutVite,
+      },
+    },
     [ProjectTypes.Layout]: {
       mateAcademy: {
         projectType: ProjectTypes.Layout,
@@ -93,6 +98,37 @@ export class MigrateCommand extends Command {
 
   protected async common(options: MigrateOptions) {
     await this[options.projectType]();
+  }
+
+  protected layoutVite = async () => {
+    await execBashCodeAsync('npm i -D @mate-academy/scripts');
+
+    const pkg = await this.getPackage();
+
+    pkg.scripts = MigrateCommand.scripts.layout;
+
+    delete pkg['lint-staged'];
+    delete pkg.husky;
+
+    await nodeFs.writeFile(
+      path.join(this.rootDir, 'package.json'),
+      JSON.stringify({
+        ...pkg,
+        ...MigrateCommand.mateConfig.layoutVite,
+      }, null, 2),
+    );
+
+    await Promise.all([
+      MigrateCommand.safeRun(
+        fs.copy(
+          path.join(this.rootDir, 'config/backstop/backstopConfig.js'),
+          path.join(this.rootDir, 'backstopConfig.js'),
+        ),
+      ),
+    ]);
+
+    await execBashCodeAsync('npm i -D @linthtml/linthtml stylelint-scss @mate-academy/linthtml-config vite sass');
+    await execBashCodeAsync('npm i');
   }
 
   protected layout = async () => {

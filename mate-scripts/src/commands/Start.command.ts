@@ -23,6 +23,15 @@ export class StartCommand extends Command {
     // do nothing
   }
 
+  layoutVite = <F extends boolean, R = ExecResult<F>>(
+    options: StartOptions,
+    async?: F,
+  ): R => this.vite.start({
+    showLogs: options.shouldShowInternalLogs,
+    open: options.open,
+    port: options.port,
+  }, async);
+
   layout = <F extends boolean, R = ExecResult<F>>(
     options: StartOptions,
     async?: F,

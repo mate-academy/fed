@@ -30,6 +30,8 @@ export class UpdateCommand extends Command {
 
   protected layout = emptyFn;
 
+  protected layoutVite = emptyFn;
+
   protected layoutDOM = emptyFn;
 
   protected javascript = emptyFn;

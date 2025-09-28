@@ -27,6 +27,10 @@ export abstract class Command {
     this.logNoImplementationWarning
   );
 
+  protected [ProjectTypes.LayoutVite]: (options?: any) => void = (
+    this.logNoImplementationWarning
+  );
+
   protected [ProjectTypes.Javascript]: (options?: any) => void = (
     this.logNoImplementationWarning
   );

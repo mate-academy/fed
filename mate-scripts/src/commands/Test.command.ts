@@ -32,6 +32,44 @@ export class TestCommand extends Command {
     // do nothing
   }
 
+  protected layoutVite = async ({ showLogs }: TestOptions): Promise<void> => {
+    const freePort = await TestCommand.getPort();
+
+    const childProcess = this.startCommand.layoutVite(
+      { shouldShowInternalLogs: showLogs, open: false, port: freePort },
+      true,
+    );
+
+    if (!childProcess.stdout) {
+      await kill(childProcess.pid);
+
+      throw new Error('Unexpected error: child stdout is null');
+    }
+
+    let testsStarted = false;
+
+    childProcess.stdout.on('data', async (data) => {
+      if (testsStarted || !data.toString().includes('Local:')) {
+        return;
+      }
+
+      testsStarted = true;
+
+      try {
+        this.backstop.test(freePort);
+        this.jest.once();
+
+        await kill(childProcess.pid);
+
+        process.exit(0);
+      } catch {
+        await kill(childProcess.pid);
+
+        process.exit(1);
+      }
+    });
+  }
+
   protected layout = async ({ showLogs }: TestOptions) => {
     const freePort = await TestCommand.getPort();
 

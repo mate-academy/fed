@@ -11,6 +11,10 @@ export class LintCommand extends Command {
     // do nothing
   }
 
+  protected layoutVite = (options: LintOptions) => {
+    this.layout(options);
+  }
+
   protected layout = (options: LintOptions) => {
     const {
       html,
