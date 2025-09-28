@@ -68,7 +68,7 @@ export class TestCommand extends Command {
         process.exit(1);
       }
     });
-  }
+  };
 
   protected layout = async ({ showLogs }: TestOptions) => {
     const freePort = await TestCommand.getPort();

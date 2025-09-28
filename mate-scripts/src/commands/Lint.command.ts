@@ -13,7 +13,7 @@ export class LintCommand extends Command {
 
   protected layoutVite = (options: LintOptions) => {
     this.layout(options);
-  }
+  };
 
   protected layout = (options: LintOptions) => {
     const {

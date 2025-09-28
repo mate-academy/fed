@@ -41,7 +41,7 @@ export class DeployCommand extends Command {
 
   protected layoutVite = async (options: DeployOptions): Promise<void> => {
     await this.layout(options);
-  }
+  };
 
   protected layout = async (options: DeployOptions): Promise<void> => {
     await this.setShellRunner();

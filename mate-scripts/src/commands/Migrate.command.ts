@@ -129,7 +129,7 @@ export class MigrateCommand extends Command {
 
     await execBashCodeAsync('npm i -D @linthtml/linthtml stylelint-scss @mate-academy/linthtml-config vite sass');
     await execBashCodeAsync('npm i');
-  }
+  };
 
   protected layout = async () => {
     await execBashCodeAsync('npm i -D @mate-academy/scripts');
