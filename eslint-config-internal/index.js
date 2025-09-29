@@ -1,5 +1,7 @@
 "use strict";
 
+const { formattingRules } = require('./rules');
+
 module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -14,32 +16,15 @@ module.exports = {
   ],
   plugins: [
     "@typescript-eslint",
-    "ternary"
+    "ternary",
+    "@stylistic",
   ],
   rules: {
     // JS
     "prefer-const": "error",
     "curly": ["error", "all"],
     "no-redeclare": ["error", { "builtinGlobals": true }],
-    "operator-linebreak": ["error", "before", {
-      "overrides": {
-        "=": "after",
-        "+=": "after",
-        "-=": "after",
-        "*=": "after",
-        "/=": "after"
-      }
-    }],
-    "brace-style": ["error", "1tbs"],
     "no-param-reassign": ["error", { "props": true }],
-    "padding-line-between-statements": [
-      "error",
-      {"blankLine": "always", "prev": "*", "next": "return"},
-      {"blankLine": "always", "prev": ["const", "let", "var"], "next": "*"},
-      {"blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"]},
-      {"blankLine": "always", "prev": "directive", "next": "*"},
-      {"blankLine": "always", "prev": "block-like", "next": "*"},
-    ],
     "no-underscore-dangle": ["error", { "allow": [ "__resolveType" ] }],
     "no-use-before-define": "off",
     "no-useless-constructor": "off",
@@ -48,16 +33,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "import/extensions": "off",
     "max-classes-per-file": "off",
-    "max-len": ["error", 80, {
-      "ignoreStrings": true,
-      "ignoreTemplateLiterals": true,
-      "ignoreRegExpLiterals": true,
-      "ignoreComments": true,
-    }],
-    "arrow-parens": ["error", "always"],
-    "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "no-console": ["error"],
-    "semi": "off",
     'import/order': ['error', {
       groups: [
         'builtin',
@@ -73,9 +49,7 @@ module.exports = {
       }],
       'newlines-between': 'ignore',
     }],
-    "multiline-ternary": ["error", "always"],
     "ternary/no-unreachable": "off",
-    'function-paren-newline': ['error', 'multiline-arguments'],
 
     // typescript
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -84,7 +58,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/camelcase": "off",
     "@typescript-eslint/no-unused-vars": ["error"],
-    "@typescript-eslint/indent": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-useless-constructor": "error",
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -94,8 +67,8 @@ module.exports = {
       "typedefs": false,
       "enums": false,
     }],
-    '@typescript-eslint/semi': ['error'],
-    '@typescript-eslint/member-delimiter-style': ['error'],
     'require-await': ['error'],
+
+    ...formattingRules,
   },
 };
