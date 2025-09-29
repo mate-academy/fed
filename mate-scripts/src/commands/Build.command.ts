@@ -21,6 +21,10 @@ export class BuildCommand extends Command {
     // do nothing
   }
 
+  protected layoutVite = (options: BuildOptions) => {
+    this.buildVite(options.shouldShowInternalLogs);
+  };
+
   protected layout = (options: BuildOptions) => {
     fs.removeSync(path.join(this.rootDir, DESTINATION_DIR));
 

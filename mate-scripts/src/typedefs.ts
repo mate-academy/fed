@@ -1,5 +1,6 @@
 export enum ProjectTypes {
   None = 'none',
+  LayoutVite = 'layoutVite',
   Layout = 'layout',
   LayoutDOM = 'layoutDOM',
   Javascript = 'javascript',

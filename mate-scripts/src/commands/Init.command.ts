@@ -26,6 +26,10 @@ export class InitCommand extends Command {
     this.copyCommonConfigs();
   }
 
+  protected layoutVite = async () => {
+    await this.layout();
+  };
+
   protected layout = async () => {
     this.copyGitIgnore(ProjectTypes.Layout);
     this.copyProjectTypeSpecificConfigs(ProjectTypes.Layout);
