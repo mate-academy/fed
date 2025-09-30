@@ -1,5 +1,7 @@
 "use strict";
 
+const { formattingRules } = require('./rules');
+
 module.exports = {
   env: {
     browser: true,
@@ -41,5 +43,6 @@ module.exports = {
     'react/sort-comp': 'off',
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
+    ...formattingRules
   },
 };
