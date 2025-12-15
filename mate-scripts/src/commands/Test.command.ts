@@ -49,7 +49,7 @@ export class TestCommand extends Command {
     let testsStarted = false;
 
     childProcess.stdout.on('data', async (data) => {
-      if (testsStarted || !data.toString().includes('Local:')) {
+      if (testsStarted || !data.toString().includes('http://localhost')) {
         return;
       }
 
