@@ -30,6 +30,7 @@ module.exports = {
     }],
     'selector-class-pattern': null,
     'scss/dollar-variable-pattern': null,
+    'scss/at-mixin-pattern': null,
     'scss/at-rule-no-unknown': [true, {
       ignoreAtRules: ['theme', 'plugin', 'apply', 'utility']
     }],
